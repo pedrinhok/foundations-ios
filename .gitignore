@@ -1,9 +1,10 @@
-# MACOSX FILES
+# macosx files
 **/.DS_Store
 
-# USER SETTINGS
+# user settings
+**/SoccerMatch.xcodeproj/
 **/xcuserdata/
 
-# PODs
+# pods
 **/Pods/
 
