@@ -50,9 +50,18 @@ class SignupViewController: UIViewController {
             return
         }
 
-        UserService.create(name: name, phone: phone, email: email, password: password)
+        UserService.create(name: name, phone: phone, email: email, password: password) { (error) in
+            print("here")
+        }
+        print("3")
 
-        performSegue(withIdentifier: "gotoHome", sender: nil)
+//        let response: String? = UserService.create(name: name, phone: phone, email: email, password: password)
+//
+//        if response != nil {
+//            showMessage(response!)
+//        } else {
+//            performSegue(withIdentifier: "gotoHome", sender: nil)
+//        }
     }
 
     func showMessage(_ message: String) {
