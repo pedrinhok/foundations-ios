@@ -1,5 +1,6 @@
 import Foundation
 import CoreData
+import FirebaseAuth
 
 class UserService {
 
@@ -10,6 +11,22 @@ class UserService {
     // TODO - submit post request
     public static func create(name: String, phone: String, email: String, password: String) {
 
+        var success: Bool = false
+        
+        Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
+            guard let email = authResult?.user.email, error == nil else {
+                print("ERRRRO -> \(error!)")
+                success = false
+                return
+            }
+            print("\(email) created")
+            success = true
+        }
+        
+        if !success {
+            return
+        }
+        
         if let user = current() {
             AppDelegate.persistentContainer.viewContext.delete(user)
         }

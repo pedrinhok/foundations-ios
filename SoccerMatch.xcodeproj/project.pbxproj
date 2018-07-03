@@ -155,13 +155,13 @@
 		95D946FD20E518C8008C5192 /* SoccerMatch */ = {
 			isa = PBXGroup;
 			children = (
-				874FC53120EBAD3C000D0443 /* home */,
-				874FC52C20EBAD2D000D0443 /* profile */,
-				874FC52320EBAD1E000D0443 /* mymatches */,
 				95D946FE20E518C8008C5192 /* AppDelegate.swift */,
 				95D9470220E518C8008C5192 /* Main.storyboard */,
 				95D9470020E518C8008C5192 /* ViewController.swift */,
 				95D9471320E518F1008C5192 /* SignupViewController.swift */,
+				874FC53120EBAD3C000D0443 /* home */,
+				874FC52C20EBAD2D000D0443 /* profile */,
+				874FC52320EBAD1E000D0443 /* mymatches */,
 				9518C57220E652C700B55134 /* Commons */,
 				9518C56620E64B8100B55134 /* Services */,
 				95D9470820E518C9008C5192 /* Assets.xcassets */,
@@ -259,11 +259,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SoccerMatch/Pods-SoccerMatch-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
