@@ -31,6 +31,7 @@
 		95D9470920E518C9008C5192 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95D9470820E518C9008C5192 /* Assets.xcassets */; };
 		95D9470C20E518C9008C5192 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D9470A20E518C9008C5192 /* LaunchScreen.storyboard */; };
 		95D9471420E518F1008C5192 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D9471320E518F1008C5192 /* SignupViewController.swift */; };
+		C68497E120EBC0C500A8E3A1 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68497E020EBC0C500A8E3A1 /* CircleImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		95D9470B20E518C9008C5192 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95D9470D20E518C9008C5192 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95D9471320E518F1008C5192 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		C68497E020EBC0C500A8E3A1 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		C9E7C108D81BFD2E28E324C3 /* Pods_SoccerMatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoccerMatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -127,6 +129,7 @@
 		9518C57220E652C700B55134 /* Commons */ = {
 			isa = PBXGroup;
 			children = (
+				C68497E020EBC0C500A8E3A1 /* CircleImage.swift */,
 				9518C57320E652F800B55134 /* RoundedView.swift */,
 				9518C57D20E6681C00B55134 /* StandardButton.swift */,
 				9518C57B20E667B600B55134 /* StandardTextField.swift */,
@@ -306,6 +309,7 @@
 				95D9470120E518C8008C5192 /* ViewController.swift in Sources */,
 				95D9470720E518C8008C5192 /* SoccerMatch.xcdatamodeld in Sources */,
 				874FC53020EBAD2D000D0443 /* ProfileViewController.swift in Sources */,
+				C68497E120EBC0C500A8E3A1 /* CircleImage.swift in Sources */,
 				95D9471420E518F1008C5192 /* SignupViewController.swift in Sources */,
 				95D946FF20E518C8008C5192 /* AppDelegate.swift in Sources */,
 				874FC52F20EBAD2D000D0443 /* ChangePasswordViewController.swift in Sources */,
