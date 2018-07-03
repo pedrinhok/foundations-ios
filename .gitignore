@@ -1,4 +1,9 @@
+# MACOSX FILES
 **/.DS_Store
+
+# USER SETTINGS
 **/xcuserdata/
+
+# PODs
 **/Pods/
 
