@@ -71,6 +71,10 @@ class HomeViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     }
     
     
+    @IBAction func clickNewMatch(_ sender: UIButton) {
+        performSegue(withIdentifier: "gotoNewMatch", sender: nil)
+    }
+
 }
 
 

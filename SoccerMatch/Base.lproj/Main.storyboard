@@ -151,7 +151,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="zPD-CB-GhV"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="2Hm-8M-RNw"/>
+                    <navigationItem key="navigationItem" title="Home" id="2Hm-8M-RNw">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="wMg-4d-AtU">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="36y-Og-42f">
+                                <rect key="frame" x="221" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="New match"/>
+                                <connections>
+                                    <action selector="clickNewMatch:" destination="DSw-oW-3st" eventType="touchUpInside" id="Hw1-e0-gYa"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapas" destination="EvR-fb-yEG" id="LvR-gz-UUc"/>
                         <segue destination="ZtP-Rk-P6W" kind="show" identifier="gotoNewMatch" id="3fa-1p-Ioe"/>
@@ -162,17 +173,203 @@
             </objects>
             <point key="canvasLocation" x="3536.25" y="-1543.3098591549297"/>
         </scene>
-        <!--New Match View Controller-->
+        <!--New match-->
         <scene sceneID="a3n-zc-YIx">
             <objects>
                 <viewController id="ZtP-Rk-P6W" customClass="NewMatchViewController" customModule="SoccerMatch" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aLd-DC-GxV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l0V-Vk-sFL" customClass="StandardButton" customModule="SoccerMatch" customModuleProvider="target">
+                                <rect key="frame" x="8" y="444" width="304" height="50"/>
+                                <color key="backgroundColor" red="0.49019607840000001" green="0.82352941180000006" blue="0.45098039220000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="zOg-uu-QpB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <state key="normal" title="Create">
+                                    <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="corner">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uni-ga-xon" customClass="StandardButton" customModule="SoccerMatch" customModuleProvider="target">
+                                <rect key="frame" x="8" y="84" width="304" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="HlR-G5-OlR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Location">
+                                    <color key="titleColor" red="0.80392156862745101" green="0.80392156862745101" blue="0.80392156862745101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="corner">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.80392156862745101" green="0.80392156862745101" blue="0.80392156862745101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="centerAlignment" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="clickLocation:" destination="ZtP-Rk-P6W" eventType="touchUpInside" id="opK-tt-dU8"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Match type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nZf-ib-BJ2" customClass="StandardTextField" customModule="SoccerMatch" customModuleProvider="target">
+                                <rect key="frame" x="8" y="200" width="304" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="LS5-Uc-vwa"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="corner">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.80392156859999997" green="0.80392156859999997" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Number of vacancies" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DkT-ar-nhO" customClass="StandardTextField" customModule="SoccerMatch" customModuleProvider="target">
+                                <rect key="frame" x="8" y="258" width="304" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="MBz-nw-n1E"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="corner">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.80392156859999997" green="0.80392156859999997" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Price" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SqV-mW-uOd" customClass="StandardTextField" customModule="SoccerMatch" customModuleProvider="target">
+                                <rect key="frame" x="8" y="316" width="304" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="GuS-jP-QjN"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="corner">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.80392156859999997" green="0.80392156859999997" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hrk-Dr-pvQ" customClass="StandardTextField" customModule="SoccerMatch" customModuleProvider="target">
+                                <rect key="frame" x="8" y="374" width="304" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Rr6-65-CkB"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="corner">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.80392156859999997" green="0.80392156859999997" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uUh-WQ-mJY" customClass="StandardButton" customModule="SoccerMatch" customModuleProvider="target">
+                                <rect key="frame" x="8" y="142" width="304" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="GnL-A5-CEM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="Schedule">
+                                    <color key="titleColor" red="0.80392156859999997" green="0.80392156859999997" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="corner">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.80392156859999997" green="0.80392156859999997" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="centerAlignment" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="clickSchedule:" destination="ZtP-Rk-P6W" eventType="touchUpInside" id="GDI-Fn-AhJ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="tVD-UR-xWY" firstAttribute="trailing" secondItem="uUh-WQ-mJY" secondAttribute="trailing" constant="8" id="6so-gJ-goh"/>
+                            <constraint firstItem="tVD-UR-xWY" firstAttribute="trailing" secondItem="uni-ga-xon" secondAttribute="trailing" constant="8" id="CcC-bB-JxH"/>
+                            <constraint firstItem="uni-ga-xon" firstAttribute="top" secondItem="tVD-UR-xWY" secondAttribute="top" constant="20" id="DW1-Y3-cmf"/>
+                            <constraint firstItem="DkT-ar-nhO" firstAttribute="leading" secondItem="tVD-UR-xWY" secondAttribute="leading" constant="8" id="Ffs-tu-Tb9"/>
+                            <constraint firstItem="nZf-ib-BJ2" firstAttribute="top" secondItem="uUh-WQ-mJY" secondAttribute="bottom" constant="8" id="MJv-DL-bNG"/>
+                            <constraint firstItem="DkT-ar-nhO" firstAttribute="top" secondItem="nZf-ib-BJ2" secondAttribute="bottom" constant="8" id="ZTf-Qk-rQm"/>
+                            <constraint firstItem="hrk-Dr-pvQ" firstAttribute="top" secondItem="SqV-mW-uOd" secondAttribute="bottom" constant="8" id="cw8-rO-k1F"/>
+                            <constraint firstItem="l0V-Vk-sFL" firstAttribute="leading" secondItem="tVD-UR-xWY" secondAttribute="leading" constant="8" id="dYa-rs-rH1"/>
+                            <constraint firstItem="uni-ga-xon" firstAttribute="leading" secondItem="tVD-UR-xWY" secondAttribute="leading" constant="8" id="eD7-wj-GaK"/>
+                            <constraint firstItem="l0V-Vk-sFL" firstAttribute="top" secondItem="hrk-Dr-pvQ" secondAttribute="bottom" constant="20" id="eZz-Cq-QZO"/>
+                            <constraint firstItem="tVD-UR-xWY" firstAttribute="trailing" secondItem="l0V-Vk-sFL" secondAttribute="trailing" constant="8" id="haf-oy-UTf"/>
+                            <constraint firstItem="tVD-UR-xWY" firstAttribute="trailing" secondItem="SqV-mW-uOd" secondAttribute="trailing" constant="8" id="htA-nf-eHj"/>
+                            <constraint firstItem="SqV-mW-uOd" firstAttribute="top" secondItem="DkT-ar-nhO" secondAttribute="bottom" constant="8" id="iDY-px-TFU"/>
+                            <constraint firstItem="tVD-UR-xWY" firstAttribute="trailing" secondItem="DkT-ar-nhO" secondAttribute="trailing" constant="8" id="j05-sQ-ED8"/>
+                            <constraint firstItem="nZf-ib-BJ2" firstAttribute="leading" secondItem="tVD-UR-xWY" secondAttribute="leading" constant="8" id="nas-0W-H0h"/>
+                            <constraint firstItem="tVD-UR-xWY" firstAttribute="trailing" secondItem="nZf-ib-BJ2" secondAttribute="trailing" constant="8" id="nlZ-bY-Q3f"/>
+                            <constraint firstItem="SqV-mW-uOd" firstAttribute="leading" secondItem="tVD-UR-xWY" secondAttribute="leading" constant="8" id="o3Y-Eq-2Hq"/>
+                            <constraint firstItem="uUh-WQ-mJY" firstAttribute="leading" secondItem="tVD-UR-xWY" secondAttribute="leading" constant="8" id="o4h-7p-t9y"/>
+                            <constraint firstItem="tVD-UR-xWY" firstAttribute="trailing" secondItem="hrk-Dr-pvQ" secondAttribute="trailing" constant="8" id="p8g-SC-lZL"/>
+                            <constraint firstItem="uUh-WQ-mJY" firstAttribute="top" secondItem="uni-ga-xon" secondAttribute="bottom" constant="8" id="sKh-eS-81M"/>
+                            <constraint firstItem="hrk-Dr-pvQ" firstAttribute="leading" secondItem="tVD-UR-xWY" secondAttribute="leading" constant="8" id="wNz-1o-R4S"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="tVD-UR-xWY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="New match" id="xLA-6A-cKl">
+                        <barButtonItem key="backBarButtonItem" title=" " id="deE-1s-Dl5"/>
+                    </navigationItem>
                     <connections>
+                        <outlet property="desc" destination="hrk-Dr-pvQ" id="Fse-IV-JW6"/>
+                        <outlet property="matchType" destination="nZf-ib-BJ2" id="Pau-kh-n7H"/>
+                        <outlet property="price" destination="SqV-mW-uOd" id="p0Q-5a-k33"/>
+                        <outlet property="vacancies" destination="DkT-ar-nhO" id="E70-Ow-0Ry"/>
                         <segue destination="p81-gR-ZVJ" kind="show" identifier="gotoSchedule" id="IWR-7Y-m71"/>
                         <segue destination="CEF-If-scC" kind="show" identifier="gotoLocation" id="krq-4L-Xuz"/>
                     </connections>
@@ -181,7 +378,7 @@
             </objects>
             <point key="canvasLocation" x="4488.8000000000002" y="-1880.5097451274364"/>
         </scene>
-        <!--Location View Controller-->
+        <!--Location-->
         <scene sceneID="u9c-cB-3oN">
             <objects>
                 <viewController id="CEF-If-scC" customClass="LocationViewController" customModule="SoccerMatch" customModuleProvider="target" sceneMemberID="viewController">
@@ -191,23 +388,127 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="QTV-N0-RdJ"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Location" id="LsE-2u-0Ka"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vyV-0Z-Vuq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5671" y="-2195"/>
         </scene>
-        <!--Schedule View Controller-->
+        <!--Schedule-->
         <scene sceneID="u6w-yu-CQl">
             <objects>
                 <viewController id="p81-gR-ZVJ" customClass="ScheduleViewController" customModule="SoccerMatch" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0Vg-Vz-ybu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Match day" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c0u-Pt-GCb" customClass="StandardTextField" customModule="SoccerMatch" customModuleProvider="target">
+                                <rect key="frame" x="8" y="84" width="304" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="C9A-Cd-IR6"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="corner">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.80392156859999997" green="0.80392156859999997" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Start time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jQG-92-kDA" customClass="StandardTextField" customModule="SoccerMatch" customModuleProvider="target">
+                                <rect key="frame" x="8" y="142" width="148.5" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="N1g-Z7-mcv"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="corner">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.80392156859999997" green="0.80392156859999997" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvV-rV-uZp" customClass="StandardButton" customModule="SoccerMatch" customModuleProvider="target">
+                                <rect key="frame" x="8" y="212" width="304" height="50"/>
+                                <color key="backgroundColor" red="0.49019607840000001" green="0.82352941180000006" blue="0.45098039220000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="h8Q-AW-pKS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <state key="normal" title="Update">
+                                    <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="corner">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="clickUpdate:" destination="p81-gR-ZVJ" eventType="touchUpInside" id="7Lb-Zj-qY2"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Finish time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0NT-rz-Qlm" customClass="StandardTextField" customModule="SoccerMatch" customModuleProvider="target">
+                                <rect key="frame" x="164.5" y="142" width="147.5" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="bHA-Kn-0DQ"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="corner">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.80392156859999997" green="0.80392156859999997" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="0NT-rz-Qlm" firstAttribute="leading" secondItem="jQG-92-kDA" secondAttribute="trailing" constant="8" id="DQD-2t-DWv"/>
+                            <constraint firstItem="gvV-rV-uZp" firstAttribute="leading" secondItem="n73-MR-h4Z" secondAttribute="leading" constant="8" id="DgB-fk-od9"/>
+                            <constraint firstItem="jQG-92-kDA" firstAttribute="top" secondItem="c0u-Pt-GCb" secondAttribute="bottom" constant="8" id="Txv-cy-CHw"/>
+                            <constraint firstItem="n73-MR-h4Z" firstAttribute="trailing" secondItem="gvV-rV-uZp" secondAttribute="trailing" constant="8" id="VcY-sC-BP0"/>
+                            <constraint firstItem="gvV-rV-uZp" firstAttribute="top" secondItem="jQG-92-kDA" secondAttribute="bottom" constant="20" id="WEO-pw-edV"/>
+                            <constraint firstItem="0NT-rz-Qlm" firstAttribute="width" secondItem="jQG-92-kDA" secondAttribute="width" id="fTu-Sk-5dZ"/>
+                            <constraint firstItem="jQG-92-kDA" firstAttribute="leading" secondItem="n73-MR-h4Z" secondAttribute="leading" constant="8" id="kzX-uv-FrY"/>
+                            <constraint firstItem="n73-MR-h4Z" firstAttribute="trailing" secondItem="0NT-rz-Qlm" secondAttribute="trailing" constant="8" id="ram-e4-qhu"/>
+                            <constraint firstItem="0NT-rz-Qlm" firstAttribute="top" secondItem="c0u-Pt-GCb" secondAttribute="bottom" constant="8" id="xFN-Oy-aPQ"/>
+                            <constraint firstItem="c0u-Pt-GCb" firstAttribute="leading" secondItem="n73-MR-h4Z" secondAttribute="leading" constant="8" id="xgy-vG-HaB"/>
+                            <constraint firstItem="c0u-Pt-GCb" firstAttribute="top" secondItem="n73-MR-h4Z" secondAttribute="top" constant="20" id="xjr-7U-3YK"/>
+                            <constraint firstItem="n73-MR-h4Z" firstAttribute="trailing" secondItem="c0u-Pt-GCb" secondAttribute="trailing" constant="8" id="zU2-jM-FBD"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="n73-MR-h4Z"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Schedule" id="KvZ-7k-CmS"/>
+                    <connections>
+                        <segue destination="xNc-t3-7Md" kind="unwind" identifier="unwindNewMatch" unwindAction="unwindNewMatchWithSegue:" id="YVt-2W-trM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l9v-T4-Dz3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="xNc-t3-7Md" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="5671" y="-1513"/>
         </scene>
