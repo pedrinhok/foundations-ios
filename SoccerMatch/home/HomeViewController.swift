@@ -11,4 +11,8 @@ class HomeViewController: UIViewController {
         user = UserService.current()!
     }
 
+    @IBAction func clickNewMatch(_ sender: UIButton) {
+        performSegue(withIdentifier: "gotoNewMatch", sender: nil)
+    }
+
 }

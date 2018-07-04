@@ -32,4 +32,15 @@ class StandardButton: UIButton {
         }
     }
     
+    @IBInspectable
+    var centerAlignment: Bool = true {
+        didSet {
+            if centerAlignment {
+                contentHorizontalAlignment = .center
+            } else {
+                contentHorizontalAlignment = .left
+            }
+        }
+    }
+
 }

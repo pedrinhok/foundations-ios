@@ -3,6 +3,7 @@
 
 # user settings
 **/xcuserdata/
+**/SoccerMatch.xcodeproj/xcuserdata/
 
 # pods
 **/Pods/
