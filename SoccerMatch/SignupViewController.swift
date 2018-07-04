@@ -9,8 +9,8 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var password: StandardTextField!
     @IBOutlet weak var confirmPassword: StandardTextField!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         name.delegate = self
         phone.delegate = self
@@ -51,8 +51,8 @@ class SignupViewController: UIViewController {
         }
 
         UserService.create(name: name, phone: phone, email: email, password: password) { (error) in
-            if error != nil {
-                self.showMessage(error!)
+            if let error = error {
+                self.showMessage(error)
             } else {
                 self.performSegue(withIdentifier: "gotoHome", sender: nil)
             }
@@ -73,12 +73,12 @@ class SignupViewController: UIViewController {
 }
 
 extension SignupViewController: UITextFieldDelegate {
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
+
         textField.resignFirstResponder()
-        
+
         return true
     }
-    
+
 }

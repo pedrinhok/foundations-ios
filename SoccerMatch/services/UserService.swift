@@ -44,7 +44,7 @@ class UserService {
         }
     }
     
-    public static func signIn(email: String, password: String, handler: @escaping (_ error: String?) -> ()) {
+    public static func signin(email: String, password: String, handler: @escaping (_ error: String?) -> ()) {
         
         do {
             try Auth.auth().signOut()
