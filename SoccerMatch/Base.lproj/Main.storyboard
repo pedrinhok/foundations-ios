@@ -385,14 +385,97 @@
                     <view key="view" contentMode="scaleToFill" id="CSM-k7-Fz1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Ga-c7-PZg" customClass="StandardButton" customModule="SoccerMatch" customModuleProvider="target">
+                                <rect key="frame" x="8" y="449" width="304" height="50"/>
+                                <color key="backgroundColor" red="0.49019607840000001" green="0.82352941180000006" blue="0.45098039220000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="jrE-h1-DgH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <state key="normal" title="Update">
+                                    <color key="titleColor" red="0.98039215690000003" green="0.98039215690000003" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="corner">
+                                        <real key="value" value="8"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Lha-in-F9y" customClass="StandardTextField" customModule="SoccerMatch" customModuleProvider="target">
+                                <rect key="frame" x="8" y="391" width="304" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="KIF-jI-p0q"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="corner">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.80392156859999997" green="0.80392156859999997" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="u7C-jP-PlQ">
+                                <rect key="frame" x="0.0" y="64" width="320" height="249"/>
+                            </mapView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Location" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tRo-Pz-z3W" customClass="StandardTextField" customModule="SoccerMatch" customModuleProvider="target">
+                                <rect key="frame" x="8" y="333" width="304" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Vxg-ox-T5k"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="corner">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.80392156859999997" green="0.80392156859999997" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="u7C-jP-PlQ" firstAttribute="leading" secondItem="QTV-N0-RdJ" secondAttribute="leading" id="0Rm-zv-ddq"/>
+                            <constraint firstItem="QTV-N0-RdJ" firstAttribute="trailing" secondItem="tRo-Pz-z3W" secondAttribute="trailing" constant="8" id="1FO-C8-2bo"/>
+                            <constraint firstItem="QTV-N0-RdJ" firstAttribute="trailing" secondItem="1Ga-c7-PZg" secondAttribute="trailing" constant="8" id="4ig-Zc-DSa"/>
+                            <constraint firstItem="Lha-in-F9y" firstAttribute="top" secondItem="tRo-Pz-z3W" secondAttribute="bottom" constant="8" id="57P-za-Iuy"/>
+                            <constraint firstItem="Lha-in-F9y" firstAttribute="leading" secondItem="QTV-N0-RdJ" secondAttribute="leading" constant="8" id="AFQ-vz-QzX"/>
+                            <constraint firstItem="tRo-Pz-z3W" firstAttribute="leading" secondItem="QTV-N0-RdJ" secondAttribute="leading" constant="8" id="CV2-Up-hWe"/>
+                            <constraint firstItem="QTV-N0-RdJ" firstAttribute="trailing" secondItem="Lha-in-F9y" secondAttribute="trailing" constant="8" id="c4g-wU-JUO"/>
+                            <constraint firstItem="tRo-Pz-z3W" firstAttribute="top" secondItem="u7C-jP-PlQ" secondAttribute="bottom" constant="20" id="fKp-bv-anx"/>
+                            <constraint firstItem="u7C-jP-PlQ" firstAttribute="top" secondItem="QTV-N0-RdJ" secondAttribute="top" id="mgJ-0d-x8j"/>
+                            <constraint firstItem="1Ga-c7-PZg" firstAttribute="top" secondItem="Lha-in-F9y" secondAttribute="bottom" constant="8" id="ojk-DO-sqU"/>
+                            <constraint firstItem="QTV-N0-RdJ" firstAttribute="bottom" secondItem="1Ga-c7-PZg" secondAttribute="bottom" constant="20" id="qOs-lL-SsR"/>
+                            <constraint firstItem="1Ga-c7-PZg" firstAttribute="leading" secondItem="QTV-N0-RdJ" secondAttribute="leading" constant="8" id="qjY-B2-MX3"/>
+                            <constraint firstItem="QTV-N0-RdJ" firstAttribute="trailing" secondItem="u7C-jP-PlQ" secondAttribute="trailing" id="tuv-90-f8U"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="QTV-N0-RdJ"/>
                     </view>
                     <navigationItem key="navigationItem" title="Location" id="LsE-2u-0Ka"/>
+                    <connections>
+                        <outlet property="address" destination="tRo-Pz-z3W" id="Kge-kE-4De"/>
+                        <outlet property="map" destination="u7C-jP-PlQ" id="31y-Yt-C9c"/>
+                        <outlet property="name" destination="Lha-in-F9y" id="vkY-5A-Sue"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vyV-0Z-Vuq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5671" y="-2195"/>
+            <point key="canvasLocation" x="5670" y="-2195.0704225352115"/>
         </scene>
         <!--Schedule-->
         <scene sceneID="u6w-yu-CQl">
