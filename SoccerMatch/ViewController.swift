@@ -28,6 +28,8 @@ class ViewController: UIViewController {
         }
     }
 
+    @IBAction func unwindSignin(segue: UIStoryboardSegue) {}
+
     @IBAction func clickSignin(_ sender: StandardButton) {
         
         guard let email = email.text, email != "" else {
