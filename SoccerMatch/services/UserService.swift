@@ -12,10 +12,10 @@ class UserService {
     // TODO - submit post request
     public static func create(name: String, phone: String, email: String, password: String, handler: @escaping (_ error: String?) -> ()) {
 
-        var erro: String?
-        
-        if Auth.auth().currentUser != nil {
-            try! Auth.auth().signOut()
+        do {
+            try Auth.auth().signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
         }
         
         if let user = current() {
@@ -25,8 +25,7 @@ class UserService {
         Auth.auth().createUser(withEmail: email, password: password) { (authResult, error) in
             
             guard let uid = authResult?.user.uid, error == nil else {
-                erro = error!.localizedDescription
-                handler(erro)
+                handler(error!.localizedDescription)
                 return
             }
 
@@ -46,45 +45,62 @@ class UserService {
     }
     
     public static func signIn(email: String, password: String, handler: @escaping (_ error: String?) -> ()) {
-        if Auth.auth().currentUser != nil {
-            
-            if Auth.auth().currentUser != nil {
-                try! Auth.auth().signOut()
+        
+        do {
+            try Auth.auth().signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        
+        if let user = current() {
+            AppDelegate.persistentContainer.viewContext.delete(user)
+        }
+        
+        Auth.auth().signIn(withEmail: email, password: password) { (AuthResult, error) in
+            guard let userAuth = AuthResult?.user, error == nil else {
+                handler(error!.localizedDescription)
+                return
             }
             
-            if let user = current() {
-                AppDelegate.persistentContainer.viewContext.delete(user)
-            }
+            let ref = Database.database().reference()
             
-            Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
-                guard let uid = user?.user.uid, error == nil else {
-                    handler(error!.localizedDescription)
-                    return
-                }
+            ref.child("users").child(userAuth.uid).observeSingleEvent(of: .value, with: { (snapshot) in
                 
-                let ref = Database.database().reference()
+                let value = snapshot.value as? NSDictionary
+                let email = value?["email"] as? String ?? ""
+                let name = value?["name"] as? String ?? ""
+                let phone = value?["phone"] as? String ?? ""
                 
-                ref.child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-                    
-                    let value = snapshot.value as? NSDictionary
-                    let email = value?["email"] as? String ?? ""
-                    let name = value?["name"] as? String ?? ""
-                    let phone = value?["phone"] as? String ?? ""
-                    
-                    let user = ManagedUser(context: AppDelegate.persistentContainer.viewContext)
-                    user.id = uid
-                    user.name = name
-                    user.phone = phone
-                    user.email = email
-                    
-                    AppDelegate.saveContext()
-                    handler(nil)
-                    
-                }) { (error) in
-                    handler(error.localizedDescription)
-                }
+                let user = ManagedUser(context: AppDelegate.persistentContainer.viewContext)
+                user.id = userAuth.uid
+                user.name = name
+                user.phone = phone
+                user.email = email
+                
+                AppDelegate.saveContext()
+                handler(nil)
+                
+            }) { (error) in
+                handler(error.localizedDescription)
             }
         }
+    }
+    
+    public static func logout(handler: @escaping (_ bool: Bool?) -> ()) {
+        
+        do {
+            try Auth.auth().signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+        
+        
+        if let user = current() {
+            AppDelegate.persistentContainer.viewContext.delete(user)
+        }
+        
+        AppDelegate.saveContext()
+        handler(true)
     }
 
     // TODO - submit get request
