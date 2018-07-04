@@ -1,3 +1,7 @@
 import UIKit
 
-class LocationViewController: UIViewController {}
+class LocationViewController: UIViewController {
+
+    var match: Match!
+
+}

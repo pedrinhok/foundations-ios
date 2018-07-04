@@ -367,8 +367,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="desc" destination="hrk-Dr-pvQ" id="Fse-IV-JW6"/>
-                        <outlet property="matchType" destination="nZf-ib-BJ2" id="Pau-kh-n7H"/>
                         <outlet property="price" destination="SqV-mW-uOd" id="p0Q-5a-k33"/>
+                        <outlet property="type" destination="nZf-ib-BJ2" id="Pau-kh-n7H"/>
                         <outlet property="vacancies" destination="DkT-ar-nhO" id="E70-Ow-0Ry"/>
                         <segue destination="p81-gR-ZVJ" kind="show" identifier="gotoSchedule" id="IWR-7Y-m71"/>
                         <segue destination="CEF-If-scC" kind="show" identifier="gotoLocation" id="krq-4L-Xuz"/>
@@ -424,7 +424,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Start time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jQG-92-kDA" customClass="StandardTextField" customModule="SoccerMatch" customModuleProvider="target">
-                                <rect key="frame" x="8" y="142" width="148.5" height="50"/>
+                                <rect key="frame" x="8" y="142" width="148" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="N1g-Z7-mcv"/>
@@ -464,7 +464,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Finish time" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0NT-rz-Qlm" customClass="StandardTextField" customModule="SoccerMatch" customModuleProvider="target">
-                                <rect key="frame" x="164.5" y="142" width="147.5" height="50"/>
+                                <rect key="frame" x="164" y="142" width="148" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="bHA-Kn-0DQ"/>
@@ -504,6 +504,9 @@
                     </view>
                     <navigationItem key="navigationItem" title="Schedule" id="KvZ-7k-CmS"/>
                     <connections>
+                        <outlet property="day" destination="c0u-Pt-GCb" id="MWg-7A-kmd"/>
+                        <outlet property="finish" destination="0NT-rz-Qlm" id="DwP-Dw-s0g"/>
+                        <outlet property="start" destination="jQG-92-kDA" id="IJu-qR-IxD"/>
                         <segue destination="xNc-t3-7Md" kind="unwind" identifier="unwindNewMatch" unwindAction="unwindNewMatchWithSegue:" id="YVt-2W-trM"/>
                     </connections>
                 </viewController>

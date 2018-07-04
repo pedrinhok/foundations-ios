@@ -24,6 +24,7 @@
 		9518C57420E652F800B55134 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9518C57320E652F800B55134 /* RoundedView.swift */; };
 		9518C57C20E667B600B55134 /* StandardTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9518C57B20E667B600B55134 /* StandardTextField.swift */; };
 		9518C57E20E6681C00B55134 /* StandardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9518C57D20E6681C00B55134 /* StandardButton.swift */; };
+		9531C6DF20ECF93400DA3295 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9531C6DE20ECF93400DA3295 /* Match.swift */; };
 		95D946FF20E518C8008C5192 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D946FE20E518C8008C5192 /* AppDelegate.swift */; };
 		95D9470120E518C8008C5192 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D9470020E518C8008C5192 /* ViewController.swift */; };
 		95D9470420E518C8008C5192 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D9470220E518C8008C5192 /* Main.storyboard */; };
@@ -54,6 +55,7 @@
 		9518C57320E652F800B55134 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		9518C57B20E667B600B55134 /* StandardTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardTextField.swift; sourceTree = "<group>"; };
 		9518C57D20E6681C00B55134 /* StandardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardButton.swift; sourceTree = "<group>"; };
+		9531C6DE20ECF93400DA3295 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		95D946FB20E518C8008C5192 /* SoccerMatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoccerMatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95D946FE20E518C8008C5192 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95D9470020E518C8008C5192 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +144,14 @@
 			path = Commons;
 			sourceTree = "<group>";
 		};
+		9531C6DD20ECF8D900DA3295 /* structs */ = {
+			isa = PBXGroup;
+			children = (
+				9531C6DE20ECF93400DA3295 /* Match.swift */,
+			);
+			path = structs;
+			sourceTree = "<group>";
+		};
 		95D946F220E518C8008C5192 = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +182,7 @@
 				874FC52320EBAD1E000D0443 /* mymatches */,
 				9518C57220E652C700B55134 /* Commons */,
 				9518C56620E64B8100B55134 /* Services */,
+				9531C6DD20ECF8D900DA3295 /* structs */,
 				95D9470820E518C9008C5192 /* Assets.xcassets */,
 				95D9470A20E518C9008C5192 /* LaunchScreen.storyboard */,
 				95D9470D20E518C9008C5192 /* Info.plist */,
@@ -310,6 +321,7 @@
 				874FC53720EBAD3C000D0443 /* LocationViewController.swift in Sources */,
 				9518C57420E652F800B55134 /* RoundedView.swift in Sources */,
 				874FC52A20EBAD1E000D0443 /* MatchCreatedViewController.swift in Sources */,
+				9531C6DF20ECF93400DA3295 /* Match.swift in Sources */,
 				874FC53920EBAD3C000D0443 /* SelectMatchViewController.swift in Sources */,
 				874FC53820EBAD3C000D0443 /* ScheduleViewController.swift in Sources */,
 				874FC53A20EBAD3C000D0443 /* HomeViewController.swift in Sources */,
