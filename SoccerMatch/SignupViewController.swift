@@ -26,7 +26,7 @@ class SignupViewController: UIViewController {
             return
         }
         if name.count < 3 {
-            showMessage("Name must be at least 3 characters!")
+            showMessage("Name must be at least 6 characters!")
             return
         }
         guard let phone = phone.text, phone != "" else {
@@ -50,9 +50,13 @@ class SignupViewController: UIViewController {
             return
         }
 
-        UserService.create(name: name, phone: phone, email: email, password: password)
-
-        performSegue(withIdentifier: "gotoHome", sender: nil)
+        UserService.create(name: name, phone: phone, email: email, password: password) { (error) in
+            if error != nil {
+                self.showMessage(error!)
+            } else {
+                self.performSegue(withIdentifier: "gotoHome", sender: nil)
+            }
+        }
     }
 
     func showMessage(_ message: String) {

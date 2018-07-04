@@ -21,7 +21,37 @@ class ViewController: UIViewController {
         }
     }
 
-    @IBAction func clickSignin(_ sender: StandardButton) {}
+    @IBAction func clickSignin(_ sender: StandardButton) {
+        
+        guard let email = email.text, email != "" else {
+            showMessage("E-mail cannnot be empty!")
+            return
+        }
+        
+        guard let password = password.text, password != "" else {
+            showMessage("Password cannnot be empty!")
+            return
+        }
+        
+        UserService.signIn(email: email, password: password) { (error) in
+            if error != nil {
+                self.showMessage(error!)
+            } else {
+                self.performSegue(withIdentifier: "gotoHome", sender: nil)
+            }
+        }
+    }
+    
+    func showMessage(_ message: String) {
+        let alert = UIAlertController(title: "Wops", message: message, preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "OK", style: .default) { (action) in
+            alert.dismiss(animated: true)
+        }
+        alert.addAction(action)
+        
+        present(alert, animated: true)
+    }
 
 }
 
