@@ -1,7 +1,11 @@
 import UIKit
 import CoreData
 
+import MapKit
+
 class ViewController: UIViewController {
+
+    var locationManager = CLLocationManager()
 
     @IBOutlet weak var email: StandardTextField!
     @IBOutlet weak var password: StandardTextField!
@@ -9,12 +13,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        locationManager.delegate = self
         email.delegate = self
         password.delegate = self
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
+        locationManager.requestWhenInUseAuthorization()
 
         if UserService.auth() {
             performSegue(withIdentifier: "gotoHome", sender: nil)
@@ -35,9 +42,10 @@ class ViewController: UIViewController {
         
         UserService.signIn(email: email, password: password) { (error) in
             if error != nil {
-                self.showMessage(error!)
+                showMessage(error!)
             } else {
-                self.performSegue(withIdentifier: "gotoHome", sender: nil)
+                locationManager.requestWhenInUseAuthorization()
+                performSegue(withIdentifier: "gotoHome", sender: nil)
             }
         }
     }
@@ -51,6 +59,19 @@ class ViewController: UIViewController {
         alert.addAction(action)
         
         present(alert, animated: true)
+    }
+
+}
+
+extension ViewController: CLLocationManagerDelegate {
+
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            print("authorized")
+        default:
+            print("unauthorized")
+        }
     }
 
 }
