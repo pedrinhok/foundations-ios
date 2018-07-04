@@ -9,4 +9,5 @@ struct Match {
     var type: String?
     var vacancies: String?
     var price: String?
+    var location: Location?
 }
