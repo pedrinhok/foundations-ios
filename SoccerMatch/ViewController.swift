@@ -42,10 +42,10 @@ class ViewController: UIViewController {
         
         UserService.signIn(email: email, password: password) { (error) in
             if error != nil {
-                showMessage(error!)
+                self.showMessage(error!)
             } else {
-                locationManager.requestWhenInUseAuthorization()
-                performSegue(withIdentifier: "gotoHome", sender: nil)
+                self.locationManager.requestWhenInUseAuthorization()
+                self.performSegue(withIdentifier: "gotoHome", sender: nil)
             }
         }
     }
