@@ -1,7 +1,9 @@
 import UIKit
 
-class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
+class ChangePasswordViewController: UIViewController {
     
+    var user: User!
+
     @IBOutlet weak var password: StandardTextField!
     @IBOutlet weak var newPassword: StandardTextField!
     @IBOutlet weak var confirmPassword: StandardTextField!
@@ -16,18 +18,8 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
         confirmPassword.isSecureTextEntry = true
     }
     
-    func showMessage(_ message: String) {
-        let alert = UIAlertController(title: "Wops", message: message, preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: "OK", style: .default) { (action) in
-            alert.dismiss(animated: true)
-        }
-        alert.addAction(action)
-        present(alert, animated: true)
-    }
-    
-    func showMessageNewPassword(_ message: String) {
-        let alert = UIAlertController(title: "Done", message: message, preferredStyle: .alert)
+    func showMessage(_ message: String, title: String = "Wops") {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         let action = UIAlertAction(title: "OK", style: .default) { (action) in
             alert.dismiss(animated: true)
@@ -38,12 +30,21 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func changePassword(_ sender: StandardButton) {
         
+        guard let password = password.text, password != "" else {
+            showMessage("Confirm you current password!")
+            return
+        }
+        if password != user.password {
+            showMessage("Your current password is wrong!")
+            return
+        }
+
         guard let newPassword = newPassword.text, newPassword != "" else {
-            showMessage("Password cannnot be empty!")
+            showMessage("New password cannnot be empty!")
             return
         }
         if newPassword.count < 3 {
-            showMessage("Password must be at least 3 characters!")
+            showMessage("New password must be at least 3 characters!")
             return
         }
         guard let confirmPassword = confirmPassword.text, newPassword == confirmPassword else{
@@ -51,9 +52,20 @@ class ChangePasswordViewController: UIViewController, UITextFieldDelegate {
             return
         }
         if confirmPassword == newPassword{
-            showMessageNewPassword("Password changed!")
+            showMessage("Password changed!", title: "Done")
         }
   
     }
 
+}
+
+extension ChangePasswordViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
 }

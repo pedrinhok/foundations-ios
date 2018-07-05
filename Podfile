@@ -7,5 +7,7 @@ target 'SoccerMatch' do
 
   # Pods for SoccerMatch
   pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Database'
 
 end

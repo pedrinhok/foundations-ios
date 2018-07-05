@@ -9,8 +9,8 @@ class SignupViewController: UIViewController {
     @IBOutlet weak var password: StandardTextField!
     @IBOutlet weak var confirmPassword: StandardTextField!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         name.delegate = self
         phone.delegate = self
@@ -26,7 +26,7 @@ class SignupViewController: UIViewController {
             return
         }
         if name.count < 3 {
-            showMessage("Name must be at least 3 characters!")
+            showMessage("Name must be at least 6 characters!")
             return
         }
         guard let phone = phone.text, phone != "" else {
@@ -50,9 +50,13 @@ class SignupViewController: UIViewController {
             return
         }
 
-        UserService.create(name: name, phone: phone, email: email, password: password)
-
-        performSegue(withIdentifier: "gotoHome", sender: nil)
+        UserService.create(name: name, phone: phone, email: email, password: password) { (error) in
+            if let error = error {
+                self.showMessage(error)
+            } else {
+                self.performSegue(withIdentifier: "gotoHome", sender: nil)
+            }
+        }
     }
 
     func showMessage(_ message: String) {
@@ -69,12 +73,12 @@ class SignupViewController: UIViewController {
 }
 
 extension SignupViewController: UITextFieldDelegate {
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
+
         textField.resignFirstResponder()
-        
+
         return true
     }
-    
+
 }

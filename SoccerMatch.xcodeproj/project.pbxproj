@@ -24,6 +24,7 @@
 		9518C57420E652F800B55134 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9518C57320E652F800B55134 /* RoundedView.swift */; };
 		9518C57C20E667B600B55134 /* StandardTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9518C57B20E667B600B55134 /* StandardTextField.swift */; };
 		9518C57E20E6681C00B55134 /* StandardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9518C57D20E6681C00B55134 /* StandardButton.swift */; };
+		9531C6DF20ECF93400DA3295 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9531C6DE20ECF93400DA3295 /* Match.swift */; };
 		95D946FF20E518C8008C5192 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D946FE20E518C8008C5192 /* AppDelegate.swift */; };
 		95D9470120E518C8008C5192 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D9470020E518C8008C5192 /* ViewController.swift */; };
 		95D9470420E518C8008C5192 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D9470220E518C8008C5192 /* Main.storyboard */; };
@@ -32,6 +33,10 @@
 		95D9470C20E518C9008C5192 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D9470A20E518C9008C5192 /* LaunchScreen.storyboard */; };
 		95D9471420E518F1008C5192 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D9471320E518F1008C5192 /* SignupViewController.swift */; };
 		C68497E120EBC0C500A8E3A1 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68497E020EBC0C500A8E3A1 /* CircleImage.swift */; };
+		95DB013120EE390B009AF416 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB013020EE390B009AF416 /* CustomButton.swift */; };
+		95F198E220ED01EE00B1BDAA /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F198E120ED01EE00B1BDAA /* Location.swift */; };
+		E0B5AA8120EBB60700501574 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0B5AA8020EBB60700501574 /* CoreLocation.framework */; };
+		E0B5AA8320EBB61F00501574 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0B5AA8220EBB61E00501574 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +58,7 @@
 		9518C57320E652F800B55134 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		9518C57B20E667B600B55134 /* StandardTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardTextField.swift; sourceTree = "<group>"; };
 		9518C57D20E6681C00B55134 /* StandardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardButton.swift; sourceTree = "<group>"; };
+		9531C6DE20ECF93400DA3295 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		95D946FB20E518C8008C5192 /* SoccerMatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoccerMatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95D946FE20E518C8008C5192 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		95D9470020E518C8008C5192 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,7 +69,11 @@
 		95D9470D20E518C9008C5192 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95D9471320E518F1008C5192 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		C68497E020EBC0C500A8E3A1 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
+		95DB013020EE390B009AF416 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		95F198E120ED01EE00B1BDAA /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		C9E7C108D81BFD2E28E324C3 /* Pods_SoccerMatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoccerMatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E0B5AA8020EBB60700501574 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E0B5AA8220EBB61E00501574 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +81,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0B5AA8320EBB61F00501574 /* MapKit.framework in Frameworks */,
+				E0B5AA8120EBB60700501574 /* CoreLocation.framework in Frameworks */,
 				1AA286D439A4192D21F51CCA /* Pods_SoccerMatch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,6 +93,8 @@
 		5827C5D62A8442D2D5AC4C20 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E0B5AA8220EBB61E00501574 /* MapKit.framework */,
+				E0B5AA8020EBB60700501574 /* CoreLocation.framework */,
 				C9E7C108D81BFD2E28E324C3 /* Pods_SoccerMatch.framework */,
 			);
 			name = Frameworks;
@@ -132,9 +146,19 @@
 				C68497E020EBC0C500A8E3A1 /* CircleImage.swift */,
 				9518C57320E652F800B55134 /* RoundedView.swift */,
 				9518C57D20E6681C00B55134 /* StandardButton.swift */,
+				95DB013020EE390B009AF416 /* CustomButton.swift */,
 				9518C57B20E667B600B55134 /* StandardTextField.swift */,
 			);
 			path = Commons;
+			sourceTree = "<group>";
+		};
+		9531C6DD20ECF8D900DA3295 /* structs */ = {
+			isa = PBXGroup;
+			children = (
+				9531C6DE20ECF93400DA3295 /* Match.swift */,
+				95F198E120ED01EE00B1BDAA /* Location.swift */,
+			);
+			path = structs;
 			sourceTree = "<group>";
 		};
 		95D946F220E518C8008C5192 = {
@@ -158,15 +182,16 @@
 		95D946FD20E518C8008C5192 /* SoccerMatch */ = {
 			isa = PBXGroup;
 			children = (
-				874FC53120EBAD3C000D0443 /* home */,
-				874FC52C20EBAD2D000D0443 /* profile */,
-				874FC52320EBAD1E000D0443 /* mymatches */,
 				95D946FE20E518C8008C5192 /* AppDelegate.swift */,
 				95D9470220E518C8008C5192 /* Main.storyboard */,
 				95D9470020E518C8008C5192 /* ViewController.swift */,
 				95D9471320E518F1008C5192 /* SignupViewController.swift */,
+				874FC53120EBAD3C000D0443 /* home */,
+				874FC52C20EBAD2D000D0443 /* profile */,
+				874FC52320EBAD1E000D0443 /* mymatches */,
 				9518C57220E652C700B55134 /* Commons */,
 				9518C56620E64B8100B55134 /* Services */,
+				9531C6DD20ECF8D900DA3295 /* structs */,
 				95D9470820E518C9008C5192 /* Assets.xcassets */,
 				95D9470A20E518C9008C5192 /* LaunchScreen.storyboard */,
 				95D9470D20E518C9008C5192 /* Info.plist */,
@@ -262,12 +287,16 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SoccerMatch/Pods-SoccerMatch-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,6 +332,7 @@
 				874FC53720EBAD3C000D0443 /* LocationViewController.swift in Sources */,
 				9518C57420E652F800B55134 /* RoundedView.swift in Sources */,
 				874FC52A20EBAD1E000D0443 /* MatchCreatedViewController.swift in Sources */,
+				9531C6DF20ECF93400DA3295 /* Match.swift in Sources */,
 				874FC53920EBAD3C000D0443 /* SelectMatchViewController.swift in Sources */,
 				874FC53820EBAD3C000D0443 /* ScheduleViewController.swift in Sources */,
 				874FC53A20EBAD3C000D0443 /* HomeViewController.swift in Sources */,
@@ -313,10 +343,12 @@
 				95D9471420E518F1008C5192 /* SignupViewController.swift in Sources */,
 				95D946FF20E518C8008C5192 /* AppDelegate.swift in Sources */,
 				874FC52F20EBAD2D000D0443 /* ChangePasswordViewController.swift in Sources */,
+				95F198E220ED01EE00B1BDAA /* Location.swift in Sources */,
 				9518C57020E64CB700B55134 /* UserService.swift in Sources */,
 				874FC53B20EBAD3C000D0443 /* NewMatchViewController.swift in Sources */,
 				874FC52820EBAD1E000D0443 /* MyMatchesViewController.swift in Sources */,
 				9518C57E20E6681C00B55134 /* StandardButton.swift in Sources */,
+				95DB013120EE390B009AF416 /* CustomButton.swift in Sources */,
 				874FC52920EBAD1E000D0443 /* MatchSubscribedViewController.swift in Sources */,
 				874FC52B20EBAD1E000D0443 /* UserInformationViewController.swift in Sources */,
 				9518C57C20E667B600B55134 /* StandardTextField.swift in Sources */,
@@ -465,6 +497,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5F3426985K;
 				INFOPLIST_FILE = SoccerMatch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -483,6 +516,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5F3426985K;
 				INFOPLIST_FILE = SoccerMatch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
