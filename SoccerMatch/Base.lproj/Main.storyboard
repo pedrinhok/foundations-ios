@@ -205,14 +205,13 @@
                                     <action selector="clickCreate:" destination="ZtP-Rk-P6W" eventType="touchUpInside" id="psM-IB-jlQ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uni-ga-xon" customClass="CustomButton" customModule="SoccerMatch" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CLp-kP-XKP" customClass="CustomButton" customModule="SoccerMatch" customModuleProvider="target">
                                 <rect key="frame" x="8" y="84" width="304" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="HlR-G5-OlR"/>
+                                    <constraint firstAttribute="height" constant="50" id="roZ-w2-QG6"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <state key="normal" title="Location" image="icon-right">
                                     <color key="titleColor" red="0.7803921568627451" green="0.7803921568627451" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -224,39 +223,11 @@
                                         <real key="value" value="2"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.80392156862745101" green="0.80392156862745101" blue="0.80392156862745101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" red="0.80392156862745101" green="0.80392156862745101" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="centerAlignment" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="clickLocation:" destination="ZtP-Rk-P6W" eventType="touchUpInside" id="opK-tt-dU8"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uUh-WQ-mJY" customClass="CustomButton" customModule="SoccerMatch" customModuleProvider="target">
-                                <rect key="frame" x="8" y="142" width="304" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="GnL-A5-CEM"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                <state key="normal" title="Schedule" image="icon-right">
-                                    <color key="titleColor" red="0.7803921568627451" green="0.7803921568627451" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="corner">
-                                        <real key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="2"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.80392156859999997" green="0.80392156859999997" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="centerAlignment" value="NO"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="clickSchedule:" destination="ZtP-Rk-P6W" eventType="touchUpInside" id="GDI-Fn-AhJ"/>
+                                    <action selector="clickLocation:" destination="ZtP-Rk-P6W" eventType="touchUpInside" id="60M-lj-Bj2"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Match type" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nZf-ib-BJ2" customClass="StandardTextField" customModule="SoccerMatch" customModuleProvider="target">
@@ -343,29 +314,54 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O7M-Qy-lJZ" customClass="CustomButton" customModule="SoccerMatch" customModuleProvider="target">
+                                <rect key="frame" x="8" y="142" width="304" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="lcV-S6-edH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Schedule" image="icon-right">
+                                    <color key="titleColor" red="0.78039215689999997" green="0.78039215689999997" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="corner">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.80392156859999997" green="0.80392156859999997" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="clickSchedule:" destination="ZtP-Rk-P6W" eventType="touchUpInside" id="ikb-kF-y4G"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="tVD-UR-xWY" firstAttribute="trailing" secondItem="uUh-WQ-mJY" secondAttribute="trailing" constant="8" id="6so-gJ-goh"/>
-                            <constraint firstItem="tVD-UR-xWY" firstAttribute="trailing" secondItem="uni-ga-xon" secondAttribute="trailing" constant="8" id="CcC-bB-JxH"/>
-                            <constraint firstItem="uni-ga-xon" firstAttribute="top" secondItem="tVD-UR-xWY" secondAttribute="top" constant="20" id="DW1-Y3-cmf"/>
+                            <constraint firstItem="CLp-kP-XKP" firstAttribute="leading" secondItem="tVD-UR-xWY" secondAttribute="leading" constant="8" id="7IA-Ev-o7p"/>
+                            <constraint firstItem="O7M-Qy-lJZ" firstAttribute="top" secondItem="CLp-kP-XKP" secondAttribute="bottom" constant="8" id="DeI-0f-zLQ"/>
                             <constraint firstItem="DkT-ar-nhO" firstAttribute="leading" secondItem="tVD-UR-xWY" secondAttribute="leading" constant="8" id="Ffs-tu-Tb9"/>
-                            <constraint firstItem="nZf-ib-BJ2" firstAttribute="top" secondItem="uUh-WQ-mJY" secondAttribute="bottom" constant="8" id="MJv-DL-bNG"/>
                             <constraint firstItem="DkT-ar-nhO" firstAttribute="top" secondItem="nZf-ib-BJ2" secondAttribute="bottom" constant="8" id="ZTf-Qk-rQm"/>
+                            <constraint firstItem="O7M-Qy-lJZ" firstAttribute="leading" secondItem="tVD-UR-xWY" secondAttribute="leading" constant="8" id="cp2-kD-IPx"/>
                             <constraint firstItem="hrk-Dr-pvQ" firstAttribute="top" secondItem="SqV-mW-uOd" secondAttribute="bottom" constant="8" id="cw8-rO-k1F"/>
                             <constraint firstItem="l0V-Vk-sFL" firstAttribute="leading" secondItem="tVD-UR-xWY" secondAttribute="leading" constant="8" id="dYa-rs-rH1"/>
-                            <constraint firstItem="uni-ga-xon" firstAttribute="leading" secondItem="tVD-UR-xWY" secondAttribute="leading" constant="8" id="eD7-wj-GaK"/>
                             <constraint firstItem="l0V-Vk-sFL" firstAttribute="top" secondItem="hrk-Dr-pvQ" secondAttribute="bottom" constant="20" id="eZz-Cq-QZO"/>
                             <constraint firstItem="tVD-UR-xWY" firstAttribute="trailing" secondItem="l0V-Vk-sFL" secondAttribute="trailing" constant="8" id="haf-oy-UTf"/>
                             <constraint firstItem="tVD-UR-xWY" firstAttribute="trailing" secondItem="SqV-mW-uOd" secondAttribute="trailing" constant="8" id="htA-nf-eHj"/>
                             <constraint firstItem="SqV-mW-uOd" firstAttribute="top" secondItem="DkT-ar-nhO" secondAttribute="bottom" constant="8" id="iDY-px-TFU"/>
                             <constraint firstItem="tVD-UR-xWY" firstAttribute="trailing" secondItem="DkT-ar-nhO" secondAttribute="trailing" constant="8" id="j05-sQ-ED8"/>
+                            <constraint firstItem="tVD-UR-xWY" firstAttribute="trailing" secondItem="O7M-Qy-lJZ" secondAttribute="trailing" constant="8" id="jSU-Sh-88f"/>
                             <constraint firstItem="nZf-ib-BJ2" firstAttribute="leading" secondItem="tVD-UR-xWY" secondAttribute="leading" constant="8" id="nas-0W-H0h"/>
                             <constraint firstItem="tVD-UR-xWY" firstAttribute="trailing" secondItem="nZf-ib-BJ2" secondAttribute="trailing" constant="8" id="nlZ-bY-Q3f"/>
                             <constraint firstItem="SqV-mW-uOd" firstAttribute="leading" secondItem="tVD-UR-xWY" secondAttribute="leading" constant="8" id="o3Y-Eq-2Hq"/>
-                            <constraint firstItem="uUh-WQ-mJY" firstAttribute="leading" secondItem="tVD-UR-xWY" secondAttribute="leading" constant="8" id="o4h-7p-t9y"/>
                             <constraint firstItem="tVD-UR-xWY" firstAttribute="trailing" secondItem="hrk-Dr-pvQ" secondAttribute="trailing" constant="8" id="p8g-SC-lZL"/>
-                            <constraint firstItem="uUh-WQ-mJY" firstAttribute="top" secondItem="uni-ga-xon" secondAttribute="bottom" constant="8" id="sKh-eS-81M"/>
+                            <constraint firstItem="nZf-ib-BJ2" firstAttribute="top" secondItem="O7M-Qy-lJZ" secondAttribute="bottom" constant="8" id="pJQ-TH-4cb"/>
+                            <constraint firstItem="CLp-kP-XKP" firstAttribute="top" secondItem="tVD-UR-xWY" secondAttribute="top" constant="20" id="ud8-fY-RNq"/>
+                            <constraint firstItem="tVD-UR-xWY" firstAttribute="trailing" secondItem="CLp-kP-XKP" secondAttribute="trailing" constant="8" id="vMr-rg-yh6"/>
                             <constraint firstItem="hrk-Dr-pvQ" firstAttribute="leading" secondItem="tVD-UR-xWY" secondAttribute="leading" constant="8" id="wNz-1o-R4S"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="tVD-UR-xWY"/>
@@ -375,9 +371,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="desc" destination="hrk-Dr-pvQ" id="Fse-IV-JW6"/>
-                        <outlet property="location" destination="uni-ga-xon" id="62t-9C-hQZ"/>
+                        <outlet property="location" destination="CLp-kP-XKP" id="0ha-h5-AkX"/>
                         <outlet property="price" destination="SqV-mW-uOd" id="p0Q-5a-k33"/>
-                        <outlet property="schedule" destination="uUh-WQ-mJY" id="JOs-LD-mhB"/>
+                        <outlet property="schedule" destination="O7M-Qy-lJZ" id="f2Y-dY-vKb"/>
                         <outlet property="type" destination="nZf-ib-BJ2" id="Pau-kh-n7H"/>
                         <outlet property="vacancies" destination="DkT-ar-nhO" id="E70-Ow-0Ry"/>
                         <segue destination="p81-gR-ZVJ" kind="show" identifier="gotoSchedule" id="IWR-7Y-m71"/>
@@ -1001,7 +997,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="idd-BS-Iti">
-                        <barButtonItem key="rightBarButtonItem" title="SAIR" style="plain" id="NKi-Jx-BSq">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="NKi-Jx-BSq">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pBx-Vc-ZeK">
                                 <rect key="frame" x="233" y="7" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

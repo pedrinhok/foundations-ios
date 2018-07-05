@@ -4,8 +4,8 @@ class NewMatchViewController: UIViewController {
 
     var match: Match!
 
-    @IBOutlet weak var location: StandardButton!
-    @IBOutlet weak var schedule: StandardButton!
+    @IBOutlet weak var location: CustomButton!
+    @IBOutlet weak var schedule: CustomButton!
     @IBOutlet weak var type: StandardTextField!
     @IBOutlet weak var vacancies: StandardTextField!
     @IBOutlet weak var price: StandardTextField!
@@ -73,11 +73,11 @@ class NewMatchViewController: UIViewController {
 
     @IBAction func unwindNewMatch(segue: UIStoryboardSegue) {}
 
-    @IBAction func clickLocation(_ sender: StandardButton) {
+    @IBAction func clickLocation(_ sender: CustomButton) {
         performSegue(withIdentifier: "gotoLocation", sender: nil)
     }
 
-    @IBAction func clickSchedule(_ sender: StandardButton) {
+    @IBAction func clickSchedule(_ sender: CustomButton) {
         performSegue(withIdentifier: "gotoSchedule", sender: nil)
     }
 
