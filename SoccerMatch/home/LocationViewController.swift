@@ -25,6 +25,19 @@ class LocationViewController: UIViewController {
         construct()
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+
+        case "unwindNewMatch":
+            guard let vc = segue.destination as? NewMatchViewController else { return }
+            vc.match = match
+            return
+
+        case .none, .some(_):
+            return
+        }
+    }
+
     func construct() {
         var c: CLLocationCoordinate2D
         if let x = match.x, let y = match.y {
@@ -40,30 +53,8 @@ class LocationViewController: UIViewController {
         let span = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
         let region = MKCoordinateRegion(center: c, span: span)
         map.setRegion(region, animated: true)
-
+        
         name.text = match.location
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-
-        case "unwindNewMatch":
-            guard let vc = segue.destination as? NewMatchViewController else { return }
-            vc.match = match
-            return
-
-        case .none, .some(_):
-            return
-        }
-    }
-
-    @objc func selectPosition(tap: UITapGestureRecognizer) {
-        let p = tap.location(in: map)
-        let c = map.convert(p, toCoordinateFrom: map)
-        updateAddress(c)
-        map.removeAnnotations(map.annotations)
-        annotation.coordinate = c
-        map.addAnnotation(annotation)
     }
 
     func updateAddress(_ coord: CLLocationCoordinate2D) {
@@ -77,13 +68,38 @@ class LocationViewController: UIViewController {
         }
     }
 
+    func showMessage(_ message: String) {
+        let alert = UIAlertController(title: "Wops", message: message, preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "OK", style: .default) { (action) in
+            alert.dismiss(animated: true)
+        }
+        alert.addAction(action)
+        
+        present(alert, animated: true)
+    }
+
     @IBAction func clickUpdate(_ sender: StandardButton) {
-        match.location = name.text
+
+        guard let name = name.text, name != "" else {
+            showMessage("You must set the name!")
+            return
+        }
+        match.location = name
 
         match.x = Double(annotation.coordinate.latitude)
         match.y = Double(annotation.coordinate.longitude)
 
         performSegue(withIdentifier: "unwindNewMatch", sender: nil)
+    }
+
+    @objc func selectPosition(tap: UITapGestureRecognizer) {
+        let p = tap.location(in: map)
+        let c = map.convert(p, toCoordinateFrom: map)
+        updateAddress(c)
+        map.removeAnnotations(map.annotations)
+        annotation.coordinate = c
+        map.addAnnotation(annotation)
     }
 
 }

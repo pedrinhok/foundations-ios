@@ -42,4 +42,10 @@ class CustomButton: UIButton {
         }
     }
 
+    override func setTitle(_ title: String?, for state: UIControlState) {
+        super.setTitle(title, for: state)
+
+        setTitleColor(UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1), for: state)
+    }
+
 }

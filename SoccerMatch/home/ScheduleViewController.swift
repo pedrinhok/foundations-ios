@@ -19,6 +19,7 @@ class ScheduleViewController: UIViewController {
 
         day.inputView = dayKeyboard
         start.inputView = startKeyboard
+        finish.inputView = finishKeyboard
 
         day.delegate = self
         start.delegate = self
@@ -42,10 +43,37 @@ class ScheduleViewController: UIViewController {
         }
     }
 
+    func showMessage(_ message: String) {
+        let alert = UIAlertController(title: "Wops", message: message, preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "OK", style: .default) { (action) in
+            alert.dismiss(animated: true)
+        }
+        alert.addAction(action)
+        
+        present(alert, animated: true)
+    }
+
     @IBAction func clickUpdate(_ sender: StandardButton) {
-        match.day = day.text
-        match.start = start.text
-        match.finish = finish.text
+
+        guard let day = day.text, day != "" else {
+            showMessage("You must set the day!")
+            return
+        }
+        match.day = day
+
+        guard let start = start.text, start != "" else {
+            showMessage("You must set the start!")
+            return
+        }
+        match.start = start
+
+        guard let finish = finish.text, finish != "" else {
+            showMessage("You must set the finish!")
+            return
+        }
+        match.finish = finish
+
         performSegue(withIdentifier: "unwindNewMatch", sender: nil)
     }
 

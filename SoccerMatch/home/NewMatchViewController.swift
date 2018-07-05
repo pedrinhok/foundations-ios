@@ -46,12 +46,14 @@ class NewMatchViewController: UIViewController {
     }
 
     func construct() {
-//        if let text = match.location!.name {
-//            location.titleLabel!.text = text
-//        }
-//        if let day = match.day {
-//            schedule.titleLabel!.text = day
-//        }
+        if let text = match.location {
+            location.setTitle(text, for: .normal)
+            location.setTitle(text, for: .selected)
+        }
+        if let day = match.day {
+            schedule.setTitle(day, for: .normal)
+            schedule.setTitle(day, for: .selected)
+        }
         type.text = match.type
         vacancies.text = match.vacancies
         price.text = match.price
@@ -136,7 +138,7 @@ class NewMatchViewController: UIViewController {
                 self.showMessage(error)
                 return
             }
-            print("OK!!!")
+            performSegue(withIdentifier: "unwindHome", sender: nil)
         }
 
     }

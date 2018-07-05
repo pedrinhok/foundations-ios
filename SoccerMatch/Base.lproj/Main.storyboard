@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -382,9 +382,11 @@
                         <outlet property="vacancies" destination="DkT-ar-nhO" id="E70-Ow-0Ry"/>
                         <segue destination="p81-gR-ZVJ" kind="show" identifier="gotoSchedule" id="IWR-7Y-m71"/>
                         <segue destination="CEF-If-scC" kind="show" identifier="gotoLocation" id="krq-4L-Xuz"/>
+                        <segue destination="sFE-NX-MOd" kind="unwind" identifier="unwindHome" unwindAction="unwindHomeWithSegue:" id="Uuh-xb-GDS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c0g-bM-FP0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="sFE-NX-MOd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4488.8000000000002" y="-1880.5097451274364"/>
         </scene>
