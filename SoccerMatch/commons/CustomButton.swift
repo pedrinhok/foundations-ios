@@ -1,7 +1,7 @@
 import UIKit
 
 @IBDesignable
-class StandardButton: UIButton {
+class CustomButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -9,6 +9,16 @@ class StandardButton: UIButton {
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        if let iv = imageView, iv.image != nil {
+            imageEdgeInsets = UIEdgeInsets(top: 5, left: (bounds.width - 30), bottom: 5, right: 0)
+            titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: iv.frame.width)
+        }
+        contentHorizontalAlignment = .left
     }
 
     @IBInspectable
