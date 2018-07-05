@@ -33,6 +33,7 @@
 		95D9470C20E518C9008C5192 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95D9470A20E518C9008C5192 /* LaunchScreen.storyboard */; };
 		95D9471420E518F1008C5192 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D9471320E518F1008C5192 /* SignupViewController.swift */; };
 		95DB013120EE390B009AF416 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB013020EE390B009AF416 /* CustomButton.swift */; };
+		95DB013320EE5E09009AF416 /* MatchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB013220EE5E09009AF416 /* MatchService.swift */; };
 		95F198E220ED01EE00B1BDAA /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F198E120ED01EE00B1BDAA /* Location.swift */; };
 		E0B5AA8120EBB60700501574 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0B5AA8020EBB60700501574 /* CoreLocation.framework */; };
 		E0B5AA8320EBB61F00501574 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0B5AA8220EBB61E00501574 /* MapKit.framework */; };
@@ -68,6 +69,7 @@
 		95D9470D20E518C9008C5192 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95D9471320E518F1008C5192 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		95DB013020EE390B009AF416 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		95DB013220EE5E09009AF416 /* MatchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchService.swift; sourceTree = "<group>"; };
 		95F198E120ED01EE00B1BDAA /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		C9E7C108D81BFD2E28E324C3 /* Pods_SoccerMatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoccerMatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0B5AA8020EBB60700501574 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -134,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				9518C56F20E64CB700B55134 /* UserService.swift */,
+				95DB013220EE5E09009AF416 /* MatchService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				95D9471420E518F1008C5192 /* SignupViewController.swift in Sources */,
 				95D946FF20E518C8008C5192 /* AppDelegate.swift in Sources */,
 				874FC52F20EBAD2D000D0443 /* ChangePasswordViewController.swift in Sources */,
+				95DB013320EE5E09009AF416 /* MatchService.swift in Sources */,
 				95F198E220ED01EE00B1BDAA /* Location.swift in Sources */,
 				9518C57020E64CB700B55134 /* UserService.swift in Sources */,
 				874FC53B20EBAD3C000D0443 /* NewMatchViewController.swift in Sources */,

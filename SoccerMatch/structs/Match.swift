@@ -1,6 +1,7 @@
 import Foundation
 
-struct Match {
+struct Match: Codable {
+    var creator: String?
     var name: String?
     var desc: String?
     var day: String?
@@ -9,5 +10,7 @@ struct Match {
     var type: String?
     var vacancies: String?
     var price: String?
-    var location: Location?
+    var location: String?
+    var x: Double?
+    var y: Double?
 }

@@ -7,9 +7,18 @@ class ScheduleViewController: UIViewController {
     @IBOutlet weak var day: StandardTextField!
     @IBOutlet weak var start: StandardTextField!
     @IBOutlet weak var finish: StandardTextField!
+    @IBOutlet var dayKeyboard: UIView!
+    @IBOutlet weak var daySelector: UIDatePicker!
+    @IBOutlet var startKeyboard: UIView!
+    @IBOutlet weak var startSelector: UIDatePicker!
+    @IBOutlet var finishKeyboard: UIView!
+    @IBOutlet weak var finishSelector: UIDatePicker!
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        day.inputView = dayKeyboard
+        start.inputView = startKeyboard
 
         day.delegate = self
         start.delegate = self
@@ -38,6 +47,27 @@ class ScheduleViewController: UIViewController {
         match.start = start.text
         match.finish = finish.text
         performSegue(withIdentifier: "unwindNewMatch", sender: nil)
+    }
+
+    @IBAction func dayUpdate(_ sender: UIButton) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        day.text = formatter.string(from: daySelector.date)
+        day.resignFirstResponder()
+    }
+
+    @IBAction func startUpdate(_ sender: UIButton) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        start.text = formatter.string(from: startSelector.date)
+        start.resignFirstResponder()
+    }
+
+    @IBAction func finishUpdate(_ sender: UIButton) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        finish.text = formatter.string(from: finishSelector.date)
+        finish.resignFirstResponder()
     }
 
 }

@@ -20,7 +20,6 @@ class NewMatchViewController: UIViewController {
         desc.delegate = self
 
         match = Match()
-        match.location = Location()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -82,15 +81,15 @@ class NewMatchViewController: UIViewController {
 
     @IBAction func clickCreate(_ sender: StandardButton) {
 
-        guard let location = match.location!.name, location != "" else {
+        guard let location = match.location, location != "" else {
             showMessage("You must set the location!")
             return
         }
-        guard let x = match.location!.x, x != 0.0 else {
+        guard let x = match.x, x != 0.0 else {
             showMessage("You must set the location!")
             return
         }
-        guard let y = match.location!.y, y != 0.0 else {
+        guard let y = match.y, y != 0.0 else {
             showMessage("You must set the location!")
             return
         }
@@ -131,6 +130,14 @@ class NewMatchViewController: UIViewController {
             return
         }
         match.desc = desc
+
+        MatchService.create(match) { (error) in
+            if let error = error {
+                self.showMessage(error)
+                return
+            }
+            print("OK!!!")
+        }
 
     }
 

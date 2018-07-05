@@ -26,10 +26,8 @@ class LocationViewController: UIViewController {
     }
 
     func construct() {
-        guard let location = match.location else { return }
-
         var c: CLLocationCoordinate2D
-        if let x = location.x, let y = location.y {
+        if let x = match.x, let y = match.y {
             c = CLLocationCoordinate2D(latitude: CLLocationDegrees(x), longitude: CLLocationDegrees(y))
         } else {
             guard let current = locationManager.location else { return }
@@ -43,7 +41,7 @@ class LocationViewController: UIViewController {
         let region = MKCoordinateRegion(center: c, span: span)
         map.setRegion(region, animated: true)
 
-        name.text = location.name
+        name.text = match.location
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -61,10 +59,10 @@ class LocationViewController: UIViewController {
 
     @objc func selectPosition(tap: UITapGestureRecognizer) {
         let p = tap.location(in: map)
-        let coord = map.convert(p, toCoordinateFrom: map)
-        updateAddress(coord)
+        let c = map.convert(p, toCoordinateFrom: map)
+        updateAddress(c)
         map.removeAnnotations(map.annotations)
-        annotation.coordinate = coord
+        annotation.coordinate = c
         map.addAnnotation(annotation)
     }
 
@@ -80,9 +78,11 @@ class LocationViewController: UIViewController {
     }
 
     @IBAction func clickUpdate(_ sender: StandardButton) {
-        match.location!.name = name.text
-        match.location!.x = Double(annotation.coordinate.latitude)
-        match.location!.y = Double(annotation.coordinate.longitude)
+        match.location = name.text
+
+        match.x = Double(annotation.coordinate.latitude)
+        match.y = Double(annotation.coordinate.longitude)
+
         performSegue(withIdentifier: "unwindNewMatch", sender: nil)
     }
 
