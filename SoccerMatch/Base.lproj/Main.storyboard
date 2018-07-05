@@ -143,12 +143,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="EvR-fb-yEG">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="EvR-fb-yEG">
                                 <rect key="frame" x="0.0" y="64" width="320" height="455"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="EvR-fb-yEG" firstAttribute="top" secondItem="zPD-CB-GhV" secondAttribute="top" id="Axx-RB-hiQ"/>
+                            <constraint firstItem="EvR-fb-yEG" firstAttribute="bottom" secondItem="zPD-CB-GhV" secondAttribute="bottom" id="Cbm-Og-fiD"/>
+                            <constraint firstItem="EvR-fb-yEG" firstAttribute="trailing" secondItem="zPD-CB-GhV" secondAttribute="trailing" id="FAI-mB-JJu"/>
+                            <constraint firstItem="EvR-fb-yEG" firstAttribute="leading" secondItem="zPD-CB-GhV" secondAttribute="leading" id="G9Y-kZ-IUE"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="zPD-CB-GhV"/>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="2Hm-8M-RNw">
