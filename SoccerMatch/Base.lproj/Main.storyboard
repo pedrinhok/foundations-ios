@@ -490,7 +490,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vyV-0Z-Vuq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="twi-9M-6Mc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5670" y="-2195.0704225352115"/>
+            <point key="canvasLocation" x="6036" y="-2272"/>
         </scene>
         <!--Schedule-->
         <scene sceneID="u6w-yu-CQl">
@@ -603,15 +603,129 @@
                     <navigationItem key="navigationItem" title="Schedule" id="KvZ-7k-CmS"/>
                     <connections>
                         <outlet property="day" destination="c0u-Pt-GCb" id="MWg-7A-kmd"/>
+                        <outlet property="dayKeyboard" destination="lK9-h0-I2r" id="uyB-7Q-FoU"/>
+                        <outlet property="daySelector" destination="DSE-jO-4eI" id="OW0-0F-aPV"/>
                         <outlet property="finish" destination="0NT-rz-Qlm" id="DwP-Dw-s0g"/>
+                        <outlet property="finishKeyboard" destination="EDa-h6-e8J" id="B3w-NQ-2aG"/>
+                        <outlet property="finishSelector" destination="kAc-6u-UEB" id="84w-Hm-kdR"/>
                         <outlet property="start" destination="jQG-92-kDA" id="IJu-qR-IxD"/>
+                        <outlet property="startKeyboard" destination="dBU-ma-6SV" id="BSh-DN-ex0"/>
+                        <outlet property="startSelector" destination="ZSM-3P-P8a" id="8KT-lF-ChM"/>
                         <segue destination="xNc-t3-7Md" kind="unwind" identifier="unwindNewMatch" unwindAction="unwindNewMatchWithSegue:" id="YVt-2W-trM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l9v-T4-Dz3" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="xNc-t3-7Md" userLabel="Exit" sceneMemberID="exit"/>
+                <view contentMode="scaleToFill" id="lK9-h0-I2r">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="DSE-jO-4eI">
+                            <rect key="frame" x="0.0" y="30" width="320" height="150"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="150" id="kI9-8B-aga"/>
+                            </constraints>
+                            <date key="date" timeIntervalSinceReferenceDate="552484569.59296">
+                                <!--2018-07-05 11:56:09 +0000-->
+                            </date>
+                        </datePicker>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nVB-RS-5ea">
+                            <rect key="frame" x="270" y="0.0" width="50" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="eBa-jZ-Bjw"/>
+                                <constraint firstAttribute="height" constant="30" id="knR-dW-IuS"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="OK"/>
+                            <connections>
+                                <action selector="dayUpdate:" destination="p81-gR-ZVJ" eventType="touchUpInside" id="bAg-SN-uBJ"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="nVB-RS-5ea" firstAttribute="top" secondItem="PpS-77-7y0" secondAttribute="top" id="VcP-in-I6y"/>
+                        <constraint firstItem="nVB-RS-5ea" firstAttribute="trailing" secondItem="PpS-77-7y0" secondAttribute="trailing" id="X8q-Gg-VbX"/>
+                        <constraint firstItem="DSE-jO-4eI" firstAttribute="trailing" secondItem="PpS-77-7y0" secondAttribute="trailing" id="XHk-oD-8pk"/>
+                        <constraint firstItem="PpS-77-7y0" firstAttribute="bottom" secondItem="DSE-jO-4eI" secondAttribute="bottom" id="XfJ-un-rNz"/>
+                        <constraint firstItem="DSE-jO-4eI" firstAttribute="leading" secondItem="PpS-77-7y0" secondAttribute="leading" id="eyp-QF-fPn"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="PpS-77-7y0"/>
+                </view>
+                <view contentMode="scaleToFill" id="dBU-ma-6SV">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="ZSM-3P-P8a">
+                            <rect key="frame" x="0.0" y="30" width="320" height="150"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="150" id="4NA-I2-h1k"/>
+                            </constraints>
+                            <date key="date" timeIntervalSinceReferenceDate="552484569.59296">
+                                <!--2018-07-05 11:56:09 +0000-->
+                            </date>
+                        </datePicker>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DYb-Av-fOd">
+                            <rect key="frame" x="270" y="0.0" width="50" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="9qF-7q-ho9"/>
+                                <constraint firstAttribute="height" constant="30" id="ykU-BD-kPX"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="OK"/>
+                            <connections>
+                                <action selector="startUpdate:" destination="p81-gR-ZVJ" eventType="touchUpInside" id="0Bd-wu-s5W"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="ZSM-3P-P8a" firstAttribute="bottom" secondItem="wq7-bB-TPs" secondAttribute="bottom" id="08L-SK-Kzf"/>
+                        <constraint firstItem="ZSM-3P-P8a" firstAttribute="leading" secondItem="wq7-bB-TPs" secondAttribute="leading" id="8Md-Vm-i8S"/>
+                        <constraint firstItem="wq7-bB-TPs" firstAttribute="trailing" secondItem="DYb-Av-fOd" secondAttribute="trailing" id="NYm-CL-ZJs"/>
+                        <constraint firstItem="DYb-Av-fOd" firstAttribute="top" secondItem="wq7-bB-TPs" secondAttribute="top" id="TpZ-Nj-xxv"/>
+                        <constraint firstItem="ZSM-3P-P8a" firstAttribute="trailing" secondItem="wq7-bB-TPs" secondAttribute="trailing" id="uhJ-Nl-83U"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="wq7-bB-TPs"/>
+                </view>
+                <view contentMode="scaleToFill" id="EDa-h6-e8J">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="kAc-6u-UEB">
+                            <rect key="frame" x="0.0" y="30" width="320" height="150"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="150" id="Wbu-Xs-Izw"/>
+                            </constraints>
+                            <date key="date" timeIntervalSinceReferenceDate="552484569.59296">
+                                <!--2018-07-05 11:56:09 +0000-->
+                            </date>
+                        </datePicker>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9IV-UT-fX1">
+                            <rect key="frame" x="270" y="0.0" width="50" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="ZXZ-ZN-xBr"/>
+                                <constraint firstAttribute="width" constant="50" id="g6F-eg-657"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="OK"/>
+                            <connections>
+                                <action selector="finishUpdate:" destination="p81-gR-ZVJ" eventType="touchUpInside" id="ExS-GH-aw7"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="9IV-UT-fX1" firstAttribute="top" secondItem="EDa-h6-e8J" secondAttribute="top" id="ACW-Mt-0e8"/>
+                        <constraint firstItem="kAc-6u-UEB" firstAttribute="leading" secondItem="Vs4-BC-eHq" secondAttribute="leading" id="Ndc-Xb-zjn"/>
+                        <constraint firstItem="Vs4-BC-eHq" firstAttribute="bottom" secondItem="kAc-6u-UEB" secondAttribute="bottom" id="Vbe-06-yW4"/>
+                        <constraint firstItem="Vs4-BC-eHq" firstAttribute="trailing" secondItem="9IV-UT-fX1" secondAttribute="trailing" id="hOi-PR-Z4I"/>
+                        <constraint firstAttribute="trailing" secondItem="kAc-6u-UEB" secondAttribute="trailing" id="ije-4l-gWa"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="Vs4-BC-eHq"/>
+                </view>
             </objects>
-            <point key="canvasLocation" x="5671" y="-1513"/>
+            <point key="canvasLocation" x="6035.625" y="-1374.2957746478874"/>
         </scene>
         <!--Profile-->
         <scene sceneID="H2I-Vk-iyz">
