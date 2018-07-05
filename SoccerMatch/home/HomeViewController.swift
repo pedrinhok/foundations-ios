@@ -5,41 +5,50 @@ import MapKit
 class HomeViewController: UIViewController {
     
     var locationManager = CLLocationManager()
-    var geocoder = CLGeocoder()
+    var matches: [MatchAnnotation] = []
     
     @IBOutlet weak var map: MKMapView!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        locationManager.delegate = self
+        map.delegate = self
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        construct()
+
+        locationManager.startUpdatingLocation()
         getMatches()
     }
-    
-    func construct() {
-        locationManager.startUpdatingLocation()
-        guard let location = locationManager.location else { return }
 
-        let span = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
-        let region = MKCoordinateRegion(center: location.coordinate, span: span)
-        map.setRegion(region, animated: true)
-        map.showsUserLocation = true
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+            
+        case "gotoSelectMatch":
+            guard let vc = segue.destination as? SelectMatchViewController else { return }
+            guard let match = sender as? Match else { return }
+            vc.match = match
+            return
+            
+        case .none, .some(_):
+            return
+        }
     }
-    
+
     func getMatches() {
-        MatchService.get { (matches) in
+        MatchService.get { (data) in
 
-            var anns: [MKAnnotation] = []
+            for match in data {
 
-            for match in matches {
-                let ann = MKPointAnnotation()
                 guard let x = match.x, let y = match.y else { continue }
-                let c = CLLocationCoordinate2D(latitude: CLLocationDegrees(x), longitude: CLLocationDegrees(y))
-                ann.coordinate = c
-                anns.append(ann)
+                let ann = MatchAnnotation(match, x: CLLocationDegrees(x), y: CLLocationDegrees(y))
+
+                self.matches.append(ann)
             }
 
-            self.map.addAnnotations(anns)
+            self.map.addAnnotations(self.matches)
         }
     }
 
@@ -47,6 +56,39 @@ class HomeViewController: UIViewController {
 
     @IBAction func clickNewMatch(_ sender: UIButton) {
         performSegue(withIdentifier: "gotoNewMatch", sender: nil)
+    }
+
+}
+
+extension HomeViewController: CLLocationManagerDelegate, MKMapViewDelegate {
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations[0] as CLLocation
+
+        let span = MKCoordinateSpan(latitudeDelta: 0.008, longitudeDelta: 0.008)
+        let region = MKCoordinateRegion(center: location.coordinate, span: span)
+        map.setRegion(region, animated: true)
+        map.showsUserLocation = true
+    }
+
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+
+        guard let ann = view.annotation as? MatchAnnotation else { return }
+        let match = ann.match
+
+        performSegue(withIdentifier: "gotoSelectMatch", sender: match)
+    }
+
+}
+
+class MatchAnnotation: NSObject, MKAnnotation {
+
+    var match: Match
+    var coordinate: CLLocationCoordinate2D
+
+    init(_ data: Match, x: CLLocationDegrees, y: CLLocationDegrees) {
+        match = data
+        coordinate = CLLocationCoordinate2D(latitude: x, longitude: y)
     }
 
 }
