@@ -1,22 +1,21 @@
 import UIKit
 
 class CircleImage: UIImageView {
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        round()
+        construct()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
-        round()
+        construct()
     }
-
-    func round() {
-        layer.masksToBounds = true
+    
+    func construct() {
         layer.cornerRadius = frame.size.width / 2
     }
-
+    
 }
