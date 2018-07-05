@@ -8,7 +8,7 @@ class LocationViewController: UIViewController {
 
     var locationManager = CLLocationManager()
     var geocoder = CLGeocoder()
-    var annotation = MKPointAnnotation()
+    var ann = MKPointAnnotation()
 
     @IBOutlet weak var map: MKMapView!
     @IBOutlet weak var address: StandardTextField!
@@ -48,8 +48,8 @@ class LocationViewController: UIViewController {
         }
         updateAddress(c)
         map.removeAnnotations(map.annotations)
-        annotation.coordinate = c
-        map.addAnnotation(annotation)
+        ann.coordinate = c
+        map.addAnnotation(ann)
         let span = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
         let region = MKCoordinateRegion(center: c, span: span)
         map.setRegion(region, animated: true)
@@ -87,8 +87,9 @@ class LocationViewController: UIViewController {
         }
         match.location = name
 
-        match.x = Double(annotation.coordinate.latitude)
-        match.y = Double(annotation.coordinate.longitude)
+        let c = ann.coordinate
+        match.x = Double(c.latitude)
+        match.y = Double(c.longitude)
 
         performSegue(withIdentifier: "unwindNewMatch", sender: nil)
     }
@@ -98,8 +99,8 @@ class LocationViewController: UIViewController {
         let c = map.convert(p, toCoordinateFrom: map)
         updateAddress(c)
         map.removeAnnotations(map.annotations)
-        annotation.coordinate = c
-        map.addAnnotation(annotation)
+        ann.coordinate = c
+        map.addAnnotation(ann)
     }
 
 }
