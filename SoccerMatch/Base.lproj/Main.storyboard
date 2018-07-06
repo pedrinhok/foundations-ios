@@ -1575,11 +1575,21 @@
                     <view key="view" contentMode="scaleToFill" id="x8a-ec-onn">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zUi-75-bzj">
+                                <rect key="frame" x="44" y="163" width="233" height="266"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="K62-Z9-84b"/>
                     </view>
                     <navigationItem key="navigationItem" title="My Matches" id="Elq-UY-ygr"/>
                     <connections>
+                        <outlet property="labelTest" destination="zUi-75-bzj" id="gBv-Cp-j9I"/>
                         <segue destination="egf-ev-rpz" kind="show" identifier="gotoMatchCreated" id="PGh-OT-D1N"/>
                         <segue destination="erp-I6-vWT" kind="show" identifier="gotoMatchSubscribed" id="1Zc-nD-nDo"/>
                     </connections>
@@ -1601,7 +1611,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aDL-XI-egS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4488.8000000000002" y="412.44377811094455"/>
+            <point key="canvasLocation" x="4488.75" y="411.97183098591552"/>
         </scene>
         <!--Match Created View Controller-->
         <scene sceneID="cvV-tq-1pU">

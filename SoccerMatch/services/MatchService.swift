@@ -4,20 +4,18 @@ import FirebaseDatabase
 
 class MatchService {
     
-    public static func getMatchCreator(userRef: String!, handler: @escaping (UserObject?) -> ()) {
+    public static func getMatch(matchId: String?, handler: @escaping (Match?) -> ()) {
         let ref = Database.database().reference()
         
-        ref.child("users").child(userRef).observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("matches").child(matchId!).observeSingleEvent(of: .value, with: { (snapshot) in
             
-            let user = UserObject()
-            let value = snapshot.value as? NSDictionary
+            guard let data = snapshot.value as? [String: Any] else {
+                handler(nil)
+                return
+            }
+            let match = Match.decode(data)
             
-            user.id = userRef
-            user.email = value?["email"] as? String ?? ""
-            user.name = value?["name"] as? String ?? ""
-            user.phone = value?["phone"] as? String ?? ""
-            
-            handler(user)
+            handler(match)
             
         }) { (error) in
             print(error.localizedDescription)
@@ -25,6 +23,7 @@ class MatchService {
         }
     }
 
+    // TODO: Fazer este get com query com a data e horario para verificar se ainda está dispoível o jogo
     public static func get(handler: @escaping ([Match]) -> ()) {
         let ref = Database.database().reference()
 

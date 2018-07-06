@@ -15,7 +15,7 @@ class SelectMatchViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        MatchService.getMatchCreator(userRef: match.creator) { (user) in
+        UserService.getMatchCreator(userRef: match.creator) { (user) in
             guard let user = user else {
                 self.showMessage("Match crashed")
                 return

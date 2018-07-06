@@ -8,6 +8,27 @@ class UserService {
     public static func auth() -> Bool {
         return current() != nil
     }
+    
+    public static func getMatchCreator(userRef: String!, handler: @escaping (UserObject?) -> ()) {
+        let ref = Database.database().reference()
+        
+        ref.child("users").child(userRef).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let user = UserObject()
+            let value = snapshot.value as? NSDictionary
+            
+            user.id = userRef
+            user.email = value?["email"] as? String ?? ""
+            user.name = value?["name"] as? String ?? ""
+            user.phone = value?["phone"] as? String ?? ""
+            
+            handler(user)
+            
+        }) { (error) in
+            print(error.localizedDescription)
+            handler(nil)
+        }
+    }
 
     // TODO - submit post request
     public static func create(name: String, phone: String, email: String, password: String, handler: @escaping (_ error: String?) -> ()) {
