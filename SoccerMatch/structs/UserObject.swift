@@ -1,13 +1,7 @@
-//
-//  UserObject.swift
-//  SoccerMatch
-//
-//  Created by Hercílio Martins Ortiz on 06/07/2018.
-//  Copyright © 2018 Pedro Kayser. All rights reserved.
-//
 
-import UIKit
-
-class UserObject: Any {
-
+class UserObject {
+    var id: String?
+    var name: String?
+    var phone: String?
+    var email: String?
 }

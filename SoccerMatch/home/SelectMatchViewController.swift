@@ -14,13 +14,41 @@ class SelectMatchViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        desc.text = match.desc
-        location.text = match.location
-        scheduleDate.text = match.day
-        scheduleDuration.text = "\(match.start!) - \(match.finish!)"
-        price.text = match.price
-        vacancies.text = match.vacancies
+        
+        MatchService.getMatchCreator(userRef: match.creator) { (user) in
+            guard let user = user else {
+                self.showMessage("Match crashed")
+                return
+            }
+            self.creator.text = user.name
+            self.desc.text = self.match.desc
+            self.location.text = self.match.location
+            self.scheduleDate.text = self.match.day
+            self.scheduleDuration.text = "\(self.match.start!) - \(self.match.finish!)"
+            self.price.text = self.match.price
+            self.vacancies.text = self.match.vacancies
+        }
     }
-
+    
+    @IBAction func subscriveToMatch(_ sender: UIButton) {
+        SubscribeService.create(match) { (error) in
+            if let error = error {
+                self.showMessage(error)
+                return
+            }
+            self.performSegue(withIdentifier: "unwindSelectMatch", sender: nil)
+        }
+    }
+    
+    func showMessage(_ message: String) {
+        let alert = UIAlertController(title: "Wops", message: message, preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "OK", style: .default) { (action) in
+            alert.dismiss(animated: true)
+            self.performSegue(withIdentifier: "unwindSelectMatch", sender: nil)
+        }
+        alert.addAction(action)
+        
+        present(alert, animated: true)
+    }
 }

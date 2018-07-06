@@ -3,6 +3,27 @@ import FirebaseAuth
 import FirebaseDatabase
 
 class MatchService {
+    
+    public static func getMatchCreator(userRef: String!, handler: @escaping (UserObject?) -> ()) {
+        let ref = Database.database().reference()
+        
+        ref.child("users").child(userRef).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let user = UserObject()
+            let value = snapshot.value as? NSDictionary
+            
+            user.id = userRef
+            user.email = value?["email"] as? String ?? ""
+            user.name = value?["name"] as? String ?? ""
+            user.phone = value?["phone"] as? String ?? ""
+            
+            handler(user)
+            
+        }) { (error) in
+            print(error.localizedDescription)
+            handler(nil)
+        }
+    }
 
     public static func get(handler: @escaping ([Match]) -> ()) {
         let ref = Database.database().reference()

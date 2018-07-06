@@ -1,13 +1,29 @@
-//
-//  SubscribeService.swift
-//  SoccerMatch
-//
-//  Created by Hercílio Martins Ortiz on 06/07/2018.
-//  Copyright © 2018 Pedro Kayser. All rights reserved.
-//
+import Foundation
+import FirebaseAuth
+import FirebaseDatabase
 
-import UIKit
-
-class SubscribeService: Any {
+class SubscribeService {
+    
+    public static func create(_ match: Match, handler: (String?) -> ()) {
+        guard let user = UserService.current() else {
+            handler("Unauthorized!")
+            return
+        }
+        
+        if user.id == match.creator {
+            handler("This's your match, idiot")
+            return
+        }
+        
+        let ref = Database.database().reference()
+        
+        let creator = match.creator
+        let subscribed = user.id
+        
+        
+        ref.child("subscribe").childByAutoId().setValue(["creator": creator, "subscribed": subscribed])
+        
+        handler(nil)
+    }
 
 }
