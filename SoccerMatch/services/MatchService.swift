@@ -31,14 +31,17 @@ class MatchService {
             handler("Unauthorized!")
             return
         }
+
+        let ref = Database.database().reference()
+        
         var m = match
+        m.matchId = ref.child("matches").childByAutoId().key
         m.creator = user.id
 
         let JSON = try! JSONEncoder().encode(m)
         let data = try! JSONSerialization.jsonObject(with: JSON, options: [])
 
-        let ref = Database.database().reference()
-        ref.child("matches").childByAutoId().setValue(data)
+        ref.child("matches").child(m.matchId!).setValue(data)
 
         handler(nil)
     }
