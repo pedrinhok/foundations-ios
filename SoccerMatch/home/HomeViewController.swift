@@ -2,18 +2,20 @@ import UIKit
 
 import MapKit
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UISearchBarDelegate {
     
     var locationManager = CLLocationManager()
     var matches: [MatchAnnotation] = []
-    
     @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var searchBarMap: UISearchBar!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         locationManager.delegate = self
         map.delegate = self
+        searchBarMap.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -35,6 +37,33 @@ class HomeViewController: UIViewController {
         case .none, .some(_):
             return
         }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBarMap.resignFirstResponder()
+        
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(searchBarMap.text!) { (placemarks:[CLPlacemark]?, error:Error?) in
+            if error == nil{
+                
+                let placemark = placemarks?.first
+                
+                let anno = MKPointAnnotation()
+                anno.coordinate = (placemark?.location?.coordinate)!
+                anno.title = self.searchBarMap.text!
+                
+                let span = MKCoordinateSpanMake(0.008, 0.008)
+                let region = MKCoordinateRegion(center: anno.coordinate, span: span)
+                
+                self.map.setRegion(region, animated: true)
+                //self.map.addAnnotation(anno)
+                //self.map.selectAnnotation(anno, animated: true)
+                
+            }else{
+                print(error?.localizedDescription ?? "error")
+            }
+        }
+        
     }
 
     func getMatches() {

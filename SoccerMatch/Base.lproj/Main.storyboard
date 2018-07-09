@@ -146,6 +146,11 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="V5p-r8-aZ9">
                                 <rect key="frame" x="0.0" y="64" width="320" height="455"/>
                             </mapView>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mr3-EW-O4e">
+                                <rect key="frame" x="0.0" y="64" width="320" height="56"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -170,6 +175,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="map" destination="V5p-r8-aZ9" id="Ymi-3U-JlM"/>
+                        <outlet property="searchBarMap" destination="Mr3-EW-O4e" id="Mzk-3a-pzT"/>
                         <segue destination="ZtP-Rk-P6W" kind="show" identifier="gotoNewMatch" id="3fa-1p-Ioe"/>
                         <segue destination="8oZ-Mf-F1x" kind="show" identifier="gotoSelectMatch" id="vu4-4I-yKw"/>
                     </connections>
@@ -1809,6 +1815,6 @@
         <image name="logoSoccerM" width="603" height="215"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hBH-cC-Rdf"/>
+        <segue reference="RQ4-PG-0SG"/>
     </inferredMetricsTieBreakers>
 </document>

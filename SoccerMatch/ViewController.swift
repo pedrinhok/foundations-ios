@@ -9,6 +9,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var email: StandardTextField!
     @IBOutlet weak var password: StandardTextField!
+    
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -17,6 +18,8 @@ class ViewController: UIViewController {
         email.delegate = self
         password.delegate = self
     }
+    
+
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
