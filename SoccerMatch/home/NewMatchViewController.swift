@@ -60,11 +60,12 @@ class NewMatchViewController: UIViewController {
         desc.text = match.desc
     }
 
-    func showMessage(_ message: String) {
-        let alert = UIAlertController(title: "Wops", message: message, preferredStyle: .alert)
+    func showMessage(title: String, message: String, completion: (() -> ())? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
         let action = UIAlertAction(title: "OK", style: .default) { (action) in
             alert.dismiss(animated: true)
+            if let completion = completion { completion() }
         }
         alert.addAction(action)
 
@@ -84,61 +85,63 @@ class NewMatchViewController: UIViewController {
     @IBAction func clickCreate(_ sender: StandardButton) {
 
         guard let location = match.location, location != "" else {
-            showMessage("You must set the location!")
+            showMessage(title: "Wops", message: "You must set the location!")
             return
         }
         guard let x = match.x, x != 0.0 else {
-            showMessage("You must set the location!")
+            showMessage(title: "Wops", message: "You must set the location!")
             return
         }
         guard let y = match.y, y != 0.0 else {
-            showMessage("You must set the location!")
+            showMessage(title: "Wops", message: "You must set the location!")
             return
         }
 
         guard let day = match.day, day != "" else {
-            showMessage("You must set the schedule!")
+            showMessage(title: "Wops", message: "You must set the schedule!")
             return
         }
         guard let start = match.start, start != "" else {
-            showMessage("You must set the schedule!")
+            showMessage(title: "Wops", message: "You must set the schedule!")
             return
         }
         guard let finish = match.finish, finish != "" else {
-            showMessage("You must set the schedule!")
+            showMessage(title: "Wops", message: "You must set the schedule!")
             return
         }
 
         guard let type = type.text, type != "" else {
-            showMessage("You must set the match type!")
+            showMessage(title: "Wops", message: "You must set the match type!")
             return
         }
         match.type = type
 
         guard let vacancies = vacancies.text, vacancies != "" else {
-            showMessage("You must set the vacancies!")
+            showMessage(title: "Wops", message: "You must set the vacancies!")
             return
         }
         match.vacancies = vacancies
 
         guard let price = price.text, price != "" else {
-            showMessage("You must set the price!")
+            showMessage(title: "Wops", message: "You must set the price!")
             return
         }
         match.price = price
 
         guard let desc = desc.text, desc != "" else {
-            showMessage("You must set the description!")
+            showMessage(title: "Wops", message: "You must set the description!")
             return
         }
         match.desc = desc
 
         MatchService.create(match) { (error) in
             if let error = error {
-                self.showMessage(error)
-                return
+                self.showMessage(title: "Wops", message: error)
+            } else {
+                self.showMessage(title: "Match successfully created!", message: "") {
+                    self.performSegue(withIdentifier: "unwindHome", sender: nil)
+                }
             }
-            performSegue(withIdentifier: "unwindHome", sender: nil)
         }
 
     }

@@ -57,7 +57,7 @@ class SelectMatchViewController: UIViewController {
             if let error = error {
                 self.showMessage(title: "Wops", message: error)
             } else {
-                self.showMessage(title: "You have successfully subscribed to this match", message: "The creator of the match must still accept you") {
+                self.showMessage(title: "You have subscribed to this match!", message: "") {
                     self.performSegue(withIdentifier: "unwindSelectMatch", sender: nil)
                 }
             }
