@@ -3,7 +3,7 @@ import CoreData
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate{
     
-    var user: User!
+    var user: UserO!
 
     @IBOutlet weak var name: StandardTextField!
     @IBOutlet weak var gender: StandardTextField!
@@ -39,7 +39,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
     func getUser() {
         // request user to firebase
-        user = User(name: "User 1", birthday: "01/01/2000", gender: "Female", phone: "123", email: "user1@email.com", password: "password")
+        user = UserO(name: "User 1", birthday: "01/01/2000", gender: "Female", phone: "123", email: "user1@email.com", password: "password")
         name.text = user.name
         gender.text = user.gender
         birthday.text = user.birthday
@@ -162,7 +162,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
 
 }
 
-struct User {
+struct UserO {
     var name: String?
     var birthday: String?
     var gender: String?

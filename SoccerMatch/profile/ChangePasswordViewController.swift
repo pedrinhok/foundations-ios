@@ -2,7 +2,7 @@ import UIKit
 
 class ChangePasswordViewController: UIViewController {
     
-    var user: User!
+    var user: UserO!
 
     @IBOutlet weak var password: StandardTextField!
     @IBOutlet weak var newPassword: StandardTextField!
