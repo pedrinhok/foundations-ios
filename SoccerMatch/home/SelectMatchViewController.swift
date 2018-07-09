@@ -30,13 +30,13 @@ class SelectMatchViewController: UIViewController {
         }
     }
     
-    @IBAction func subscriveToMatch(_ sender: UIButton) {
-        SubscribeService.create(match) { (error) in
+    @IBAction func clickSubscribe(_ sender: UIButton) {
+        SubscriptionService.create(match) { (error) in
             if let error = error {
                 self.showMessage(error)
-                return
+            } else {
+                self.performSegue(withIdentifier: "unwindSelectMatch", sender: nil)
             }
-            self.performSegue(withIdentifier: "unwindSelectMatch", sender: nil)
         }
     }
     
@@ -45,7 +45,6 @@ class SelectMatchViewController: UIViewController {
         
         let action = UIAlertAction(title: "OK", style: .default) { (action) in
             alert.dismiss(animated: true)
-            self.performSegue(withIdentifier: "unwindSelectMatch", sender: nil)
         }
         alert.addAction(action)
         

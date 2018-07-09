@@ -1304,7 +1304,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="subscriveToMatch:" destination="8oZ-Mf-F1x" eventType="touchUpInside" id="c5B-XM-ON3"/>
+                                    <action selector="clickSubscribe:" destination="8oZ-Mf-F1x" eventType="touchUpInside" id="c5B-XM-ON3"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1664,21 +1664,108 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MATCHES I AM SUBSCRIBED" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcI-f5-YPM">
+                                <rect key="frame" x="8" y="280" width="304" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <color key="textColor" red="0.78039215689999997" green="0.78039215689999997" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="dox-Qa-snz">
+                                <rect key="frame" x="8" y="306" width="304" height="150"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="F8H-6L-WkZ"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0MK-mk-q1C">
+                                    <size key="itemSize" width="250" height="150"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="matchSubscribedCell" id="Ciz-1R-90r" customClass="MatchCollectionCell" customModule="SoccerMatch" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="250" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GGO-2f-t8j" customClass="RoundedView" customModule="SoccerMatch" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="250" height="150"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fKv-Dk-04i">
+                                                            <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Match desc" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3UQ-IQ-Zy1">
+                                                                    <rect key="frame" x="8" y="13.5" width="234" height="24"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                                                    <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" red="0.49019607840000001" green="0.82352941180000006" blue="0.45098039220000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <constraints>
+                                                                <constraint firstItem="3UQ-IQ-Zy1" firstAttribute="centerY" secondItem="fKv-Dk-04i" secondAttribute="centerY" id="6EH-TP-tav"/>
+                                                                <constraint firstAttribute="trailing" secondItem="3UQ-IQ-Zy1" secondAttribute="trailing" constant="8" id="qRC-2e-ryA"/>
+                                                                <constraint firstAttribute="height" constant="50" id="rs1-k4-dxj"/>
+                                                                <constraint firstItem="3UQ-IQ-Zy1" firstAttribute="leading" secondItem="fKv-Dk-04i" secondAttribute="leading" constant="8" id="vL3-Da-JZU"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="fKv-Dk-04i" firstAttribute="top" secondItem="GGO-2f-t8j" secondAttribute="top" id="NLg-ch-bpM"/>
+                                                        <constraint firstItem="fKv-Dk-04i" firstAttribute="leading" secondItem="GGO-2f-t8j" secondAttribute="leading" id="TMr-jd-14f"/>
+                                                        <constraint firstAttribute="trailing" secondItem="fKv-Dk-04i" secondAttribute="trailing" id="wa5-MV-HHX"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="corner">
+                                                            <real key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                            <real key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                            <color key="value" red="0.80392156859999997" green="0.80392156859999997" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="GGO-2f-t8j" secondAttribute="bottom" id="NzG-sD-TKF"/>
+                                            <constraint firstItem="GGO-2f-t8j" firstAttribute="top" secondItem="Ciz-1R-90r" secondAttribute="top" id="WfC-QK-NpI"/>
+                                            <constraint firstAttribute="trailing" secondItem="GGO-2f-t8j" secondAttribute="trailing" id="bXq-ci-oxp"/>
+                                            <constraint firstItem="GGO-2f-t8j" firstAttribute="leading" secondItem="Ciz-1R-90r" secondAttribute="leading" id="nVl-fU-ptp"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="desc" destination="3UQ-IQ-Zy1" id="E9p-Px-Ef6"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="K62-Z9-84b" firstAttribute="trailing" secondItem="vcI-f5-YPM" secondAttribute="trailing" constant="8" id="198-Nf-m59"/>
                             <constraint firstItem="7mi-1p-bgw" firstAttribute="leading" secondItem="K62-Z9-84b" secondAttribute="leading" constant="8" id="EK2-fJ-lqS"/>
                             <constraint firstItem="0cy-WY-Ets" firstAttribute="leading" secondItem="K62-Z9-84b" secondAttribute="leading" constant="8" id="HWJ-43-XBz"/>
                             <constraint firstItem="7mi-1p-bgw" firstAttribute="top" secondItem="K62-Z9-84b" secondAttribute="top" constant="20" id="WXu-tp-dws"/>
                             <constraint firstItem="K62-Z9-84b" firstAttribute="trailing" secondItem="7mi-1p-bgw" secondAttribute="trailing" constant="8" id="WYG-lV-Wzn"/>
+                            <constraint firstItem="dox-Qa-snz" firstAttribute="top" secondItem="vcI-f5-YPM" secondAttribute="bottom" constant="8" id="a7Y-wV-snC"/>
+                            <constraint firstItem="vcI-f5-YPM" firstAttribute="leading" secondItem="K62-Z9-84b" secondAttribute="leading" constant="8" id="ajb-dL-pec"/>
                             <constraint firstItem="K62-Z9-84b" firstAttribute="trailing" secondItem="0cy-WY-Ets" secondAttribute="trailing" constant="8" id="eR3-fJ-xCi"/>
+                            <constraint firstItem="vcI-f5-YPM" firstAttribute="top" secondItem="0cy-WY-Ets" secondAttribute="bottom" constant="20" id="gIY-V1-9oE"/>
+                            <constraint firstItem="K62-Z9-84b" firstAttribute="trailing" secondItem="dox-Qa-snz" secondAttribute="trailing" constant="8" id="gL4-O6-BGs"/>
                             <constraint firstItem="0cy-WY-Ets" firstAttribute="top" secondItem="7mi-1p-bgw" secondAttribute="bottom" constant="8" id="nr3-Mr-dXJ"/>
+                            <constraint firstItem="dox-Qa-snz" firstAttribute="leading" secondItem="K62-Z9-84b" secondAttribute="leading" constant="8" id="nw7-eI-BvN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="K62-Z9-84b"/>
                     </view>
                     <navigationItem key="navigationItem" title="My matches" id="Elq-UY-ygr"/>
                     <connections>
                         <outlet property="collectionCreated" destination="0cy-WY-Ets" id="zDc-TM-xjV"/>
+                        <outlet property="collectionSubscribed" destination="dox-Qa-snz" id="Z1y-r0-woB"/>
                         <segue destination="egf-ev-rpz" kind="show" identifier="gotoMatchCreated" id="PGh-OT-D1N"/>
                         <segue destination="erp-I6-vWT" kind="show" identifier="gotoMatchSubscribed" id="1Zc-nD-nDo"/>
                     </connections>
