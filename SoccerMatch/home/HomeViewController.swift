@@ -48,6 +48,7 @@ class HomeViewController: UIViewController {
             }
             self.map.addAnnotations(self.matches)
         }
+        matches = []
     }
 
     @IBAction func unwindHome(segue: UIStoryboardSegue) {}

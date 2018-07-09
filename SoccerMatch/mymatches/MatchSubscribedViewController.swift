@@ -1,5 +1,3 @@
 import UIKit
 
-class MatchSubscribedViewController: UIViewController {
-    
-}
+class MatchSubscribedViewController: UIViewController {}

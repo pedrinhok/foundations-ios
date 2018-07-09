@@ -3,16 +3,16 @@ import UIKit
 @IBDesignable
 class StandardButton: UIButton {
 
-    var tempBackgroundColor: UIColor?
+    var tempColor: UIColor?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        tempBackgroundColor = backgroundColor
+        tempColor = backgroundColor
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        tempBackgroundColor = backgroundColor
+        tempColor = backgroundColor
     }
 
     @IBInspectable
@@ -35,16 +35,15 @@ class StandardButton: UIButton {
             layer.borderColor = borderColor?.cgColor
         }
     }
-    
+
     public func disable() {
         isEnabled = false
         layer.backgroundColor = UIColor.gray.cgColor
-        
     }
-    
+
     public func enable() {
         isEnabled = true
-        layer.backgroundColor = tempBackgroundColor?.cgColor
+        layer.backgroundColor = tempColor?.cgColor
     }
 
 }

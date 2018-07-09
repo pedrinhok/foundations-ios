@@ -41,8 +41,8 @@ class SignupViewController: UIViewController {
             showMessage("Password cannnot be empty!")
             return
         }
-        if password.count < 3 {
-            showMessage("Password must be at least 3 characters!")
+        if password.count < 6 {
+            showMessage("Password must be at least 6 characters!")
             return
         }
         guard let confirmPassword = confirmPassword.text, password == confirmPassword else {

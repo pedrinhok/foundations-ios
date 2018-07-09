@@ -9,7 +9,6 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var email: StandardTextField!
     @IBOutlet weak var password: StandardTextField!
-    
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -17,14 +16,12 @@ class ViewController: UIViewController {
         locationManager.delegate = self
         email.delegate = self
         password.delegate = self
-    }
-    
 
+        locationManager.requestWhenInUseAuthorization()
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        locationManager.requestWhenInUseAuthorization()
 
         if UserService.auth() {
             performSegue(withIdentifier: "gotoHome", sender: nil)
@@ -46,8 +43,8 @@ class ViewController: UIViewController {
         }
 
         UserService.signin(email: email, password: password) { (error) in
-            if let error = error {
-                self.showMessage(error)
+            if error != nil {
+                self.showMessage("User not found!")
             } else {
                 self.locationManager.requestWhenInUseAuthorization()
                 self.performSegue(withIdentifier: "gotoHome", sender: nil)
