@@ -11,16 +11,16 @@ class SelectMatchViewController: UIViewController {
     @IBOutlet weak var schedule: UILabel!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var vacancies: UILabel!
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.desc.text = self.match.desc
-        self.location.text = self.match.location
-        self.day.text = self.match.day
-        self.schedule.text = "\(self.match.start!) - \(self.match.finish!)"
-        self.price.text = self.match.price
-        self.vacancies.text = self.match.vacancies
+        desc.text = match.desc
+        location.text = match.location
+        day.text = match.day
+        schedule.text = "\(match.start!) - \(match.finish!)"
+        price.text = match.price
+        vacancies.text = match.vacancies
 
         getCreator()
     }
@@ -33,11 +33,12 @@ class SelectMatchViewController: UIViewController {
         }
     }
 
-    func showMessage(_ message: String) {
-        let alert = UIAlertController(title: "Wops", message: message, preferredStyle: .alert)
+    func showMessage(title: String, message: String, completion: (() -> ())? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
         let action = UIAlertAction(title: "OK", style: .default) { (action) in
             alert.dismiss(animated: true)
+            if let completion = completion { completion() }
         }
         alert.addAction(action)
 
@@ -47,9 +48,11 @@ class SelectMatchViewController: UIViewController {
     @IBAction func clickSubscribe(_ sender: UIButton) {
         SubscriptionService.create(match) { (error) in
             if let error = error {
-                self.showMessage(error)
+                self.showMessage(title: "Wops", message: error)
             } else {
-                self.performSegue(withIdentifier: "unwindSelectMatch", sender: nil)
+                self.showMessage(title: "You have successfully subscribed to this match", message: "The creator of the match must still accept you") {
+                    self.performSegue(withIdentifier: "unwindSelectMatch", sender: nil)
+                }
             }
         }
     }
