@@ -1,8 +1,6 @@
 import UIKit
 
 class ChangePasswordViewController: UIViewController {
-    
-    var user: UserO!
 
     @IBOutlet weak var password: StandardTextField!
     @IBOutlet weak var newPassword: StandardTextField!
@@ -34,10 +32,10 @@ class ChangePasswordViewController: UIViewController {
             showMessage("Confirm you current password!")
             return
         }
-        if password != user.password {
-            showMessage("Your current password is wrong!")
-            return
-        }
+//        if password != user.password {
+//            showMessage("Your current password is wrong!")
+//            return
+//        }
 
         guard let newPassword = newPassword.text, newPassword != "" else {
             showMessage("New password cannnot be empty!")

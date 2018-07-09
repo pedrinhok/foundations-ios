@@ -5,4 +5,6 @@ struct User {
     var name: String?
     var phone: String?
     var email: String?
+    var birthday: String?
+    var gender: String?
 }

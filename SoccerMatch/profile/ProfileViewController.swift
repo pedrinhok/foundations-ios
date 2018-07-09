@@ -1,9 +1,7 @@
 import UIKit
 import CoreData
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate{
-    
-    var user: UserO!
+class ProfileViewController: UIViewController {
 
     @IBOutlet weak var name: StandardTextField!
     @IBOutlet weak var gender: StandardTextField!
@@ -11,106 +9,45 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBOutlet weak var phone: StandardTextField!
     @IBOutlet weak var email: StandardTextField!
     @IBOutlet weak var photo: UIImageView!
+    @IBOutlet weak var submitBtn: StandardButton!
     
     let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         imagePicker.delegate = self
-        name.delegate = self
-        gender.delegate = self
-        birthday.delegate = self
-        phone.delegate = self
-        email.delegate = self
         
-        getUser()
+        name.delegate = self
+        name.addTarget(self, action:#selector(ProfileViewController.textFieldDataChanged), for:UIControlEvents.editingChanged)
+        
+        gender.delegate = self
+        gender.addTarget(self, action:#selector(ProfileViewController.textFieldDataChanged), for:UIControlEvents.editingChanged)
+        
+        birthday.delegate = self
+        birthday.addTarget(self, action:#selector(ProfileViewController.textFieldDataChanged), for:UIControlEvents.editingChanged)
+        
+        phone.delegate = self
+        phone.addTarget(self, action:#selector(ProfileViewController.textFieldDataChanged), for:UIControlEvents.editingChanged)
+        
+        email.delegate = self
+        email.addTarget(self, action:#selector(ProfileViewController.textFieldDataChanged), for:UIControlEvents.editingChanged)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "gotoChangePassword":
-            guard let vc = segue.destination as? ChangePasswordViewController else { return }
-            vc.user = user
-            return
-            
-        case .none, .some(_):
-            return
-        }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        submitBtn.disable()
+        getUser()
     }
 
     func getUser() {
-        // request user to firebase
-        user = UserO(name: "User 1", birthday: "01/01/2000", gender: "Female", phone: "123", email: "user1@email.com", password: "password")
-        name.text = user.name
-        gender.text = user.gender
-        birthday.text = user.birthday
-        phone.text = user.phone
-        email.text = user.email
+        if let user = UserService.current() {
+            name.text = user.name
+            gender.text = user.gender
+            birthday.text = user.birthday
+            phone.text = user.phone
+            email.text = user.email
+        }
     }
 
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField == self.name{
-            textField.backgroundColor = UIColor(red: 205/255, green: 205/255, blue: 205/255, alpha: 1.0)
-            return true
-        }else if textField == self.gender{
-            textField.backgroundColor = UIColor(red: 205/255, green: 205/255, blue: 205/255, alpha: 1.0)
-            return true
-        }else if textField == self.birthday{
-            textField.backgroundColor = UIColor(red: 205/255, green: 205/255, blue: 205/255, alpha: 1.0)
-            return true
-        }else if textField == self.phone{
-            textField.backgroundColor = UIColor(red: 205/255, green: 205/255, blue: 205/255, alpha: 1.0)
-            return true
-        }else if textField == self.email{
-            textField.backgroundColor = UIColor(red: 205/255, green: 205/255, blue: 205/255, alpha: 1.0)
-            return true
-        }
-        return true
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        //
-    }
-
-    
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        if textField == self.name{
-            textField.backgroundColor = UIColor.white
-            return true
-        }else if textField == self.gender{
-            textField.backgroundColor = UIColor.white
-            return true
-        }else if textField == self.birthday{
-            textField.backgroundColor = UIColor.white
-            return true
-        }else if textField == self.phone{
-            textField.backgroundColor = UIColor.white
-            return true
-        }else if textField == self.email{
-            textField.backgroundColor = UIColor.white
-            return true
-        }
-        return false
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == self.name{
-            self.name = textField as! StandardTextField
-        }else if textField == self.gender{
-            self.gender = textField as! StandardTextField
-        }else if textField == self.birthday{
-            self.birthday = textField as! StandardTextField
-        }else if textField == self.phone{
-            self.phone = textField as! StandardTextField
-        }else if textField == self.email{
-            self.email = textField as! StandardTextField
-        }
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
     @IBAction func password(_ sender: UIButton) {
          performSegue(withIdentifier: "gotoChangePassword", sender: nil)
     }
@@ -120,23 +57,27 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         present(imagePicker, animated: true)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage{
-            photo.image = image
-            imagePicker.dismiss(animated: true, completion: nil)
-        }
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        imagePicker.dismiss(animated: true, completion: nil)
-    }
-    
     @IBAction func clickSubmit(_ sender: StandardButton) {
+        
+        var user = User()
         user.name = self.name.text
         user.gender = self.gender.text
         user.birthday = self.birthday.text
         user.phone = self.phone.text
         user.email = self.email.text
+        
+        UserService.updateUserData(data: user) { (error) in
+            if let error = error {
+                self.showMessage(error)
+                return
+            }
+            self.submitBtn.disable()
+            self.name.resignFirstResponder()
+            self.gender.resignFirstResponder()
+            self.birthday.resignFirstResponder()
+            self.phone.resignFirstResponder()
+            self.email.resignFirstResponder()
+        }
     }
     
     @IBAction func logout(_ sender: UIButton) {
@@ -159,14 +100,62 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         present(alert, animated: true)
     }
-
 }
 
-struct UserO {
-    var name: String?
-    var birthday: String?
-    var gender: String?
-    var phone: String?
-    var email: String?
-    var password: String?
+extension ProfileViewController: UIImagePickerControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage{
+            photo.image = image
+            imagePicker.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        imagePicker.dismiss(animated: true, completion: nil)
+    }
+    
 }
+
+extension ProfileViewController: UITextFieldDelegate {
+    
+    @objc func textFieldDataChanged() {
+        submitBtn.enable()
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        textField.backgroundColor = UIColor(red: 205/255, green: 205/255, blue: 205/255, alpha: 1.0)
+        return true
+
+    }
+    
+    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
+        textField.backgroundColor = UIColor.white
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.name = textField as! StandardTextField
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+}
+
+extension ProfileViewController: UINavigationControllerDelegate {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "gotoChangePassword":
+            //            performSegue(withIdentifier: "gotoChangePassword", sender: nil)
+            return
+        case .none, .some(_):
+            return
+        }
+    }
+    
+}
+
