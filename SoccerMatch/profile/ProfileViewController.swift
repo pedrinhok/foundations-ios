@@ -90,6 +90,8 @@ class ProfileViewController: UIViewController {
         }
     }
     
+    @IBAction func unwindProfile(segue: UIStoryboardSegue) {}
+    
     func showMessage(_ message: String) {
         let alert = UIAlertController(title: "Wops", message: message, preferredStyle: .alert)
         

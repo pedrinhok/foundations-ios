@@ -169,6 +169,19 @@ class UserService {
         handler(true)
     }
     
+    public static func changePassword(password: String, handler: @escaping (_ error: String?) -> ()) {
+        
+        Auth.auth().currentUser?.updatePassword(to: password) { (error) in
+            if let error = error as? String {
+                
+                handler(error.description)
+                return
+            }
+            
+            handler(nil)
+        }
+    }
+    
     public static func current() -> ManagedUser? {
         do {
             let request: NSFetchRequest<ManagedUser> = ManagedUser.fetchRequest()
