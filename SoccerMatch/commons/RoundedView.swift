@@ -3,34 +3,32 @@ import UIKit
 @IBDesignable
 class RoundedView: UIView {
 
-    @IBInspectable
-    var corner: CGFloat {
-        get {
-            return layer.cornerRadius
-        }
-        set {
-            layer.masksToBounds = true
-            layer.cornerRadius = newValue
-        }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 
     @IBInspectable
-    var borderWidth: CGFloat {
-        get {
-            return layer.borderWidth
-        }
-        set {
-            layer.borderWidth = newValue
+    var corner: CGFloat = 0 {
+        didSet {
+            layer.cornerRadius = corner
         }
     }
-
+    
     @IBInspectable
-    var borderColor: CGColor? {
-        get {
-            return layer.borderColor
+    var borderWidth: CGFloat = 0 {
+        didSet {
+            layer.borderWidth = borderWidth
         }
-        set {
-            layer.borderColor = newValue
+    }
+    
+    @IBInspectable
+    var borderColor: UIColor? {
+        didSet {
+            layer.borderColor = borderColor?.cgColor
         }
     }
 

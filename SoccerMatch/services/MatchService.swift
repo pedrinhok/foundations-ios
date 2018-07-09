@@ -4,27 +4,48 @@ import FirebaseDatabase
 
 class MatchService {
     
-    public static func getMatch(matchId: String?, handler: @escaping (Match?) -> ()) {
+    public static func find(id: String, completion: @escaping (Match?) -> ()) {
         let ref = Database.database().reference()
-        
-        ref.child("matches").child(matchId!).observeSingleEvent(of: .value, with: { (snapshot) in
-            
+
+        ref.child("matches").child(id).observeSingleEvent(of: .value, with: { (snapshot) in
+
             guard let data = snapshot.value as? [String: Any] else {
-                handler(nil)
+                completion(nil)
                 return
             }
             let match = Match.decode(data)
-            
-            handler(match)
-            
-        }) { (error) in
-            print(error.localizedDescription)
-            handler(nil)
+
+            completion(match)
+
+        }) { (error) in completion(nil) }
+    }
+
+    public static func myCreated(completion: @escaping ([Match]) -> ()) {
+        let ref = Database.database().reference()
+
+        guard let user = UserService.current() else {
+            completion([])
+            return
         }
+
+        ref.child("matches").queryOrdered(byChild: "creator").queryEqual(toValue: user.id).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            var matches: [Match] = []
+            
+            for data in snapshot.children {
+                guard let snapshot = data as? DataSnapshot else { continue }
+                guard let data = snapshot.value as? [String: Any] else { continue }
+                let match = Match.decode(data)
+                matches.append(match)
+            }
+            
+            completion(matches)
+            
+        }) { (error) in completion([]) }
     }
 
     // TODO: Fazer este get com query com a data e horario para verificar se ainda está dispoível o jogo
-    public static func get(handler: @escaping ([Match]) -> ()) {
+    public static func get(completion: @escaping ([Match]) -> ()) {
         let ref = Database.database().reference()
 
         ref.child("matches").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -38,17 +59,14 @@ class MatchService {
                 matches.append(match)
             }
 
-            handler(matches)
+            completion(matches)
 
-        }) { (error) in
-            print(error.localizedDescription)
-            handler([])
-        }
+        }) { (error) in completion([]) }
     }
 
-    public static func create(_ match: Match, handler: (String?) -> ()) {
+    public static func create(_ match: Match, completion: (String?) -> ()) {
         guard let user = UserService.current() else {
-            handler("Unauthorized!")
+            completion("Unauthorized!")
             return
         }
 
@@ -63,7 +81,7 @@ class MatchService {
 
         ref.child("matches").child(m.matchId!).setValue(data)
 
-        handler(nil)
+        completion(nil)
     }
 
 }
