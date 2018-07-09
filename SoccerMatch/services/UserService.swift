@@ -9,12 +9,12 @@ class UserService {
         return current() != nil
     }
     
-    public static func getMatchCreator(userRef: String!, handler: @escaping (UserObject?) -> ()) {
+    public static func getMatchCreator(userRef: String!, handler: @escaping (User?) -> ()) {
         let ref = Database.database().reference()
         
         ref.child("users").child(userRef).observeSingleEvent(of: .value, with: { (snapshot) in
             
-            let user = UserObject()
+            var user = User()
             let value = snapshot.value as? NSDictionary
             
             user.id = userRef
