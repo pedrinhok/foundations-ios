@@ -14,20 +14,24 @@ class SubscriptionService {
         
         ref.child("subscriptions").queryOrdered(byChild: "user").queryEqual(toValue: user.id).observeSingleEvent(of: .value, with: { (snapshot) in
             
+            let requests = DispatchGroup()
             var matches: [Match] = []
             
             for data in snapshot.children {
                 guard let snapshot = data as? DataSnapshot else { continue }
                 guard let data = snapshot.value as? [String: Any] else { continue }
+                guard let m = data["match"] as? String else { continue }
 
-                guard let match = data["match"] as? String else { continue }
-
-                MatchService.find(match: match) { (match) in
+                requests.enter()
+                MatchService.find(m) { (match) in
                     matches.append(match!)
+                    requests.leave()
                 }
             }
 
-            completion(matches)
+            requests.notify(queue: .main) {
+                completion(matches)
+            }
 
         }) { (error) in completion([]) }
     }

@@ -18,7 +18,7 @@ class MyMatchesViewController: UIViewController {
     }
 
     func getMatches() {
-        MatchService.createdByMe { (matches) in
+        MatchService.getCreatedByMe { (matches) in
             for match in matches {
                 self.matchesCreated.append(match)
             }

@@ -50,7 +50,7 @@ class LocationViewController: UIViewController {
         map.removeAnnotations(map.annotations)
         ann.coordinate = c
         map.addAnnotation(ann)
-        let span = MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001)
+        let span = MKCoordinateSpanMake(0.008, 0.008)
         let region = MKCoordinateRegion(center: c, span: span)
         map.setRegion(region, animated: true)
         
