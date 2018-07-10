@@ -4,32 +4,11 @@ import FirebaseAuth
 import FirebaseDatabase
 
 class UserService {
-    
+
     public static func auth() -> Bool {
         return current() != nil
     }
-    
-    public static func getMatchCreator(userRef: String!, handler: @escaping (User?) -> ()) {
-        let ref = Database.database().reference()
-        
-        ref.child("users").child(userRef).observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            var user = User()
-            let value = snapshot.value as? NSDictionary
-            
-            user.id = userRef
-            user.email = value?["email"] as? String ?? ""
-            user.name = value?["name"] as? String ?? ""
-            user.phone = value?["phone"] as? String ?? ""
-            
-            handler(user)
-            
-        }) { (error) in
-            print(error.localizedDescription)
-            handler(nil)
-        }
-    }
-    
+
     public static func updateUserData(data: User!, handler: @escaping (_ error: String?) -> ()) {
         
         guard let user = current() else {
@@ -181,7 +160,7 @@ class UserService {
             handler(nil)
         }
     }
-    
+
     public static func current() -> ManagedUser? {
         do {
             let request: NSFetchRequest<ManagedUser> = ManagedUser.fetchRequest()
