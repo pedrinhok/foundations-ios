@@ -8,10 +8,16 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var birthday: StandardTextField!
     @IBOutlet weak var phone: StandardTextField!
     @IBOutlet weak var email: StandardTextField!
-    @IBOutlet weak var photo: UIImageView!
+    @IBOutlet weak var photo: CircleImage!
     @IBOutlet weak var submitBtn: StandardButton!
+    @IBOutlet var genderKeyboard: UIView!
+    @IBOutlet var birthKeyboard: UIView!
+    @IBOutlet weak var genderSelector: UIPickerView!
+    @IBOutlet weak var birthSelector: UIDatePicker!
     
+    let genders = ["Masculino", "Feminino", "Outro"]
     let imagePicker = UIImagePickerController()
+    let user = UserService.current()!
     
     override func viewDidLoad() {
         imagePicker.delegate = self
@@ -21,30 +27,54 @@ class ProfileViewController: UIViewController {
         
         gender.delegate = self
         gender.addTarget(self, action:#selector(ProfileViewController.textFieldDataChanged), for:UIControlEvents.editingChanged)
+        gender.inputView = genderKeyboard
         
         birthday.delegate = self
         birthday.addTarget(self, action:#selector(ProfileViewController.textFieldDataChanged), for:UIControlEvents.editingChanged)
+        birthday.inputView = birthKeyboard
         
         phone.delegate = self
         phone.addTarget(self, action:#selector(ProfileViewController.textFieldDataChanged), for:UIControlEvents.editingChanged)
         
         email.delegate = self
         email.addTarget(self, action:#selector(ProfileViewController.textFieldDataChanged), for:UIControlEvents.editingChanged)
+        
+        var sevenDaysfromNow: Date {
+            return (Calendar.current as NSCalendar).date(byAdding: .day, value: 7, to: Date(), options: [])!
+        }
+        birthSelector.maximumDate = sevenDaysfromNow
+        genderSelector.delegate = self
+        
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.imageTapped(_:)))
+        photo.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        submitBtn.disable()
+
+        // Atualiza datePicker
+        if let birthday = user.birthday {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd/MM/yyyy"
+            let date = formatter.date(from: birthday)
+            if let date = date {
+                birthSelector.date = date
+            }
+        }
+
         getUser()
+        enableButton()
     }
 
     func getUser() {
-        if let user = UserService.current() {
-            name.text = user.name
-            gender.text = user.gender
-            birthday.text = user.birthday
-            phone.text = user.phone
-            email.text = user.email
+        name.text = user.name
+        gender.text = user.gender
+        birthday.text = user.birthday
+        phone.text = user.phone
+        email.text = user.email
+        if photo.image == #imageLiteral(resourceName: "icon-user") {
+            photo.image = UIImage(data: user.photo!, scale: 1.0)
         }
     }
 
@@ -52,31 +82,41 @@ class ProfileViewController: UIViewController {
          performSegue(withIdentifier: "gotoChangePassword", sender: nil)
     }
     
-    @IBAction func changePhoto(_ sender: UIButton) {
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: true)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToFullscreenPhoto" {
+            let destination = segue.destination as! FullScreenPhotoViewController
+            destination.photoFull = photo.image!
+        }
     }
     
     @IBAction func clickSubmit(_ sender: StandardButton) {
         
-        var user = User()
-        user.name = self.name.text
-        user.gender = self.gender.text
-        user.birthday = self.birthday.text
-        user.phone = self.phone.text
-        user.email = self.email.text
+        var userObj = User()
+        userObj.name = self.name.text
+        userObj.gender = self.gender.text
+        userObj.birthday = self.birthday.text
+        userObj.phone = self.phone.text
+        userObj.email = self.email.text
         
-        UserService.updateUserData(data: user) { (error) in
+        if photo.image! != #imageLiteral(resourceName: "icon-user") && UIImagePNGRepresentation(photo.image!) != user.photo {
+            userObj.photo = UIImagePNGRepresentation(photo.image!)
+        }
+        
+        submitBtn.disable()
+        UserService.updateUserData(data: userObj) { (error) in
             if let error = error {
                 self.showMessage(error)
+                self.enableButton()
                 return
             }
-            self.submitBtn.disable()
             self.name.resignFirstResponder()
             self.gender.resignFirstResponder()
             self.birthday.resignFirstResponder()
             self.phone.resignFirstResponder()
             self.email.resignFirstResponder()
+            
+            self.showMessage("Profile updated", title: "Success")
+            
         }
     }
 
@@ -88,8 +128,15 @@ class ProfileViewController: UIViewController {
 
     @IBAction func unwindProfile(segue: UIStoryboardSegue) {}
     
-    func showMessage(_ message: String) {
-        let alert = UIAlertController(title: "Wops", message: message, preferredStyle: .alert)
+    func showMessage(_ message: String, title: String? = nil){
+        
+        var alert: UIAlertController
+        
+        if let title = title {
+            alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        } else {
+            alert = UIAlertController(title: "Wops", message: message, preferredStyle: .alert)
+        }
         
         let action = UIAlertAction(title: "OK", style: .default) { (action) in
             alert.dismiss(animated: true)
@@ -98,13 +145,73 @@ class ProfileViewController: UIViewController {
         
         present(alert, animated: true)
     }
+    
+    @IBAction func genderUpdate(_ sender: UIButton) {
+        
+        gender.text = genders[genderSelector.selectedRow(inComponent: 0)]
+        gender.resignFirstResponder()
+        enableButton()
+    }
+    
+    @IBAction func birthUpdate(_ sender: UIButton) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        birthday.text = formatter.string(from: birthSelector.date)
+        birthday.resignFirstResponder()
+        enableButton()
+    }
+    
+    func enableButton() {
+        if user.gender == gender.text
+                && user.email == email.text
+                && user.birthday == birthday.text
+                && user.email == email.text
+                && user.phone == phone.text
+                && user.name == name.text
+                && user.photo == UIImagePNGRepresentation(photo.image!) {
+            submitBtn.disable()
+        } else {
+            submitBtn.enable()
+        }
+    }
+    
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / image.size.width
+        let heightRatio = targetSize.height / image.size.height
+        
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+        }
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
 }
 
 extension ProfileViewController: UIImagePickerControllerDelegate {
     
+    @IBAction func changePhoto(_ sender: UIButton) {
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true)
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage{
-            photo.image = image
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            photo.image = resizeImage(image: image, targetSize: CGSize(width: 200.0, height: 200.0))
             imagePicker.dismiss(animated: true, completion: nil)
         }
     }
@@ -113,12 +220,16 @@ extension ProfileViewController: UIImagePickerControllerDelegate {
         imagePicker.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
+        performSegue(withIdentifier: "goToFullscreenPhoto", sender: sender)
+    }
+    
 }
 
 extension ProfileViewController: UITextFieldDelegate {
     
     @objc func textFieldDataChanged() {
-        submitBtn.enable()
+        enableButton()
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -133,10 +244,6 @@ extension ProfileViewController: UITextFieldDelegate {
         return true
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        self.name = textField as! StandardTextField
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -144,15 +251,20 @@ extension ProfileViewController: UITextFieldDelegate {
 }
 
 extension ProfileViewController: UINavigationControllerDelegate {
+}
+
+extension ProfileViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "gotoChangePassword":
-            //            performSegue(withIdentifier: "gotoChangePassword", sender: nil)
-            return
-        case .none, .some(_):
-            return
-        }
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return genders.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return genders[row]
     }
     
 }

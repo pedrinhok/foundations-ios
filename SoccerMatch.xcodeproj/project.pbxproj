@@ -21,6 +21,7 @@
 		874FC53920EBAD3C000D0443 /* SelectMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874FC53420EBAD3C000D0443 /* SelectMatchViewController.swift */; };
 		874FC53A20EBAD3C000D0443 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874FC53520EBAD3C000D0443 /* HomeViewController.swift */; };
 		874FC53B20EBAD3C000D0443 /* NewMatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874FC53620EBAD3C000D0443 /* NewMatchViewController.swift */; };
+		877D287220F54400005FF747 /* FullScreenPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877D287120F54400005FF747 /* FullScreenPhotoViewController.swift */; };
 		9518C57020E64CB700B55134 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9518C56F20E64CB700B55134 /* UserService.swift */; };
 		9518C57420E652F800B55134 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9518C57320E652F800B55134 /* RoundedView.swift */; };
 		9518C57C20E667B600B55134 /* StandardTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9518C57B20E667B600B55134 /* StandardTextField.swift */; };
@@ -59,6 +60,7 @@
 		874FC53420EBAD3C000D0443 /* SelectMatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectMatchViewController.swift; sourceTree = "<group>"; };
 		874FC53520EBAD3C000D0443 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		874FC53620EBAD3C000D0443 /* NewMatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMatchViewController.swift; sourceTree = "<group>"; };
+		877D287120F54400005FF747 /* FullScreenPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenPhotoViewController.swift; sourceTree = "<group>"; };
 		9518C56F20E64CB700B55134 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		9518C57320E652F800B55134 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		9518C57B20E667B600B55134 /* StandardTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardTextField.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			children = (
 				95D946FE20E518C8008C5192 /* AppDelegate.swift */,
 				95D9470220E518C8008C5192 /* Main.storyboard */,
+				877D287120F54400005FF747 /* FullScreenPhotoViewController.swift */,
 				95D9470020E518C8008C5192 /* ViewController.swift */,
 				95D9471320E518F1008C5192 /* SignupViewController.swift */,
 				874FC53120EBAD3C000D0443 /* home */,
@@ -350,6 +353,7 @@
 				9518C57420E652F800B55134 /* RoundedView.swift in Sources */,
 				874FC52A20EBAD1E000D0443 /* MatchCreatedViewController.swift in Sources */,
 				9531C6DF20ECF93400DA3295 /* Match.swift in Sources */,
+				877D287220F54400005FF747 /* FullScreenPhotoViewController.swift in Sources */,
 				874FC53920EBAD3C000D0443 /* SelectMatchViewController.swift in Sources */,
 				874FC53820EBAD3C000D0443 /* ScheduleViewController.swift in Sources */,
 				95CBCD5D20F396BD0006F088 /* MatchCollectionCell.swift in Sources */,

@@ -740,7 +740,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-user" translatesAutoresizingMaskIntoConstraints="NO" id="xUE-40-AIe" customClass="CircleImage" customModule="SoccerMatch" customModuleProvider="target">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-user" translatesAutoresizingMaskIntoConstraints="NO" id="xUE-40-AIe" customClass="CircleImage" customModule="SoccerMatch" customModuleProvider="target">
                                 <rect key="frame" x="120" y="74" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="2X7-RM-ROy"/>
@@ -949,21 +949,146 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="birthKeyboard" destination="sx3-Hc-tWS" id="wbm-mH-JzK"/>
+                        <outlet property="birthSelector" destination="pth-7Q-dPH" id="cVm-TK-axw"/>
                         <outlet property="birthday" destination="1VD-q5-5Ig" id="nvp-Ke-IxL"/>
                         <outlet property="email" destination="gMs-jy-cQA" id="jhj-bi-u9c"/>
                         <outlet property="gender" destination="mCX-ON-p43" id="h6K-cs-SFa"/>
+                        <outlet property="genderKeyboard" destination="gva-Lw-dbM" id="ewY-WI-S6v"/>
+                        <outlet property="genderSelector" destination="tCb-XJ-GBj" id="YtD-iE-AV8"/>
                         <outlet property="name" destination="1OP-CU-70x" id="qEP-fy-HoE"/>
                         <outlet property="phone" destination="ipG-ue-iyO" id="N7A-5N-lgM"/>
                         <outlet property="photo" destination="xUE-40-AIe" id="euo-W5-BSw"/>
                         <outlet property="submitBtn" destination="zSg-JW-yfG" id="n7P-Wx-zwY"/>
                         <segue destination="20c-wm-XDV" kind="show" identifier="gotoChangePassword" id="lHB-XM-HLs"/>
                         <segue destination="hHz-SQ-y6i" kind="unwind" identifier="unwindSignin" unwindAction="unwindSigninWithSegue:" id="VvL-ne-g6b"/>
+                        <segue destination="L1k-Ly-FDX" kind="presentation" identifier="goToFullscreenPhoto" id="ktd-rP-onJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xoc-Zd-D6o" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="hHz-SQ-y6i" userLabel="Exit" sceneMemberID="exit"/>
+                <view contentMode="scaleToFill" id="gva-Lw-dbM">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ozw-5y-ksW">
+                            <rect key="frame" x="270" y="0.0" width="50" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="6G1-CP-6a8"/>
+                                <constraint firstAttribute="width" constant="50" id="7ea-Tl-03A"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="OK"/>
+                            <connections>
+                                <action selector="genderUpdate:" destination="xzN-yl-XAg" eventType="touchUpInside" id="c4H-5C-TOP"/>
+                            </connections>
+                        </button>
+                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tCb-XJ-GBj">
+                            <rect key="frame" x="0.0" y="30" width="320" height="150"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="150" id="Yjx-GV-ZM5"/>
+                            </constraints>
+                        </pickerView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="tCb-XJ-GBj" secondAttribute="bottom" id="8Ne-1B-d0J"/>
+                        <constraint firstItem="tCb-XJ-GBj" firstAttribute="trailing" secondItem="fts-2o-rHj" secondAttribute="trailing" id="Ikw-tn-8P0"/>
+                        <constraint firstItem="Ozw-5y-ksW" firstAttribute="top" secondItem="fts-2o-rHj" secondAttribute="top" id="S9Z-qM-M0o"/>
+                        <constraint firstItem="Ozw-5y-ksW" firstAttribute="trailing" secondItem="fts-2o-rHj" secondAttribute="trailing" id="Y0P-TO-HKw"/>
+                        <constraint firstItem="tCb-XJ-GBj" firstAttribute="leading" secondItem="fts-2o-rHj" secondAttribute="leading" id="l7y-QW-yHz"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="fts-2o-rHj"/>
+                </view>
+                <view contentMode="scaleToFill" id="sx3-Hc-tWS">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="pth-7Q-dPH">
+                            <rect key="frame" x="0.0" y="30" width="320" height="150"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="150" id="zrX-UA-Qve"/>
+                            </constraints>
+                            <date key="date" timeIntervalSinceReferenceDate="552484569.59296">
+                                <!--2018-07-05 11:56:09 +0000-->
+                            </date>
+                            <date key="minimumDate" timeIntervalSinceReferenceDate="-3187256012">
+                                <!--1900-01-01 11:06:28 +0000-->
+                            </date>
+                            <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
+                                <!--2037-12-31 11:00:00 +0000-->
+                            </date>
+                        </datePicker>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wz-Ao-upX">
+                            <rect key="frame" x="270" y="0.0" width="50" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="50" id="E3e-yL-e3L"/>
+                                <constraint firstAttribute="height" constant="30" id="YPl-Qa-Idf"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="OK"/>
+                            <connections>
+                                <action selector="birthUpdate:" destination="xzN-yl-XAg" eventType="touchUpInside" id="jTU-jF-etu"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="0wz-Ao-upX" firstAttribute="top" secondItem="c8m-jC-lA4" secondAttribute="top" id="Mio-Lh-wh2"/>
+                        <constraint firstItem="pth-7Q-dPH" firstAttribute="trailing" secondItem="c8m-jC-lA4" secondAttribute="trailing" id="YZx-su-uiu"/>
+                        <constraint firstItem="0wz-Ao-upX" firstAttribute="trailing" secondItem="c8m-jC-lA4" secondAttribute="trailing" id="eYO-HG-oFw"/>
+                        <constraint firstItem="c8m-jC-lA4" firstAttribute="bottom" secondItem="pth-7Q-dPH" secondAttribute="bottom" id="h5l-8w-G5v"/>
+                        <constraint firstItem="pth-7Q-dPH" firstAttribute="leading" secondItem="c8m-jC-lA4" secondAttribute="leading" id="q98-eb-OeH"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="c8m-jC-lA4"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="3536.25" y="1569.7183098591549"/>
+        </scene>
+        <!--Full Screen Photo View Controller-->
+        <scene sceneID="9qa-db-i7k">
+            <objects>
+                <viewController id="L1k-Ly-FDX" customClass="FullScreenPhotoViewController" customModule="SoccerMatch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="H1Z-XI-eA1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EdP-n9-0NO">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bxt-Az-cn4">
+                                <rect key="frame" x="20" y="40" width="23" height="23"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="23" id="Z9X-Oo-3NP"/>
+                                    <constraint firstAttribute="width" constant="23" id="kmf-UP-oBc"/>
+                                </constraints>
+                                <state key="normal" image="icon-close">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissAction:" destination="L1k-Ly-FDX" eventType="touchUpInside" id="m26-y1-u3p"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="EdP-n9-0NO" firstAttribute="top" secondItem="IaN-Ph-zwM" secondAttribute="top" id="48z-gk-9Mf"/>
+                            <constraint firstItem="Bxt-Az-cn4" firstAttribute="leading" secondItem="IaN-Ph-zwM" secondAttribute="leading" constant="20" id="5FS-rl-WQp"/>
+                            <constraint firstItem="EdP-n9-0NO" firstAttribute="bottom" secondItem="IaN-Ph-zwM" secondAttribute="bottom" id="Oar-Mb-T9s"/>
+                            <constraint firstItem="EdP-n9-0NO" firstAttribute="trailing" secondItem="IaN-Ph-zwM" secondAttribute="trailing" id="Pj5-iA-DGy"/>
+                            <constraint firstItem="Bxt-Az-cn4" firstAttribute="top" secondItem="IaN-Ph-zwM" secondAttribute="top" constant="20" id="WgU-UC-dy1"/>
+                            <constraint firstItem="EdP-n9-0NO" firstAttribute="leading" secondItem="IaN-Ph-zwM" secondAttribute="leading" id="fPX-58-mw8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IaN-Ph-zwM"/>
+                    </view>
+                    <connections>
+                        <outlet property="photo" destination="EdP-n9-0NO" id="LE8-G0-POL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DhN-WI-H8n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4475.625" y="1252.8169014084508"/>
         </scene>
         <!--Change Password View Controller-->
         <scene sceneID="X12-gl-bRs">
@@ -1084,7 +1209,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7co-BZ-K7D" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="HcT-6D-nNR" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4488.75" y="1569.7183098591549"/>
+            <point key="canvasLocation" x="4489" y="1973"/>
         </scene>
         <!--Select match-->
         <scene sceneID="Cw9-Gd-I4U">
@@ -2400,6 +2525,7 @@
     </scenes>
     <resources>
         <image name="icon-camera" width="30" height="30"/>
+        <image name="icon-close" width="25" height="25"/>
         <image name="icon-right" width="25" height="25"/>
         <image name="icon-user" width="500" height="500"/>
         <image name="logoSoccerM" width="603" height="215"/>

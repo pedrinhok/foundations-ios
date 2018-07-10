@@ -2,11 +2,46 @@ import Foundation
 import CoreData
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseStorage
 
 class UserService {
+    
+    private static let ref = Database.database().reference()
 
     public static func auth() -> Bool {
         return current() != nil
+    }
+    
+    public static func updateUserImage(image: Data, handler: @escaping (_ error: String?) -> ()) {
+        
+        let user = current()!
+       
+        let storageRef = Storage.storage().reference()
+        
+        let userPhotoRef = storageRef.child(user.ref! + "/userPhoto.png")
+        
+        userPhotoRef.putData(image, metadata: nil) { (metadata, error) in
+            guard metadata != nil else {
+                if let error = error {
+                    handler(error.localizedDescription)
+                } else {
+                    handler("Uh-oh, an error occurred")
+                }
+                return
+            }
+            userPhotoRef.downloadURL { url, error in
+                if let error = error {
+                    handler(error.localizedDescription)
+                    return
+                }
+                if let url = url {
+                    ref.child("users").child(user.ref!).updateChildValues(["photo": url.absoluteString])
+                    user.photo = image
+                    AppDelegate.saveContext()
+                    handler(nil)
+                }
+            }
+        }
     }
 
     public static func updateUserData(data: User!, handler: @escaping (_ error: String?) -> ()) {
@@ -43,11 +78,25 @@ class UserService {
             user.birthday = birth
         }
         
-        let ref = Database.database().reference()
-        ref.child("users").child(user.ref!).setValue(dict)
-        
-        AppDelegate.saveContext()
-        handler(nil)
+        if let image = data.photo {
+            updateUserImage(image: image) { (error) in
+                if let error = error {
+                    handler(error)
+                    return
+                }
+                
+                ref.child("users").child(user.ref!).updateChildValues(dict)
+                
+                AppDelegate.saveContext()
+                handler(nil)
+            }
+        } else {
+            
+            ref.child("users").child(user.ref!).updateChildValues(dict)
+            
+            AppDelegate.saveContext()
+            handler(nil)
+        }
     }
 
     public static func changePassword(password: String, completion: @escaping (String?) -> ()) {
