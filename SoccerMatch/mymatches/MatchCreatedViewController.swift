@@ -12,13 +12,14 @@ class MatchCreatedViewController: UIViewController {
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var vacancies: UILabel!
     @IBOutlet weak var tableSubscriptions: UITableView!
-    @IBOutlet weak var tableConstraint: NSLayoutConstraint!
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         tableSubscriptions.dataSource = self
         tableSubscriptions.delegate = self
+        heightConstraint.constant = 0
 
         desc.text = match.desc
         location.text = match.location
@@ -34,7 +35,7 @@ class MatchCreatedViewController: UIViewController {
         SubscriptionService.getUsers(match: match) { (users) in
             self.subscriptions = users
             self.tableSubscriptions.reloadData()
-            self.tableConstraint.constant = CGFloat(users.count * 70)
+            self.heightConstraint.constant = CGFloat(users.count) * self.tableSubscriptions.rowHeight
         }
     }
 

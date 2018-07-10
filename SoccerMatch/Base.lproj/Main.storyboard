@@ -2111,10 +2111,10 @@
                     <connections>
                         <outlet property="day" destination="KkA-bF-ebK" id="Qmk-QV-zTd"/>
                         <outlet property="desc" destination="fza-0y-oQz" id="5e8-sC-BTy"/>
+                        <outlet property="heightConstraint" destination="WY6-xV-q4i" id="GeA-T1-B91"/>
                         <outlet property="location" destination="1fQ-zu-ndv" id="hdl-iZ-UdV"/>
                         <outlet property="price" destination="XRm-Cq-xoF" id="vWN-RR-vd5"/>
                         <outlet property="schedule" destination="T05-VD-gZb" id="hsn-8D-ioz"/>
-                        <outlet property="tableConstraint" destination="WY6-xV-q4i" id="GeA-T1-B91"/>
                         <outlet property="tableSubscriptions" destination="l8m-lu-DEV" id="ymW-4f-5SB"/>
                         <outlet property="vacancies" destination="wVZ-0b-g12" id="d6e-b5-wY7"/>
                         <segue destination="Wq8-Vv-Da4" kind="show" identifier="gotoUserInformation" id="hj6-Mz-cJW"/>
