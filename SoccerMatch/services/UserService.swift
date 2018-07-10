@@ -5,22 +5,23 @@ import FirebaseDatabase
 import FirebaseStorage
 
 class UserService {
+    
+    private static let ref = Database.database().reference()
 
     public static func auth() -> Bool {
         return current() != nil
     }
     
-    public static func updateUserImage(image: UIImage, handler: @escaping (_ error: String?) -> ()) {
+    public static func updateUserImage(image: Data, handler: @escaping (_ error: String?) -> ()) {
+        
+        let user = current()!
        
         let storageRef = Storage.storage().reference()
         
-        let userPhotoRef = storageRef.child(current()!.ref! + "/userPhoto.png")
+        let userPhotoRef = storageRef.child(user.ref! + "/userPhoto.png")
         
-        let imagePng = UIImagePNGRepresentation(image)
-        
-        userPhotoRef.putData(imagePng!, metadata: nil) { (metadata, error) in
+        userPhotoRef.putData(image, metadata: nil) { (metadata, error) in
             guard metadata != nil else {
-                // Uh-oh, an error occurred!
                 if let error = error {
                     handler(error.localizedDescription)
                 } else {
@@ -28,15 +29,16 @@ class UserService {
                 }
                 return
             }
-            // Metadata contains file metadata such as size, content-type, and download URL.
             userPhotoRef.downloadURL { url, error in
                 if let error = error {
                     handler(error.localizedDescription)
-                } else {
-                    let ref = Database.database().reference()
-                    if let url = url {
-                        ref.child("users").child(current()!.ref!).updateChildValues(["photo": url])
-                    }
+                    return
+                }
+                if let url = url {
+                    ref.child("users").child(user.ref!).updateChildValues(["photo": url.absoluteString])
+                    user.photo = image
+                    AppDelegate.saveContext()
+                    handler(nil)
                 }
             }
         }
@@ -76,11 +78,25 @@ class UserService {
             user.birthday = birth
         }
         
-        let ref = Database.database().reference()
-        ref.child("users").child(user.ref!).setValue(dict)
-        
-        AppDelegate.saveContext()
-        handler(nil)
+        if let image = data.photo {
+            updateUserImage(image: image) { (error) in
+                if let error = error {
+                    handler(error)
+                    return
+                }
+                
+                ref.child("users").child(user.ref!).updateChildValues(dict)
+                
+                AppDelegate.saveContext()
+                handler(nil)
+            }
+        } else {
+            
+            ref.child("users").child(user.ref!).updateChildValues(dict)
+            
+            AppDelegate.saveContext()
+            handler(nil)
+        }
     }
 
     // TODO - submit post request
@@ -102,8 +118,6 @@ class UserService {
                 handler(error!.localizedDescription)
                 return
             }
-
-            let ref = Database.database().reference()
             
             ref.child("users").child(uid).setValue(["uid": uid, "name": name, "phone": phone, "email": email])
             
@@ -135,8 +149,6 @@ class UserService {
                 handler(error!.localizedDescription)
                 return
             }
-            
-            let ref = Database.database().reference()
             
             ref.child("users").child(userAuth.uid).observeSingleEvent(of: .value, with: { (snapshot) in
                 

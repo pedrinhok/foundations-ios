@@ -739,7 +739,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-user" translatesAutoresizingMaskIntoConstraints="NO" id="xUE-40-AIe" customClass="CircleImage" customModule="SoccerMatch" customModuleProvider="target">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-user" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xUE-40-AIe" customClass="CircleImage" customModule="SoccerMatch" customModuleProvider="target">
                                 <rect key="frame" x="120" y="74" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="2X7-RM-ROy"/>

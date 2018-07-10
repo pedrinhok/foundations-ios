@@ -8,7 +8,7 @@ struct User: Codable {
     var email: String?
     var gender: String?
     var birthday: String?
-    var password: String?
+    var photo: Data?
 
     static func decode(_ data: [String: Any]) -> User {
         var user = User()
@@ -31,9 +31,7 @@ struct User: Codable {
         if let birthday = data["birthday"] as? String {
             user.birthday = birthday
         }
-        if let password = data["password"] as? String {
-            user.password = password
-        }
+
 
         return user
     }

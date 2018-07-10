@@ -48,7 +48,6 @@ class ProfileViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        submitBtn.disable()
 
         // Atualiza datePicker
         if let birthday = user.birthday {
@@ -61,6 +60,7 @@ class ProfileViewController: UIViewController {
         }
 
         getUser()
+        enableButton()
     }
 
     func getUser() {
@@ -69,15 +69,13 @@ class ProfileViewController: UIViewController {
         birthday.text = user.birthday
         phone.text = user.phone
         email.text = user.email
+        if photo.image == #imageLiteral(resourceName: "icon-user") {
+            photo.image = UIImage(data: user.photo!, scale: 1.0)
+        }
     }
 
     @IBAction func password(_ sender: UIButton) {
          performSegue(withIdentifier: "gotoChangePassword", sender: nil)
-    }
-    
-    @IBAction func changePhoto(_ sender: UIButton) {
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: true)
     }
     
     @IBAction func clickSubmit(_ sender: StandardButton) {
@@ -89,29 +87,25 @@ class ProfileViewController: UIViewController {
         userObj.phone = self.phone.text
         userObj.email = self.email.text
         
+        if photo.image! != #imageLiteral(resourceName: "icon-user") && UIImagePNGRepresentation(photo.image!) != user.photo {
+            userObj.photo = UIImagePNGRepresentation(photo.image!)
+        }
+        
+        submitBtn.disable()
         UserService.updateUserData(data: userObj) { (error) in
             if let error = error {
                 self.showMessage(error)
+                self.enableButton()
                 return
             }
-            self.submitBtn.disable()
             self.name.resignFirstResponder()
             self.gender.resignFirstResponder()
             self.birthday.resignFirstResponder()
             self.phone.resignFirstResponder()
             self.email.resignFirstResponder()
             
-            if let image = self.photo.image {
-                UserService.updateUserImage(image: image) { (error) in
-                    if let error = error {
-                        self.showMessage(error)
-                        return
-                    }
-                    self.showMessage("Profile updated", title: "Success")
-                }
-            } else {
-                self.showMessage("Profile updated", title: "Success")
-            }
+            self.showMessage("Profile updated", title: "Success")
+            
         }
     }
     
@@ -166,19 +160,52 @@ class ProfileViewController: UIViewController {
             && user.birthday == birthday.text
             && user.email == email.text
             && user.phone == phone.text
-            && user.name == name.text {
+            && user.name == name.text
+            && user.photo == UIImagePNGRepresentation(photo.image!){
             submitBtn.disable()
         } else {
             submitBtn.enable()
         }
     }
+    
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / image.size.width
+        let heightRatio = targetSize.height / image.size.height
+        
+        // Figure out what our orientation is, and use that to form the rectangle
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio,  height: size.height * widthRatio)
+        }
+        
+        // This is the rect that we've calculated out and this is what is actually used below
+        let rect = CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height)
+        
+        // Actually do the resizing to the rect using the ImageContext stuff
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+
 }
 
 extension ProfileViewController: UIImagePickerControllerDelegate {
     
+    @IBAction func changePhoto(_ sender: UIButton) {
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true)
+    }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let image = info["UIImagePickerControllerOriginalImage"] as? UIImage{
-            photo.image = image
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            photo.image = resizeImage(image: image, targetSize: CGSize(width: 200.0, height: 200.0))
             imagePicker.dismiss(animated: true, completion: nil)
         }
     }
@@ -214,16 +241,6 @@ extension ProfileViewController: UITextFieldDelegate {
 }
 
 extension ProfileViewController: UINavigationControllerDelegate {
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case "gotoChangePassword":
-            //            performSegue(withIdentifier: "gotoChangePassword", sender: nil)
-            return
-        case .none, .some(_):
-            return
-        }
-    }
 }
 
 extension ProfileViewController: UIPickerViewDelegate, UIPickerViewDataSource {
