@@ -79,17 +79,13 @@ class ProfileViewController: UIViewController {
             self.email.resignFirstResponder()
         }
     }
-    
+
     @IBAction func logout(_ sender: UIButton) {
-        UserService.logout { bool in
-            if bool! {
-                self.performSegue(withIdentifier: "unwindSignin", sender: nil)
-            } else {
-                self.showMessage("Api is off")
-            }
+        UserService.signout() {
+            self.performSegue(withIdentifier: "unwindSignin", sender: nil)
         }
     }
-    
+
     @IBAction func unwindProfile(segue: UIStoryboardSegue) {}
     
     func showMessage(_ message: String) {

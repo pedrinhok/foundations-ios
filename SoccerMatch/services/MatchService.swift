@@ -10,24 +10,24 @@ class MatchService {
             return
         }
         
-        let ref = Database.database().reference()
+        let db = Database.database().reference()
         
         var m = match
-        m.ref = ref.child("matches").childByAutoId().key
+        m.ref = db.child("matches").childByAutoId().key
         m.creator = user.ref
         
         let JSON = try! JSONEncoder().encode(m)
         let data = try! JSONSerialization.jsonObject(with: JSON, options: [])
         
-        ref.child("matches").child(m.ref!).setValue(data)
+        db.child("matches").child(m.ref!).setValue(data)
         
         completion(nil)
     }
 
-    public static func find(_ match: String, completion: @escaping (Match?) -> ()) {
-        let ref = Database.database().reference()
+    public static func find(_ ref: String, completion: @escaping (Match?) -> ()) {
+        let db = Database.database().reference()
         
-        ref.child("matches").child(match).observeSingleEvent(of: .value, with: { (snapshot) in
+        db.child("matches").child(ref).observeSingleEvent(of: .value, with: { (snapshot) in
             
             guard let data = snapshot.value as? [String: Any] else {
                 completion(nil)
@@ -41,9 +41,9 @@ class MatchService {
     }
 
     public static func get(completion: @escaping ([Match]) -> ()) {
-        let ref = Database.database().reference()
+        let db = Database.database().reference()
 
-        ref.child("matches").observeSingleEvent(of: .value, with: { (snapshot) in
+        db.child("matches").observeSingleEvent(of: .value, with: { (snapshot) in
 
             var matches: [Match] = []
 
@@ -60,9 +60,9 @@ class MatchService {
     }
 
     public static func getCreator(_ match: Match, completion: @escaping (User?) -> ()) {
-        let ref = Database.database().reference()
+        let db = Database.database().reference()
 
-        ref.child("users").child(match.creator!).observeSingleEvent(of: .value, with: { (snapshot) in
+        db.child("users").child(match.creator!).observeSingleEvent(of: .value, with: { (snapshot) in
 
             let data = snapshot.value as! [String: Any]
             let user = User.decode(data)
@@ -73,14 +73,14 @@ class MatchService {
     }
 
     public static func getCreatedByMe(completion: @escaping ([Match]) -> ()) {
-        let ref = Database.database().reference()
+        let db = Database.database().reference()
         
         guard let user = UserService.current() else {
             completion([])
             return
         }
         
-        ref.child("matches").queryOrdered(byChild: "creator").queryEqual(toValue: user.ref).observeSingleEvent(of: .value, with: { (snapshot) in
+        db.child("matches").queryOrdered(byChild: "creator").queryEqual(toValue: user.ref).observeSingleEvent(of: .value, with: { (snapshot) in
             
             var matches: [Match] = []
             

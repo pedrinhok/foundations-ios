@@ -3,9 +3,10 @@ import UIKit
 class SelectMatchViewController: UIViewController {
 
     var match: Match!
-    var user: User!
+    var creator: User!
+    var subscriptions: [User] = []
 
-    @IBOutlet weak var creator: UILabel!
+    @IBOutlet weak var creatorName: UILabel!
     @IBOutlet weak var desc: UILabel!
     @IBOutlet weak var location: UILabel!
     @IBOutlet weak var day: UILabel!
@@ -13,6 +14,7 @@ class SelectMatchViewController: UIViewController {
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var vacancies: UILabel!
     @IBOutlet weak var phone: UIImageView!
+    @IBOutlet weak var buttonSubscribe: StandardButton!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -29,13 +31,34 @@ class SelectMatchViewController: UIViewController {
         phone.addGestureRecognizer(tap)
 
         getCreator()
+        getSubscriptions()
     }
 
     func getCreator() {
+        let current = UserService.current()!
+
+        if match.creator == current.ref {
+            buttonSubscribe.disable()
+            buttonSubscribe.setTitle("You created the match", for: .normal)
+        }
+
         MatchService.getCreator(match) { (user) in
             if let user = user {
-                self.user = user
-                self.creator.text = user.name
+                self.creator = user
+                self.creatorName.text = user.name
+            }
+        }
+    }
+
+    func getSubscriptions() {
+        let current = UserService.current()!
+
+        SubscriptionService.getUsers(match: match) { (users) in
+            self.subscriptions = users
+
+            if users.contains(where: { $0.ref == current.ref }) {
+                self.buttonSubscribe.disable()
+                self.buttonSubscribe.setTitle("You're already subscribed", for: .normal)
             }
         }
     }
@@ -57,15 +80,15 @@ class SelectMatchViewController: UIViewController {
             if let error = error {
                 self.showMessage(title: "Wops", message: error)
             } else {
-                self.showMessage(title: "You have subscribed to this match!", message: "") {
-                    self.performSegue(withIdentifier: "unwindSelectMatch", sender: nil)
+                self.showMessage(title: "You have successfully subscribed to the match!", message: "") {
+                    self.performSegue(withIdentifier: "unwindHome", sender: nil)
                 }
             }
         }
     }
 
     @objc func clickPhone(tap: UITapGestureRecognizer) {
-        showMessage(title: user.phone ?? "", message: "")
+        showMessage(title: creator.phone ?? "", message: "")
     }
 
 }

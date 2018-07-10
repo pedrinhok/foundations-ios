@@ -5,14 +5,14 @@ import FirebaseDatabase
 class SubscriptionService {
 
     public static func getMatches(completion: @escaping ([Match]) -> ()) {
-        let ref = Database.database().reference()
+        let db = Database.database().reference()
         
         guard let user = UserService.current() else {
             completion([])
             return
         }
         
-        ref.child("subscriptions").queryOrdered(byChild: "user").queryEqual(toValue: user.ref).observeSingleEvent(of: .value, with: { (snapshot) in
+        db.child("subscriptions").queryOrdered(byChild: "user").queryEqual(toValue: user.ref).observeSingleEvent(of: .value, with: { (snapshot) in
             
             let requests = DispatchGroup()
             var matches: [Match] = []
@@ -20,11 +20,13 @@ class SubscriptionService {
             for data in snapshot.children {
                 guard let snapshot = data as? DataSnapshot else { continue }
                 guard let data = snapshot.value as? [String: Any] else { continue }
-                guard let m = data["match"] as? String else { continue }
+                guard let ref = data["match"] as? String else { continue }
 
                 requests.enter()
-                MatchService.find(m) { (match) in
-                    matches.append(match!)
+                MatchService.find(ref) { (match) in
+                    if let match = match {
+                        matches.append(match)
+                    }
                     requests.leave()
                 }
             }
@@ -36,17 +38,46 @@ class SubscriptionService {
         }) { (error) in completion([]) }
     }
 
-    public static func create(_ match: Match, handler: (String?) -> ()) {
-        let ref = Database.database().reference()
+    public static func getUsers(match: Match, completion: @escaping ([User]) -> ()) {
+        let db = Database.database().reference()
+        
+        db.child("subscriptions").queryOrdered(byChild: "match").queryEqual(toValue: match.ref).observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            let requests = DispatchGroup()
+            var users: [User] = []
+            
+            for data in snapshot.children {
+                guard let snapshot = data as? DataSnapshot else { continue }
+                guard let data = snapshot.value as? [String: Any] else { continue }
+                guard let ref = data["user"] as? String else { continue }
+                
+                requests.enter()
+                UserService.find(ref) { (user) in
+                    if let user = user {
+                        users.append(user)
+                    }
+                    requests.leave()
+                }
+            }
+            
+            requests.notify(queue: .main) {
+                completion(users)
+            }
+            
+        }) { (error) in completion([]) }
+    }
+
+    public static func create(_ match: Match, completion: (String?) -> ()) {
+        let db = Database.database().reference()
 
         guard let user = UserService.current() else {
-            handler("Unauthorized!")
+            completion("Unauthorized!")
             return
         }
 
-        ref.child("subscriptions").childByAutoId().setValue(["match": match.ref, "user": user.ref])
+        db.child("subscriptions").childByAutoId().setValue(["match": match.ref, "user": user.ref])
 
-        handler(nil)
+        completion(nil)
     }
 
 }

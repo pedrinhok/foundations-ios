@@ -1264,7 +1264,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Select match" id="vrY-s1-aBj"/>
                     <connections>
-                        <outlet property="creator" destination="GgC-cn-f09" id="DFZ-bt-au3"/>
+                        <outlet property="buttonSubscribe" destination="par-nN-JKG" id="dXe-lt-ldy"/>
+                        <outlet property="creatorName" destination="GgC-cn-f09" id="DFZ-bt-au3"/>
                         <outlet property="day" destination="sK0-Qm-DrP" id="M87-4d-q98"/>
                         <outlet property="desc" destination="LYb-0w-cdi" id="Sue-4D-Ifo"/>
                         <outlet property="location" destination="Iw7-9c-wLK" id="bvv-m1-2rx"/>
@@ -1272,7 +1273,7 @@
                         <outlet property="price" destination="xaT-NB-Az0" id="b29-Mt-J4Z"/>
                         <outlet property="schedule" destination="Wif-RQ-wpT" id="GQw-9F-AH4"/>
                         <outlet property="vacancies" destination="vpd-1y-vp1" id="tQ2-Fa-PdY"/>
-                        <segue destination="YEc-Hz-khk" kind="unwind" identifier="unwindSelectMatch" unwindAction="unwindHomeWithSegue:" id="gkL-s2-saN"/>
+                        <segue destination="YEc-Hz-khk" kind="unwind" identifier="unwindHome" unwindAction="unwindHomeWithSegue:" id="gkL-s2-saN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ATa-G0-gC5" userLabel="First Responder" sceneMemberID="firstResponder"/>
