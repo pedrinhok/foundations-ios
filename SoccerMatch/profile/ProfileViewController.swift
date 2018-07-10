@@ -8,7 +8,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var birthday: StandardTextField!
     @IBOutlet weak var phone: StandardTextField!
     @IBOutlet weak var email: StandardTextField!
-    @IBOutlet weak var photo: UIImageView!
+    @IBOutlet weak var photo: CircleImage!
     @IBOutlet weak var submitBtn: StandardButton!
     @IBOutlet var genderKeyboard: UIView!
     @IBOutlet var birthKeyboard: UIView!
@@ -44,6 +44,10 @@ class ProfileViewController: UIViewController {
         }
         birthSelector.maximumDate = sevenDaysfromNow
         genderSelector.delegate = self
+        
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.imageTapped(_:)))
+        photo.addGestureRecognizer(tap)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -76,6 +80,13 @@ class ProfileViewController: UIViewController {
 
     @IBAction func password(_ sender: UIButton) {
          performSegue(withIdentifier: "gotoChangePassword", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToFullscreenPhoto" {
+            let destination = segue.destination as! FullScreenPhotoViewController
+            destination.photoFull = photo.image!
+        }
     }
     
     @IBAction func clickSubmit(_ sender: StandardButton) {
@@ -156,12 +167,12 @@ class ProfileViewController: UIViewController {
     
     func enableButton() {
         if user.gender == gender.text
-            && user.email == email.text
-            && user.birthday == birthday.text
-            && user.email == email.text
-            && user.phone == phone.text
-            && user.name == name.text
-            && user.photo == UIImagePNGRepresentation(photo.image!){
+                && user.email == email.text
+                && user.birthday == birthday.text
+                && user.email == email.text
+                && user.phone == phone.text
+                && user.name == name.text
+                && user.photo == UIImagePNGRepresentation(photo.image!) {
             submitBtn.disable()
         } else {
             submitBtn.enable()
@@ -193,7 +204,6 @@ class ProfileViewController: UIViewController {
         
         return newImage!
     }
-
 }
 
 extension ProfileViewController: UIImagePickerControllerDelegate {
@@ -212,6 +222,10 @@ extension ProfileViewController: UIImagePickerControllerDelegate {
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         imagePicker.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func imageTapped(_ sender: UITapGestureRecognizer) {
+        performSegue(withIdentifier: "goToFullscreenPhoto", sender: sender)
     }
     
 }
