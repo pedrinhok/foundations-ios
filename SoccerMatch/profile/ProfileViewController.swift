@@ -10,8 +10,14 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var email: StandardTextField!
     @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var submitBtn: StandardButton!
+    @IBOutlet var genderKeyboard: UIView!
+    @IBOutlet var birthKeyboard: UIView!
+    @IBOutlet weak var genderSelector: UIPickerView!
+    @IBOutlet weak var birthSelector: UIDatePicker!
     
+    let genders = ["Masculino", "Feminino", "Outro"]
     let imagePicker = UIImagePickerController()
+    let user = UserService.current()!
     
     override func viewDidLoad() {
         imagePicker.delegate = self
@@ -21,31 +27,48 @@ class ProfileViewController: UIViewController {
         
         gender.delegate = self
         gender.addTarget(self, action:#selector(ProfileViewController.textFieldDataChanged), for:UIControlEvents.editingChanged)
+        gender.inputView = genderKeyboard
         
         birthday.delegate = self
         birthday.addTarget(self, action:#selector(ProfileViewController.textFieldDataChanged), for:UIControlEvents.editingChanged)
+        birthday.inputView = birthKeyboard
         
         phone.delegate = self
         phone.addTarget(self, action:#selector(ProfileViewController.textFieldDataChanged), for:UIControlEvents.editingChanged)
         
         email.delegate = self
         email.addTarget(self, action:#selector(ProfileViewController.textFieldDataChanged), for:UIControlEvents.editingChanged)
+        
+        var sevenDaysfromNow: Date {
+            return (Calendar.current as NSCalendar).date(byAdding: .day, value: 7, to: Date(), options: [])!
+        }
+        birthSelector.maximumDate = sevenDaysfromNow
+        genderSelector.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         submitBtn.disable()
+
+        // Atualiza datePicker
+        if let birthday = user.birthday {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd/MM/yyyy"
+            let date = formatter.date(from: birthday)
+            if let date = date {
+                birthSelector.date = date
+            }
+        }
+
         getUser()
     }
 
     func getUser() {
-        if let user = UserService.current() {
-            name.text = user.name
-            gender.text = user.gender
-            birthday.text = user.birthday
-            phone.text = user.phone
-            email.text = user.email
-        }
+        name.text = user.name
+        gender.text = user.gender
+        birthday.text = user.birthday
+        phone.text = user.phone
+        email.text = user.email
     }
 
     @IBAction func password(_ sender: UIButton) {
@@ -77,6 +100,7 @@ class ProfileViewController: UIViewController {
             self.birthday.resignFirstResponder()
             self.phone.resignFirstResponder()
             self.email.resignFirstResponder()
+            self.showMessage("Profile updated", title: "Success")
         }
     }
     
@@ -92,8 +116,15 @@ class ProfileViewController: UIViewController {
     
     @IBAction func unwindProfile(segue: UIStoryboardSegue) {}
     
-    func showMessage(_ message: String) {
-        let alert = UIAlertController(title: "Wops", message: message, preferredStyle: .alert)
+    func showMessage(_ message: String, title: String? = nil){
+        
+        var alert: UIAlertController
+        
+        if let title = title {
+            alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        } else {
+            alert = UIAlertController(title: "Wops", message: message, preferredStyle: .alert)
+        }
         
         let action = UIAlertAction(title: "OK", style: .default) { (action) in
             alert.dismiss(animated: true)
@@ -102,6 +133,35 @@ class ProfileViewController: UIViewController {
         
         present(alert, animated: true)
     }
+    
+    @IBAction func genderUpdate(_ sender: UIButton) {
+        
+        gender.text = genders[genderSelector.selectedRow(inComponent: 0)]
+        gender.resignFirstResponder()
+        enableButton()
+    }
+    
+    @IBAction func birthUpdate(_ sender: UIButton) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        birthday.text = formatter.string(from: birthSelector.date)
+        birthday.resignFirstResponder()
+        enableButton()
+    }
+    
+    func enableButton() {
+        if user.gender == gender.text
+            && user.email == email.text
+            && user.birthday == birthday.text
+            && user.email == email.text
+            && user.phone == phone.text
+            && user.name == name.text {
+            submitBtn.disable()
+        } else {
+            submitBtn.enable()
+        }
+    }
+    
 }
 
 extension ProfileViewController: UIImagePickerControllerDelegate {
@@ -122,7 +182,7 @@ extension ProfileViewController: UIImagePickerControllerDelegate {
 extension ProfileViewController: UITextFieldDelegate {
     
     @objc func textFieldDataChanged() {
-        submitBtn.enable()
+        enableButton()
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -135,10 +195,6 @@ extension ProfileViewController: UITextFieldDelegate {
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         textField.backgroundColor = UIColor.white
         return true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        self.name = textField as! StandardTextField
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -157,6 +213,21 @@ extension ProfileViewController: UINavigationControllerDelegate {
         case .none, .some(_):
             return
         }
+    }
+}
+
+extension ProfileViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return genders.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return genders[row]
     }
     
 }
