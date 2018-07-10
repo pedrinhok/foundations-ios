@@ -13,13 +13,13 @@ class MatchService {
         let ref = Database.database().reference()
         
         var m = match
-        m.matchId = ref.child("matches").childByAutoId().key
-        m.creator = user.id
+        m.ref = ref.child("matches").childByAutoId().key
+        m.creator = user.ref
         
         let JSON = try! JSONEncoder().encode(m)
         let data = try! JSONSerialization.jsonObject(with: JSON, options: [])
         
-        ref.child("matches").child(m.matchId!).setValue(data)
+        ref.child("matches").child(m.ref!).setValue(data)
         
         completion(nil)
     }
@@ -80,7 +80,7 @@ class MatchService {
             return
         }
         
-        ref.child("matches").queryOrdered(byChild: "creator").queryEqual(toValue: user.id).observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("matches").queryOrdered(byChild: "creator").queryEqual(toValue: user.ref).observeSingleEvent(of: .value, with: { (snapshot) in
             
             var matches: [Match] = []
             

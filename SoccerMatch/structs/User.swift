@@ -2,7 +2,7 @@ import Foundation
 
 struct User: Codable {
 
-    var id: String?
+    var ref: String?
     var name: String?
     var phone: String?
     var email: String?
@@ -13,8 +13,8 @@ struct User: Codable {
     static func decode(_ data: [String: Any]) -> User {
         var user = User()
 
-        if let id = data["id"] as? String {
-            user.id = id
+        if let ref = data["ref"] as? String {
+            user.ref = ref
         }
         if let name = data["name"] as? String {
             user.name = name

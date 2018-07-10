@@ -2,7 +2,7 @@ import Foundation
 
 struct Match: Codable {
 
-    var matchId: String?
+    var ref: String?
     var creator: String?
     var desc: String?
     var day: String?
@@ -18,8 +18,8 @@ struct Match: Codable {
     static func decode(_ data: [String: Any]) -> Match {
         var match = Match()
 
-        if let matchId = data["matchId"] as? String {
-            match.matchId = matchId
+        if let ref = data["ref"] as? String {
+            match.ref = ref
         }
         if let creator = data["creator"] as? String {
             match.creator = creator

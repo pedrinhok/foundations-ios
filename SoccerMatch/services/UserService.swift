@@ -44,7 +44,7 @@ class UserService {
         }
         
         let ref = Database.database().reference()
-        ref.child("users").child(user.id!).setValue(dict)
+        ref.child("users").child(user.ref!).setValue(dict)
         
         AppDelegate.saveContext()
         handler(nil)
@@ -75,7 +75,7 @@ class UserService {
             ref.child("users").child(uid).setValue(["uid": uid, "name": name, "phone": phone, "email": email])
             
             let user = ManagedUser(context: AppDelegate.persistentContainer.viewContext)
-            user.id = uid
+            user.ref = uid
             user.name = name
             user.phone = phone
             user.email = email
@@ -115,7 +115,7 @@ class UserService {
                 let birthday = value?["birthday"] as? String ?? ""
 
                 let user = ManagedUser(context: AppDelegate.persistentContainer.viewContext)
-                user.id = userAuth.uid
+                user.ref = userAuth.uid
                 user.name = name
                 user.phone = phone
                 user.email = email

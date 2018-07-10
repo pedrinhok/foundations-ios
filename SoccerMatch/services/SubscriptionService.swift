@@ -12,7 +12,7 @@ class SubscriptionService {
             return
         }
         
-        ref.child("subscriptions").queryOrdered(byChild: "user").queryEqual(toValue: user.id).observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("subscriptions").queryOrdered(byChild: "user").queryEqual(toValue: user.ref).observeSingleEvent(of: .value, with: { (snapshot) in
             
             let requests = DispatchGroup()
             var matches: [Match] = []
@@ -44,7 +44,7 @@ class SubscriptionService {
             return
         }
 
-        ref.child("subscriptions").childByAutoId().setValue(["match": match.matchId, "user": user.id])
+        ref.child("subscriptions").childByAutoId().setValue(["match": match.ref, "user": user.ref])
 
         handler(nil)
     }
