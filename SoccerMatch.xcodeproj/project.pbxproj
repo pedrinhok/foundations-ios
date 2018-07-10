@@ -138,17 +138,17 @@
 			path = home;
 			sourceTree = "<group>";
 		};
-		9518C56620E64B8100B55134 /* Services */ = {
+		9518C56620E64B8100B55134 /* services */ = {
 			isa = PBXGroup;
 			children = (
 				9518C56F20E64CB700B55134 /* UserService.swift */,
 				95DB013220EE5E09009AF416 /* MatchService.swift */,
 				95CBCD5E20F3AD970006F088 /* SubscriptionService.swift */,
 			);
-			path = Services;
+			path = services;
 			sourceTree = "<group>";
 		};
-		9518C57220E652C700B55134 /* Commons */ = {
+		9518C57220E652C700B55134 /* commons */ = {
 			isa = PBXGroup;
 			children = (
 				C68497E020EBC0C500A8E3A1 /* CircleImage.swift */,
@@ -158,7 +158,7 @@
 				9518C57B20E667B600B55134 /* StandardTextField.swift */,
 				95CBCD5C20F396BD0006F088 /* MatchCollectionCell.swift */,
 			);
-			path = Commons;
+			path = commons;
 			sourceTree = "<group>";
 		};
 		9531C6DD20ECF8D900DA3295 /* structs */ = {
@@ -198,8 +198,8 @@
 				874FC53120EBAD3C000D0443 /* home */,
 				874FC52C20EBAD2D000D0443 /* profile */,
 				874FC52320EBAD1E000D0443 /* mymatches */,
-				9518C57220E652C700B55134 /* Commons */,
-				9518C56620E64B8100B55134 /* Services */,
+				9518C57220E652C700B55134 /* commons */,
+				9518C56620E64B8100B55134 /* services */,
 				9531C6DD20ECF8D900DA3295 /* structs */,
 				95D9470820E518C9008C5192 /* Assets.xcassets */,
 				95D9470A20E518C9008C5192 /* LaunchScreen.storyboard */,
