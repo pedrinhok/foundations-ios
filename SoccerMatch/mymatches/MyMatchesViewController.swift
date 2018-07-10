@@ -5,6 +5,8 @@ class MyMatchesViewController: UIViewController {
     var matchesCreated: [Match] = []
     var matchesSubscribed: [Match] = []
 
+    @IBOutlet weak var numberCreated: UILabel!
+    @IBOutlet weak var numberSubscribed: UILabel!
     @IBOutlet weak var collectionCreated: UICollectionView!
     @IBOutlet weak var collectionSubscribed: UICollectionView!
     
@@ -12,25 +14,49 @@ class MyMatchesViewController: UIViewController {
         super.viewWillAppear(animated)
 
         collectionCreated.dataSource = self
+        collectionCreated.delegate = self
         collectionSubscribed.dataSource = self
+        collectionSubscribed.delegate = self
 
         getMatches()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let match = sender as? Match else { return }
+
+        switch segue.identifier {
+
+        case "gotoMatchCreated":
+            guard let vc = segue.destination as? MatchCreatedViewController else { return }
+            vc.match = match
+            return
+
+        case "gotoMatchSubscribed":
+            guard let vc = segue.destination as? MatchSubscribedViewController else { return }
+            vc.match = match
+            return
+
+        case .none, .some(_):
+            return
+        }
     }
 
     func getMatches() {
         MatchService.getCreatedByMe { (matches) in
             self.matchesCreated = matches
+            self.numberCreated.text = String(matches.count)
             self.collectionCreated.reloadSections(IndexSet(integer: 0))
         }
         SubscriptionService.getMatches { (matches) in
             self.matchesSubscribed = matches
+            self.numberSubscribed.text = String(matches.count)
             self.collectionSubscribed.reloadSections(IndexSet(integer: 0))
         }
     }
 
 }
 
-extension MyMatchesViewController: UICollectionViewDataSource {
+extension MyMatchesViewController: UICollectionViewDataSource, UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch (collectionView.tag) {
@@ -70,6 +96,24 @@ extension MyMatchesViewController: UICollectionViewDataSource {
         cell.desc.text = match.desc
         cell.location.text = match.location
         cell.schedule.text = "\(match.day!) (\(match.start!) - \(match.finish!))"
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        switch (collectionView.tag) {
+
+        case 0:
+            let match = matchesCreated[indexPath.row]
+
+            performSegue(withIdentifier: "gotoMatchCreated", sender: match)
+
+        case 1:
+            let match = matchesSubscribed[indexPath.row]
+
+            performSegue(withIdentifier: "gotoMatchSubscribed", sender: match)
+
+        default:
+            print("?")
+        }
     }
 
 }

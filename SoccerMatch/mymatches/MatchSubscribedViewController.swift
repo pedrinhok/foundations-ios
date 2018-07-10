@@ -1,3 +1,7 @@
 import UIKit
 
-class MatchSubscribedViewController: UIViewController {}
+class MatchSubscribedViewController: UIViewController {
+
+    var match: Match!
+
+}

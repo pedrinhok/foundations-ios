@@ -25,6 +25,7 @@
 		9518C57420E652F800B55134 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9518C57320E652F800B55134 /* RoundedView.swift */; };
 		9518C57C20E667B600B55134 /* StandardTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9518C57B20E667B600B55134 /* StandardTextField.swift */; };
 		9518C57E20E6681C00B55134 /* StandardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9518C57D20E6681C00B55134 /* StandardButton.swift */; };
+		952A62C520F4FB4D001BFD7F /* SubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952A62C420F4FB4D001BFD7F /* SubscriptionCell.swift */; };
 		9531C6DF20ECF93400DA3295 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9531C6DE20ECF93400DA3295 /* Match.swift */; };
 		95CBCD5D20F396BD0006F088 /* MatchCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CBCD5C20F396BD0006F088 /* MatchCollectionCell.swift */; };
 		95CBCD5F20F3AD970006F088 /* SubscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CBCD5E20F3AD970006F088 /* SubscriptionService.swift */; };
@@ -62,6 +63,7 @@
 		9518C57320E652F800B55134 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 		9518C57B20E667B600B55134 /* StandardTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardTextField.swift; sourceTree = "<group>"; };
 		9518C57D20E6681C00B55134 /* StandardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardButton.swift; sourceTree = "<group>"; };
+		952A62C420F4FB4D001BFD7F /* SubscriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCell.swift; sourceTree = "<group>"; };
 		9531C6DE20ECF93400DA3295 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		95CBCD5C20F396BD0006F088 /* MatchCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchCollectionCell.swift; sourceTree = "<group>"; };
 		95CBCD5E20F3AD970006F088 /* SubscriptionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionService.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				95DB013020EE390B009AF416 /* CustomButton.swift */,
 				9518C57B20E667B600B55134 /* StandardTextField.swift */,
 				95CBCD5C20F396BD0006F088 /* MatchCollectionCell.swift */,
+				952A62C420F4FB4D001BFD7F /* SubscriptionCell.swift */,
 			);
 			path = commons;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				95D9470720E518C8008C5192 /* SoccerMatch.xcdatamodeld in Sources */,
 				874FC53020EBAD2D000D0443 /* ProfileViewController.swift in Sources */,
 				C68497E120EBC0C500A8E3A1 /* CircleImage.swift in Sources */,
+				952A62C520F4FB4D001BFD7F /* SubscriptionCell.swift in Sources */,
 				95D9471420E518F1008C5192 /* SignupViewController.swift in Sources */,
 				95D946FF20E518C8008C5192 /* AppDelegate.swift in Sources */,
 				874FC52F20EBAD2D000D0443 /* ChangePasswordViewController.swift in Sources */,
