@@ -31,6 +31,22 @@ class MatchCreatedViewController: UIViewController {
         getSubscriptions()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        switch segue.identifier {
+            
+        case "gotoUserInformation":
+            guard let vc = segue.destination as? UserInformationViewController else { return }
+            guard let user = sender as? User else { return }
+            vc.match = match
+            vc.user = user
+            return
+            
+        case .none, .some(_):
+            return
+        }
+    }
+
     func getSubscriptions() {
         SubscriptionService.getUsers(match: match) { (users) in
             self.subscriptions = users
@@ -49,9 +65,19 @@ extension MatchCreatedViewController: UITableViewDataSource, UITableViewDelegate
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "subscriptionCell", for: indexPath) as! SubscriptionCell
+
         let user = subscriptions[indexPath.row]
+
         cell.name.text = user.name
+
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        let user = subscriptions[indexPath.row]
+
+        performSegue(withIdentifier: "gotoUserInformation", sender: user)
     }
 
 }

@@ -4,15 +4,17 @@ import FirebaseDatabase
 
 class SubscriptionService {
 
-    public static func getMatches(completion: @escaping ([Match]) -> ()) {
+    public static func getMatches(user: String? = nil, completion: @escaping ([Match]) -> ()) {
         let db = Database.database().reference()
-        
-        guard let user = UserService.current() else {
-            completion([])
-            return
+
+        var ref: String!
+        if let user = user {
+            ref = user
+        } else {
+            ref = UserService.current()!.ref
         }
-        
-        db.child("subscriptions").queryOrdered(byChild: "user").queryEqual(toValue: user.ref).observeSingleEvent(of: .value, with: { (snapshot) in
+
+        db.child("subscriptions").queryOrdered(byChild: "user").queryEqual(toValue: ref).observeSingleEvent(of: .value, with: { (snapshot) in
             
             let requests = DispatchGroup()
             var matches: [Match] = []

@@ -40,10 +40,16 @@ class MatchService {
         }) { (error) in completion(nil) }
     }
 
-    public static func get(completion: @escaping ([Match]) -> ()) {
+    public static func get(creator: String? = nil, completion: @escaping ([Match]) -> ()) {
         let db = Database.database().reference()
 
-        db.child("matches").observeSingleEvent(of: .value, with: { (snapshot) in
+        var request = db.child("matches") as DatabaseQuery
+
+        if let creator = creator {
+            request = request.queryOrdered(byChild: "creator").queryEqual(toValue: creator)
+        }
+
+        request.observeSingleEvent(of: .value, with: { (snapshot) in
 
             var matches: [Match] = []
 
