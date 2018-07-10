@@ -2,11 +2,44 @@ import Foundation
 import CoreData
 import FirebaseAuth
 import FirebaseDatabase
+import FirebaseStorage
 
 class UserService {
 
     public static func auth() -> Bool {
         return current() != nil
+    }
+    
+    public static func updateUserImage(image: UIImage, handler: @escaping (_ error: String?) -> ()) {
+       
+        let storageRef = Storage.storage().reference()
+        
+        let userPhotoRef = storageRef.child(current()!.ref! + "/userPhoto.png")
+        
+        let imagePng = UIImagePNGRepresentation(image)
+        
+        userPhotoRef.putData(imagePng!, metadata: nil) { (metadata, error) in
+            guard metadata != nil else {
+                // Uh-oh, an error occurred!
+                if let error = error {
+                    handler(error.localizedDescription)
+                } else {
+                    handler("Uh-oh, an error occurred")
+                }
+                return
+            }
+            // Metadata contains file metadata such as size, content-type, and download URL.
+            userPhotoRef.downloadURL { url, error in
+                if let error = error {
+                    handler(error.localizedDescription)
+                } else {
+                    let ref = Database.database().reference()
+                    if let url = url {
+                        ref.child("users").child(current()!.ref!).updateChildValues(["photo": url])
+                    }
+                }
+            }
+        }
     }
 
     public static func updateUserData(data: User!, handler: @escaping (_ error: String?) -> ()) {

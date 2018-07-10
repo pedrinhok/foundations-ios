@@ -82,14 +82,14 @@ class ProfileViewController: UIViewController {
     
     @IBAction func clickSubmit(_ sender: StandardButton) {
         
-        var user = User()
-        user.name = self.name.text
-        user.gender = self.gender.text
-        user.birthday = self.birthday.text
-        user.phone = self.phone.text
-        user.email = self.email.text
+        var userObj = User()
+        userObj.name = self.name.text
+        userObj.gender = self.gender.text
+        userObj.birthday = self.birthday.text
+        userObj.phone = self.phone.text
+        userObj.email = self.email.text
         
-        UserService.updateUserData(data: user) { (error) in
+        UserService.updateUserData(data: userObj) { (error) in
             if let error = error {
                 self.showMessage(error)
                 return
@@ -100,7 +100,18 @@ class ProfileViewController: UIViewController {
             self.birthday.resignFirstResponder()
             self.phone.resignFirstResponder()
             self.email.resignFirstResponder()
-            self.showMessage("Profile updated", title: "Success")
+            
+            if let image = self.photo.image {
+                UserService.updateUserImage(image: image) { (error) in
+                    if let error = error {
+                        self.showMessage(error)
+                        return
+                    }
+                    self.showMessage("Profile updated", title: "Success")
+                }
+            } else {
+                self.showMessage("Profile updated", title: "Success")
+            }
         }
     }
     
@@ -161,7 +172,6 @@ class ProfileViewController: UIViewController {
             submitBtn.enable()
         }
     }
-    
 }
 
 extension ProfileViewController: UIImagePickerControllerDelegate {
