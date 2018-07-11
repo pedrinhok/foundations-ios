@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -1088,7 +1088,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DhN-WI-H8n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4475.625" y="1252.8169014084508"/>
+            <point key="canvasLocation" x="4489" y="1256"/>
         </scene>
         <!--Change Password View Controller-->
         <scene sceneID="X12-gl-bRs">
@@ -1592,15 +1592,17 @@
             </objects>
             <point key="canvasLocation" x="466" y="-739"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Designable Tab Bar Controller-->
         <scene sceneID="TFw-43-YnW">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="tvi-Ep-QPL" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="tvi-Ep-QPL" customClass="DesignableTabBarController" customModule="SoccerMatch" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="m5o-Cy-Qvy">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" red="0.49019607840000001" green="0.82352941180000006" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="V8f-6B-f9V" kind="relationship" relationship="viewControllers" id="zfk-bH-Ial"/>
@@ -2465,15 +2467,18 @@
             </objects>
             <point key="canvasLocation" x="5408.8000000000002" y="-289.20539730134936"/>
         </scene>
-        <!--My Matches-->
+        <!--Navigation Controller-->
         <scene sceneID="B9Q-8E-uPS">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PeT-pr-imZ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="My Matches" id="Ihc-qq-FTq"/>
+                    <tabBarItem key="tabBarItem" title="" image="icon-soccer-tab" id="Ihc-qq-FTq">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ale-im-wbf">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -2484,15 +2489,18 @@
             </objects>
             <point key="canvasLocation" x="2597.5999999999999" y="32.833583208395808"/>
         </scene>
-        <!--Home-->
+        <!--Navigation Controller-->
         <scene sceneID="2RV-v3-p24">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="V8f-6B-f9V" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" id="SfF-TG-9YL"/>
+                    <tabBarItem key="tabBarItem" title="" image="icon-home-tab" id="SfF-TG-9YL">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="DZC-En-o8y">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -2503,15 +2511,18 @@
             </objects>
             <point key="canvasLocation" x="2597.5999999999999" y="-1543.1784107946028"/>
         </scene>
-        <!--Profile-->
+        <!--Navigation Controller-->
         <scene sceneID="VCU-KI-uR1">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mj8-UQ-UqF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" id="AjS-Qd-J27"/>
+                    <tabBarItem key="tabBarItem" title="" image="icon-user-tab" id="AjS-Qd-J27">
+                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="z23-eZ-upM">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -2526,12 +2537,15 @@
     <resources>
         <image name="icon-camera" width="30" height="30"/>
         <image name="icon-close" width="25" height="25"/>
+        <image name="icon-home-tab" width="34" height="34"/>
         <image name="icon-right" width="25" height="25"/>
+        <image name="icon-soccer-tab" width="34" height="34"/>
         <image name="icon-user" width="500" height="500"/>
+        <image name="icon-user-tab" width="34" height="34"/>
         <image name="logoSoccerM" width="603" height="215"/>
         <image name="whatsapp" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RQ4-PG-0SG"/>
+        <segue reference="hBH-cC-Rdf"/>
     </inferredMetricsTieBreakers>
 </document>
