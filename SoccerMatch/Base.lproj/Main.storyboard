@@ -2214,6 +2214,7 @@
                         <outlet property="day" destination="HDw-Cu-F6l" id="pFc-Ps-G6C"/>
                         <outlet property="desc" destination="Xw8-qz-bGQ" id="ugt-m4-dv5"/>
                         <outlet property="location" destination="bFv-JM-bzz" id="qlT-QD-Tnc"/>
+                        <outlet property="phone" destination="oaA-oD-PzS" id="ktu-pM-mqB"/>
                         <outlet property="price" destination="4Q4-et-pwQ" id="Lwn-lL-b7i"/>
                         <outlet property="schedule" destination="7bv-BS-lTo" id="1ih-3X-bOl"/>
                         <outlet property="status" destination="DTG-o7-dL2" id="VTG-TO-98M"/>

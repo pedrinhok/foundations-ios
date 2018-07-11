@@ -14,6 +14,7 @@ class MatchSubscribedViewController: UIViewController {
     @IBOutlet weak var vacancies: UILabel!
     @IBOutlet weak var status: UILabel!
     @IBOutlet weak var accepted: CircleImage!
+    @IBOutlet weak var phone: UIImageView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -47,6 +48,10 @@ class MatchSubscribedViewController: UIViewController {
             status.text = "Match finished"
         }
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(clickPhone))
+        phone.isUserInteractionEnabled = true
+        phone.addGestureRecognizer(tap)
+        
         getCreator()
     }
     
@@ -57,6 +62,22 @@ class MatchSubscribedViewController: UIViewController {
                 self.creatorName.text = user.name
             }
         }
+    }
+    
+    func showMessage(title: String, message: String, completion: (() -> ())? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "OK", style: .default) { (action) in
+            alert.dismiss(animated: true)
+            if let completion = completion { completion() }
+        }
+        alert.addAction(action)
+        
+        present(alert, animated: true)
+    }
+    
+    @objc func clickPhone(tap: UITapGestureRecognizer) {
+        showMessage(title: creator.phone ?? "", message: "")
     }
     
 }
