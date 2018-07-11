@@ -29,7 +29,7 @@ class UserInformationViewController: UIViewController {
             buttonAccept.setTitle("Vacancies already filled", for: .normal)
         }
         
-        if subscription.accepted {
+        if let accepted = subscription.accepted, accepted {
             buttonAccept.disable()
             buttonAccept.setTitle("User already accepted", for: .normal)
             buttonRefuse.isHidden = false
@@ -70,6 +70,15 @@ class UserInformationViewController: UIViewController {
     }
     
     @IBAction func clickRefuse(_ sender: StandardButton) {
+        SubscriptionService.refuse(subscription) { (error) in
+            if let error = error {
+                self.showMessage(title: "Wops", message: error)
+            } else {
+                self.showMessage(title: "User successfully refused!", message: "") {
+                    self.performSegue(withIdentifier: "unwindMatchCreated", sender: nil)
+                }
+            }
+        }
     }
     
 }
