@@ -120,10 +120,18 @@ class NewMatchViewController: UIViewController {
             showMessage(title: "Wops", message: "You must set the vacancies!")
             return
         }
+        guard let vacanciesInt = Int(vacancies), vacanciesInt > 0 else {
+            showMessage(title: "Wops", message: "You must set a valid vacancies (>= 1)!")
+            return
+        }
         match.vacancies = vacancies
 
         guard let price = price.text, price != "" else {
             showMessage(title: "Wops", message: "You must set the price!")
+            return
+        }
+        guard let priceInt = Int(price), priceInt >= 0 else {
+            showMessage(title: "Wops", message: "You must set a valid price (>= 0)!")
             return
         }
         match.price = price
