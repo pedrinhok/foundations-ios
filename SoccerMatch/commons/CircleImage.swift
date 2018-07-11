@@ -15,8 +15,8 @@ class CircleImage: UIImageView {
     }
     
     func construct() {
-        layer.masksToBounds = true
         layer.cornerRadius = frame.size.width / 2
+        layer.masksToBounds = true
     }
     
 }
