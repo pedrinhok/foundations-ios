@@ -4,8 +4,9 @@ import FirebaseDatabase
 
 class SubscriptionService {
 
+    private static let db = Database.database().reference()
+
     public static func getMatches(user: String? = nil, completion: @escaping ([Match]) -> ()) {
-        let db = Database.database().reference()
 
         var ref: String!
         if let user = user {
@@ -41,8 +42,6 @@ class SubscriptionService {
     }
 
     public static func getUsers(match: Match, completion: @escaping ([User]) -> ()) {
-        let db = Database.database().reference()
-        
         db.child("subscriptions").queryOrdered(byChild: "match").queryEqual(toValue: match.ref).observeSingleEvent(of: .value, with: { (snapshot) in
             
             let requests = DispatchGroup()
@@ -70,7 +69,6 @@ class SubscriptionService {
     }
 
     public static func create(_ match: Match, completion: (String?) -> ()) {
-        let db = Database.database().reference()
 
         guard let user = UserService.current() else {
             completion("Unauthorized!")

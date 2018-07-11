@@ -4,13 +4,13 @@ import FirebaseDatabase
 
 class MatchService {
 
+    private static let db = Database.database().reference()
+
     public static func create(_ match: Match, completion: (String?) -> ()) {
         guard let user = UserService.current() else {
             completion("Unauthorized!")
             return
         }
-        
-        let db = Database.database().reference()
         
         var m = match
         m.ref = db.child("matches").childByAutoId().key
@@ -25,8 +25,6 @@ class MatchService {
     }
 
     public static func find(_ ref: String, completion: @escaping (Match?) -> ()) {
-        let db = Database.database().reference()
-        
         db.child("matches").child(ref).observeSingleEvent(of: .value, with: { (snapshot) in
             
             guard let data = snapshot.value as? [String: Any] else {
@@ -41,7 +39,6 @@ class MatchService {
     }
 
     public static func get(creator: String? = nil, completion: @escaping ([Match]) -> ()) {
-        let db = Database.database().reference()
 
         var request = db.child("matches") as DatabaseQuery
 
@@ -66,8 +63,6 @@ class MatchService {
     }
 
     public static func getCreator(_ match: Match, completion: @escaping (User?) -> ()) {
-        let db = Database.database().reference()
-
         db.child("users").child(match.creator!).observeSingleEvent(of: .value, with: { (snapshot) in
 
             let data = snapshot.value as! [String: Any]
@@ -76,30 +71,6 @@ class MatchService {
             completion(user)
 
         }) { (error) in completion(nil) }
-    }
-
-    public static func getCreatedByMe(completion: @escaping ([Match]) -> ()) {
-        let db = Database.database().reference()
-        
-        guard let user = UserService.current() else {
-            completion([])
-            return
-        }
-        
-        db.child("matches").queryOrdered(byChild: "creator").queryEqual(toValue: user.ref).observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            var matches: [Match] = []
-            
-            for data in snapshot.children {
-                guard let snapshot = data as? DataSnapshot else { continue }
-                guard let data = snapshot.value as? [String: Any] else { continue }
-                let match = Match.decode(data)
-                matches.append(match)
-            }
-            
-            completion(matches)
-            
-        }) { (error) in completion([]) }
     }
 
 }

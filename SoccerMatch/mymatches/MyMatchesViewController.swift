@@ -42,7 +42,8 @@ class MyMatchesViewController: UIViewController {
     }
 
     func getMatches() {
-        MatchService.getCreatedByMe { (matches) in
+        let user = UserService.current()!
+        MatchService.get(creator: user.ref) { (matches) in
             self.matchesCreated = matches
             self.numberCreated.text = String(matches.count)
             self.collectionCreated.reloadSections(IndexSet(integer: 0))

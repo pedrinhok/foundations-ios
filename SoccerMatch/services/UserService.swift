@@ -6,7 +6,7 @@ import FirebaseStorage
 
 class UserService {
     
-    private static let ref = Database.database().reference()
+    private static let db = Database.database().reference()
 
     public static func auth() -> Bool {
         return current() != nil
@@ -35,7 +35,7 @@ class UserService {
                     return
                 }
                 if let url = url {
-                    ref.child("users").child(user.ref!).updateChildValues(["photo": url.absoluteString])
+                    db.child("users").child(user.ref!).updateChildValues(["photo": url.absoluteString])
                     user.photo = image
                     AppDelegate.saveContext()
                     handler(nil)
@@ -85,14 +85,14 @@ class UserService {
                     return
                 }
                 
-                ref.child("users").child(user.ref!).updateChildValues(dict)
+                db.child("users").child(user.ref!).updateChildValues(dict)
                 
                 AppDelegate.saveContext()
                 handler(nil)
             }
         } else {
             
-            ref.child("users").child(user.ref!).updateChildValues(dict)
+            db.child("users").child(user.ref!).updateChildValues(dict)
             
             AppDelegate.saveContext()
             handler(nil)
@@ -123,7 +123,6 @@ class UserService {
                 return
             }
             
-            let db = Database.database().reference()
             db.child("users").child(auth.uid).setValue(["ref": auth.uid, "name": name, "phone": phone, "email": email])
             
             let user = ManagedUser(context: AppDelegate.persistentContainer.viewContext)
@@ -148,8 +147,6 @@ class UserService {
     }
 
     public static func find(_ ref: String, completion: @escaping (User?) -> ()) {
-        let db = Database.database().reference()
-        
         db.child("users").child(ref).observeSingleEvent(of: .value, with: { (snapshot) in
             
             guard let data = snapshot.value as? [String: Any] else {
@@ -177,7 +174,6 @@ class UserService {
                 return
             }
             
-            let db = Database.database().reference()
             db.child("users").child(auth.uid).observeSingleEvent(of: .value, with: { (snapshot) in
                 
                 guard let data = snapshot.value as? [String: Any] else {
