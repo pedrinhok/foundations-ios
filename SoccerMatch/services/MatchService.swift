@@ -38,6 +38,40 @@ class MatchService {
         }) { (error) in completion(nil) }
     }
 
+    public static func home(completion: @escaping ([Match]) -> ()) {
+        
+        var request = db.child("matches") as DatabaseQuery
+        
+        let date = Date()
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = "dd/MM/yyyy"
+        let currentDate = dateFormater.string(from: date)
+        
+        let timeFormater = DateFormatter()
+        timeFormater.dateFormat = "HH:mm"
+        let currentTime = timeFormater.string(from: date)
+        
+        request = request.queryOrdered(byChild: "day").queryStarting(atValue: currentDate)
+        
+        request.observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            var matches: [Match] = []
+            
+            for data in snapshot.children {
+                guard let snapshot = data as? DataSnapshot else { continue }
+                guard let data = snapshot.value as? [String: Any] else { continue }
+                let match = Match.decode(data)
+                if match.finish! < currentTime {
+                    continue
+                }
+                matches.append(match)
+            }
+            
+            completion(matches)
+            
+        }) { (error) in completion([]) }
+    }
+
     public static func get(creator: String? = nil, completion: @escaping ([Match]) -> ()) {
 
         var request = db.child("matches") as DatabaseQuery
