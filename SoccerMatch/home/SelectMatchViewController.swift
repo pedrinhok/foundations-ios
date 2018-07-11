@@ -38,7 +38,7 @@ class SelectMatchViewController: UIViewController {
         let current = UserService.current()!
         
         if match.creator == current.ref {
-            buttonSubscribe.disable()
+            buttonSubscribe.inactive()
             buttonSubscribe.setTitle("You created the match", for: .normal)
         }
         
@@ -57,7 +57,7 @@ class SelectMatchViewController: UIViewController {
             self.subscriptions = users
             
             if users.contains(where: { $0.ref == current.ref }) {
-                self.buttonSubscribe.disable()
+                self.buttonSubscribe.inactive()
                 self.buttonSubscribe.setTitle("You're already subscribed", for: .normal)
             }
         }

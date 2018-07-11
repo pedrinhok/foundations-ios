@@ -18,7 +18,7 @@ class ChangePasswordViewController: UIViewController {
         newPassword.isSecureTextEntry = true
         confirmPassword.isSecureTextEntry = true
         
-        changePassBtn.disable()
+        changePassBtn.inactive()
         
         password.addTarget(self, action:#selector(ProfileViewController.textFieldDataChanged), for:UIControlEvents.editingChanged)
         newPassword.addTarget(self, action:#selector(ProfileViewController.textFieldDataChanged), for:UIControlEvents.editingChanged)
@@ -40,7 +40,7 @@ class ChangePasswordViewController: UIViewController {
     
     @IBAction func changePassword(_ sender: StandardButton) {
         
-        changePassBtn.disable()
+        changePassBtn.inactive()
         
         guard let password = password.text, password != "" else {
             showMessage("Confirm you current password!")
@@ -81,7 +81,7 @@ class ChangePasswordViewController: UIViewController {
     }
     
     @objc func textFieldDataChanged() {
-        changePassBtn.enable()
+        changePassBtn.active()
     }
 }
 
