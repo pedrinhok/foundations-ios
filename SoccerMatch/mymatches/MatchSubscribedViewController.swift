@@ -21,11 +21,20 @@ class MatchSubscribedViewController: UIViewController {
         let match = subscription.match!
         
         desc.text = match.desc
+        
         location.text = match.location
+        
         day.text = match.day
+        
         schedule.text = "\(match.start!) - \(match.finish!)"
+        
         price.text = match.price
-        vacancies.text = match.vacancies
+        
+        if match.completed() {
+            vacancies.text = "Filled"
+        } else {
+            vacancies.text = match.vacancies
+        }
         
         if let data = subscription.accepted, data {
             accepted.isHidden = false
