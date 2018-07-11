@@ -3,6 +3,8 @@ import CoreData
 
 class ProfileViewController: UIViewController {
 
+    @IBOutlet weak var viewLoading: UIView!
+    @IBOutlet weak var activityLoading: UIActivityIndicatorView!
     @IBOutlet weak var name: StandardTextField!
     @IBOutlet weak var gender: StandardTextField!
     @IBOutlet weak var birthday: StandardTextField!
@@ -91,6 +93,8 @@ class ProfileViewController: UIViewController {
     
     @IBAction func clickSubmit(_ sender: StandardButton) {
         
+        showLoading()
+        
         var userObj = User()
         userObj.name = self.name.text
         userObj.gender = self.gender.text
@@ -107,6 +111,7 @@ class ProfileViewController: UIViewController {
             if let error = error {
                 self.showMessage(error)
                 self.enableButton()
+                self.hideLoading()
                 return
             }
             self.name.resignFirstResponder()
@@ -116,7 +121,7 @@ class ProfileViewController: UIViewController {
             self.email.resignFirstResponder()
             
             self.showMessage("Profile updated", title: "Success")
-            
+            self.hideLoading()
         }
     }
 
@@ -199,6 +204,18 @@ class ProfileViewController: UIViewController {
         UIGraphicsEndImageContext()
         
         return newImage!
+    }
+    
+    func showLoading() {
+        viewLoading.isHidden = false
+        viewLoading.isUserInteractionEnabled = true
+        activityLoading.startAnimating()
+    }
+    
+    func hideLoading() {
+        viewLoading.isHidden = true
+        viewLoading.isUserInteractionEnabled = false
+        activityLoading.stopAnimating()
     }
 }
 
