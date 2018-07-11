@@ -82,8 +82,10 @@ extension MatchCreatedViewController: UITableViewDataSource, UITableViewDelegate
         
         cell.name.text = user.name
         
-        if subscription.accepted {
+        if let accepted = subscription.accepted, accepted {
             cell.accepted.isHidden = false
+        } else {
+            cell.accepted.isHidden = true
         }
         
         return cell

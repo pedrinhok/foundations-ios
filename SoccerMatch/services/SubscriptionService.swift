@@ -82,12 +82,10 @@ class SubscriptionService {
             
             for data in snapshot.children {
                 guard let snapshot = data as? DataSnapshot else { continue }
-                guard let data = snapshot.value as? [String: String] else { continue }
+                guard let data = snapshot.value as? [String: Any] else { continue }
                 
-                guard let user = data["user"] else { continue }
-                
-                var accepted = false
-                if let str = data["accepted"] { accepted = Bool(str)! }
+                guard let user = data["user"] as? String else { continue }
+                guard let accepted = data["accepted"] as? Bool else { continue }
                 
                 requests.enter()
                 UserService.find(user) { (user) in
@@ -115,15 +113,35 @@ class SubscriptionService {
             return
         }
         if vacancies < 1 {
-            completion("An error has occured")
+            completion("Vacancies already filled")
             return
         }
         match.completed = vacancies == 1
         match.vacancies = String(vacancies - 1)
         
-        db.child("subscriptions").child(subscription.ref).updateChildValues(["accepted": "true"]) { (e, res) in
+        db.child("subscriptions").child(subscription.ref!).updateChildValues(["accepted": true]) { (e, res) in
             
             db.child("matches").child(match.ref!).updateChildValues(["completed": match.completed!, "vacancies": match.vacancies!]) { (e, res) in
+                completion(nil)
+            }
+            
+        }
+    }
+    
+    public static func refuse(_ subscription: Subscription, completion: @escaping (String?) -> ()) {
+        guard var match = subscription.match else {
+            completion("An error has occured")
+            return
+        }
+        guard let str = match.vacancies, let vacancies = Int(str) else {
+            completion("An error has occured")
+            return
+        }
+        match.vacancies = String(vacancies + 1)
+        
+        db.child("subscriptions").child(subscription.ref!).updateChildValues(["accepted": false]) { (e, res) in
+            
+            db.child("matches").child(match.ref!).updateChildValues(["completed": false, "vacancies": match.vacancies!]) { (e, res) in
                 completion(nil)
             }
             
@@ -137,7 +155,7 @@ class SubscriptionService {
             return
         }
         
-        db.child("subscriptions").childByAutoId().setValue(["match": match.ref, "user": user.ref])
+        db.child("subscriptions").childByAutoId().setValue(["match": match.ref!, "user": user.ref!, "accepted": false])
         
         completion(nil)
     }
