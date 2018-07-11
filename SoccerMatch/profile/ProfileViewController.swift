@@ -73,8 +73,8 @@ class ProfileViewController: UIViewController {
         birthday.text = user.birthday
         phone.text = user.phone
         email.text = user.email
-        if photo.image == #imageLiteral(resourceName: "icon-user") {
-            photo.image = UIImage(data: user.photo!, scale: 1.0)
+        if let userPhoto = user.photo, photo.image == #imageLiteral(resourceName: "icon-user") {
+            photo.image = UIImage(data: userPhoto, scale: 1.0)
         }
     }
 
