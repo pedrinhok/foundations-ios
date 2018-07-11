@@ -3,9 +3,9 @@ import FirebaseAuth
 import FirebaseDatabase
 
 class MatchService {
-
+    
     private static let db = Database.database().reference()
-
+    
     public static func create(_ match: Match, completion: (String?) -> ()) {
         guard let user = UserService.current() else {
             completion("Unauthorized!")
@@ -23,7 +23,7 @@ class MatchService {
         
         completion(nil)
     }
-
+    
     public static func find(_ ref: String, completion: @escaping (Match?) -> ()) {
         db.child("matches").child(ref).observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -37,21 +37,21 @@ class MatchService {
             
         }) { (error) in completion(nil) }
     }
-
+    
     public static func home(completion: @escaping ([Match]) -> ()) {
         
         var request = db.child("matches") as DatabaseQuery
         
-        let date = Date()
-        let dateFormater = DateFormatter()
-        dateFormater.dateFormat = "dd/MM/yyyy"
-        let currentDate = dateFormater.string(from: date)
+        let formatter = DateFormatter()
+        let today = Date()
         
-        let timeFormater = DateFormatter()
-        timeFormater.dateFormat = "HH:mm"
-        let currentTime = timeFormater.string(from: date)
+        formatter.dateFormat = "dd/MM/yyyy"
+        let dayCurrent = formatter.string(from: today)
         
-        request = request.queryOrdered(byChild: "day").queryStarting(atValue: currentDate)
+        formatter.dateFormat = "HH:mm"
+        let scheduleCurrent = formatter.string(from: today)
+        
+        request = request.queryOrdered(byChild: "day").queryStarting(atValue: dayCurrent)
         
         request.observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -61,9 +61,9 @@ class MatchService {
                 guard let snapshot = data as? DataSnapshot else { continue }
                 guard let data = snapshot.value as? [String: Any] else { continue }
                 let match = Match.decode(data)
-                if match.finish! < currentTime {
-                    continue
-                }
+                
+                if match.finish! < scheduleCurrent { continue }
+                
                 matches.append(match)
             }
             
@@ -71,40 +71,40 @@ class MatchService {
             
         }) { (error) in completion([]) }
     }
-
+    
     public static func get(creator: String? = nil, completion: @escaping ([Match]) -> ()) {
-
+        
         var request = db.child("matches") as DatabaseQuery
-
+        
         if let creator = creator {
             request = request.queryOrdered(byChild: "creator").queryEqual(toValue: creator)
         }
-
+        
         request.observeSingleEvent(of: .value, with: { (snapshot) in
-
+            
             var matches: [Match] = []
-
+            
             for data in snapshot.children {
                 guard let snapshot = data as? DataSnapshot else { continue }
                 guard let data = snapshot.value as? [String: Any] else { continue }
                 let match = Match.decode(data)
                 matches.append(match)
             }
-
+            
             completion(matches)
-
+            
         }) { (error) in completion([]) }
     }
-
+    
     public static func getCreator(_ match: Match, completion: @escaping (User?) -> ()) {
         db.child("users").child(match.creator!).observeSingleEvent(of: .value, with: { (snapshot) in
-
+            
             let data = snapshot.value as! [String: Any]
             let user = User.decode(data)
-
+            
             completion(user)
-
+            
         }) { (error) in completion(nil) }
     }
-
+    
 }
