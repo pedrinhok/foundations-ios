@@ -45,12 +45,12 @@ class MyMatchesViewController: UIViewController {
     func getMatches() {
         let user = UserService.current()!
         MatchService.get(creator: user.ref) { (matches) in
-            self.created = matches
+            self.created = matches.sorted(by: { $0.day! > $1.day! })
             self.numberCreated.text = String(matches.count)
             self.collectionCreated.reloadSections(IndexSet(integer: 0))
         }
         SubscriptionService.getSubscriptionsByUser(user.ref!) { (subscriptions) in
-            self.subscribed = subscriptions
+            self.subscribed = subscriptions.sorted(by: { $0.match!.day! > $1.match!.day! })
             self.numberSubscribed.text = String(subscriptions.count)
             self.collectionSubscribed.reloadSections(IndexSet(integer: 0))
         }
@@ -99,6 +99,12 @@ extension MyMatchesViewController: UICollectionViewDataSource, UICollectionViewD
         cell.desc.text = match.desc
         cell.location.text = match.location
         cell.schedule.text = "\(match.day!) (\(match.start!) - \(match.finish!))"
+        
+        if match.finished() {
+            cell.finished.backgroundColor = UIColor(red: 205/255, green: 205/255, blue: 205/255, alpha: 1)
+        } else {
+            cell.finished.backgroundColor = UIColor(red: 125/255, green: 210/255, blue: 115/255, alpha: 1)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

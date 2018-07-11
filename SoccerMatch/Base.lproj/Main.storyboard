@@ -1874,6 +1874,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="desc" destination="jp2-4N-pXZ" id="Ro6-JI-OE1"/>
+                                            <outlet property="finished" destination="9WN-XN-dzc" id="JLJ-iF-uLZ"/>
                                             <outlet property="location" destination="lIE-bP-mjc" id="azC-in-ch2"/>
                                             <outlet property="schedule" destination="piB-ZX-vgo" id="rZc-xC-V9Q"/>
                                         </connections>
@@ -1980,6 +1981,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="desc" destination="3UQ-IQ-Zy1" id="E9p-Px-Ef6"/>
+                                            <outlet property="finished" destination="fKv-Dk-04i" id="Knr-Ei-1Tg"/>
                                             <outlet property="location" destination="pIg-bd-5hl" id="1DP-sv-ZbW"/>
                                             <outlet property="schedule" destination="00I-ne-1ng" id="0kW-L2-HIs"/>
                                         </connections>
