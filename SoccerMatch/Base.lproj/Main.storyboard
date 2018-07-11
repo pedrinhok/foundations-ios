@@ -105,10 +105,10 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <view hidden="YES" alpha="0.45000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Fm-ej-qOs">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="FA8-rn-Au4">
-                                        <rect key="frame" x="150" y="264" width="20" height="20"/>
+                                        <rect key="frame" x="177.5" y="313.5" width="20" height="20"/>
                                     </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -1199,18 +1199,35 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
+                            <view hidden="YES" alpha="0.45000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bzj-g4-S3H">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="LLb-EV-vQe">
+                                        <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <constraints>
+                                    <constraint firstItem="LLb-EV-vQe" firstAttribute="centerY" secondItem="bzj-g4-S3H" secondAttribute="centerY" id="Vqg-SP-B50"/>
+                                    <constraint firstItem="LLb-EV-vQe" firstAttribute="centerX" secondItem="bzj-g4-S3H" secondAttribute="centerX" id="xkL-zN-fiI"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ZcS-VY-7Iv" firstAttribute="top" secondItem="a3e-ot-j7w" secondAttribute="bottom" constant="8" id="8Cq-pb-luY"/>
                             <constraint firstItem="q1D-gY-u4Y" firstAttribute="trailing" secondItem="a3e-ot-j7w" secondAttribute="trailing" constant="8" id="Cqt-yE-gz2"/>
+                            <constraint firstAttribute="trailing" secondItem="bzj-g4-S3H" secondAttribute="trailing" id="H7b-of-dll"/>
                             <constraint firstItem="oWm-op-dcP" firstAttribute="leading" secondItem="q1D-gY-u4Y" secondAttribute="leading" constant="8" id="HI1-Co-3li"/>
                             <constraint firstItem="a3e-ot-j7w" firstAttribute="top" secondItem="q1D-gY-u4Y" secondAttribute="top" constant="20" id="Hni-w2-YuM"/>
                             <constraint firstItem="q1D-gY-u4Y" firstAttribute="trailing" secondItem="ZcS-VY-7Iv" secondAttribute="trailing" constant="8" id="JC2-2O-rpK"/>
                             <constraint firstItem="ZcS-VY-7Iv" firstAttribute="leading" secondItem="q1D-gY-u4Y" secondAttribute="leading" constant="8" id="LwT-fc-lJf"/>
                             <constraint firstItem="oWm-op-dcP" firstAttribute="top" secondItem="ZcS-VY-7Iv" secondAttribute="bottom" constant="8" id="N5n-PD-zp4"/>
                             <constraint firstItem="lhh-WO-7sX" firstAttribute="top" secondItem="oWm-op-dcP" secondAttribute="bottom" constant="20" id="U3N-KP-V3D"/>
+                            <constraint firstItem="bzj-g4-S3H" firstAttribute="top" secondItem="1ZV-Nd-br0" secondAttribute="top" id="a0f-Ey-bde"/>
                             <constraint firstItem="a3e-ot-j7w" firstAttribute="leading" secondItem="q1D-gY-u4Y" secondAttribute="leading" constant="8" id="alW-9N-Nbk"/>
+                            <constraint firstAttribute="bottom" secondItem="bzj-g4-S3H" secondAttribute="bottom" id="czX-4c-wEj"/>
+                            <constraint firstItem="bzj-g4-S3H" firstAttribute="leading" secondItem="1ZV-Nd-br0" secondAttribute="leading" id="fgY-uD-if8"/>
                             <constraint firstItem="q1D-gY-u4Y" firstAttribute="trailing" secondItem="lhh-WO-7sX" secondAttribute="trailing" constant="8" id="fgz-i6-BZ6"/>
                             <constraint firstItem="q1D-gY-u4Y" firstAttribute="trailing" secondItem="oWm-op-dcP" secondAttribute="trailing" constant="8" id="v9j-Kg-mB0"/>
                             <constraint firstItem="lhh-WO-7sX" firstAttribute="leading" secondItem="q1D-gY-u4Y" secondAttribute="leading" constant="8" id="ypq-7S-Ggh"/>
@@ -1218,17 +1235,19 @@
                         <viewLayoutGuide key="safeArea" id="q1D-gY-u4Y"/>
                     </view>
                     <connections>
+                        <outlet property="activityLoading" destination="LLb-EV-vQe" id="7qu-iC-K4N"/>
                         <outlet property="changePassBtn" destination="lhh-WO-7sX" id="ICX-rv-4MD"/>
                         <outlet property="confirmPassword" destination="oWm-op-dcP" id="D7W-lf-Tk2"/>
                         <outlet property="newPassword" destination="ZcS-VY-7Iv" id="cnW-tY-buM"/>
                         <outlet property="password" destination="a3e-ot-j7w" id="evM-IK-ktG"/>
+                        <outlet property="viewLoading" destination="bzj-g4-S3H" id="a5H-0R-NJK"/>
                         <segue destination="HcT-6D-nNR" kind="unwind" identifier="unwindProfile" unwindAction="unwindProfileWithSegue:" id="Ogz-Em-tng"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7co-BZ-K7D" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="HcT-6D-nNR" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4489" y="1973"/>
+            <point key="canvasLocation" x="4488.8000000000002" y="1972.2638680659672"/>
         </scene>
         <!--Select match-->
         <scene sceneID="Cw9-Gd-I4U">
@@ -2128,7 +2147,7 @@
                                 <rect key="frame" x="8" y="390" width="359" height="220"/>
                                 <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="subscriptionCell" id="Csa-yD-Dkh" customClass="SubscriptionCell" customModule="SoccerMatch" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="subscriptionCell" id="Csa-yD-Dkh" customClass="SubscriptionCell" customModule="SoccerMatch" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="359" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Csa-yD-Dkh" id="2aa-4K-6w9">

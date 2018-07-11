@@ -113,12 +113,23 @@ class UserService {
         }
     }
 
-    public static func changePassword(password: String, completion: @escaping (String?) -> ()) {
-        Auth.auth().currentUser?.updatePassword(to: password) { (error) in
-            if let error = error as? String {
-                completion(error.description)
+    public static func changePassword(oldPassword: String, newPassword: String, handler: @escaping (String?) -> ()) {
+        
+        let authUser = Auth.auth().currentUser
+        
+        let credential = EmailAuthProvider.credential(withEmail: current()!.email!, password: oldPassword)
+        
+        authUser?.reauthenticateAndRetrieveData(with: credential) { (res, error) in
+            if error != nil {
+                handler(error?.localizedDescription)
             } else {
-                completion(nil)
+                authUser?.updatePassword(to: newPassword) { (error) in
+                    if let error = error as? String {
+                        handler(error.description)
+                    } else {
+                        handler(nil)
+                    }
+                }
             }
         }
     }

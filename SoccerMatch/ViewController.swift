@@ -48,6 +48,7 @@ class ViewController: UIViewController {
     @IBAction func unwindSignin(segue: UIStoryboardSegue) {}
 
     @IBAction func clickSignin(_ sender: StandardButton) {
+        hideKeyboard()
         showLoading()
         guard let email = email.text, email != "" else {
             showMessage("E-mail cannnot be empty!")
@@ -114,13 +115,13 @@ class ViewController: UIViewController {
     
     func showLoading() {
         viewLoading.isHidden = false
-        viewLoading.isUserInteractionEnabled = false
+        viewLoading.isUserInteractionEnabled = true
         activityLoading.startAnimating()
     }
     
     func hideLoading() {
         viewLoading.isHidden = true
-        viewLoading.isUserInteractionEnabled = true
+        viewLoading.isUserInteractionEnabled = false
         activityLoading.stopAnimating()
     }
 
