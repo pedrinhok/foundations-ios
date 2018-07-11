@@ -62,4 +62,18 @@ struct Match: Codable {
         return match
     }
     
+    func finished() -> Bool {
+        
+        let formatter = DateFormatter()
+        let today = Date()
+        
+        formatter.dateFormat = "dd/MM/yyyy"
+        let day = formatter.string(from: today)
+        
+        formatter.dateFormat = "HH:mm"
+        let finish = formatter.string(from: today)
+        
+        return self.day! <= day && self.finish! <= finish
+    }
+    
 }

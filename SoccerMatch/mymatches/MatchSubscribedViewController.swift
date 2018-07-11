@@ -18,12 +18,25 @@ class MatchSubscribedViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        desc.text = subscription.match!.desc
-        location.text = subscription.match!.location
-        day.text = subscription.match!.day
-        schedule.text = "\(subscription.match!.start!) - \(subscription.match!.finish!)"
-        price.text = subscription.match!.price
-        vacancies.text = subscription.match!.vacancies
+        let match = subscription.match!
+        
+        desc.text = match.desc
+        location.text = match.location
+        day.text = match.day
+        schedule.text = "\(match.start!) - \(match.finish!)"
+        price.text = match.price
+        vacancies.text = match.vacancies
+        
+        if let data = subscription.accepted, data {
+            accepted.isHidden = false
+            status.text = "Subscription accepted"
+        } else {
+            accepted.isHidden = true
+            status.text = "Subscription not accepted"
+        }
+        if match.finished() {
+            status.text = "Match finished"
+        }
         
         getCreator()
     }
