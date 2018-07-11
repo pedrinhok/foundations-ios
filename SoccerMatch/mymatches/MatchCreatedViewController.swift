@@ -58,7 +58,7 @@ class MatchCreatedViewController: UIViewController {
     }
     
     func getSubscriptions() {
-        SubscriptionService.getSubscriptionsByMatch(match) { (subscriptions) in
+        SubscriptionService.getSubscriptionsByMatch(match.ref!) { (subscriptions) in
             self.subscriptions = subscriptions
             self.collectionSubscriptions.reloadData()
         }

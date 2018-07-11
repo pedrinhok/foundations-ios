@@ -68,12 +68,12 @@ class SubscriptionService {
         }
     }
     
-    public static func getSubscriptionsByMatch(_ match: Match, completion: @escaping ([Subscription]) -> ()) {
+    public static func getSubscriptionsByMatch(_ match: String, completion: @escaping ([Subscription]) -> ()) {
         var subscriptions: [Subscription] = []
         
         var request = db.child("subscriptions") as DatabaseQuery
         
-        request = request.queryOrdered(byChild: "match").queryEqual(toValue: match.ref!)
+        request = request.queryOrdered(byChild: "match").queryEqual(toValue: match)
         
         request.observeSingleEvent(of: .value) { (snapshot) in
             let requests = DispatchGroup()
