@@ -7,16 +7,30 @@ import FirebaseStorage
 class UserService {
     
     private static let db = Database.database().reference()
+    private static let storage = Storage.storage()
 
     public static func auth() -> Bool {
         return current() != nil
     }
     
-    public static func updateUserImage(image: Data, handler: @escaping (_ error: String?) -> ()) {
+    public static func getUserPhoto(photoUrl: String, handler: @escaping (_ image: Data?) -> ()) {
+        
+        let httpsReference = storage.reference(forURL: photoUrl)
+        
+        httpsReference.getData(maxSize: 1 * 1024 * 1024) { data, error in
+            if error != nil {
+                handler(nil)
+            } else {
+                handler(data)
+            }
+        }
+    }
+    
+    public static func updateUserPhoto(image: Data, handler: @escaping (_ error: String?) -> ()) {
         
         let user = current()!
        
-        let storageRef = Storage.storage().reference()
+        let storageRef = storage.reference()
         
         let userPhotoRef = storageRef.child(user.ref! + "/userPhoto.png")
         
@@ -79,7 +93,7 @@ class UserService {
         }
         
         if let image = data.photo {
-            updateUserImage(image: image) { (error) in
+            updateUserPhoto(image: image) { (error) in
                 if let error = error {
                     handler(error)
                     return
@@ -189,9 +203,22 @@ class UserService {
                 user.birthday = data["birthday"] as? String ?? ""
                 user.gender = data["gender"] as? String ?? ""
                 
-                AppDelegate.saveContext()
-                completion(nil)
-                
+                if let photo = data["photo"] {
+                    getUserPhoto(photoUrl: photo as! String) { (data) in
+                        if let data = data {
+                            user.photo = data
+                            AppDelegate.saveContext()
+                            completion(nil)
+                        } else {
+                            completion("An error has occured!")
+                            return
+                        }
+                    }
+                } else {
+                    AppDelegate.saveContext()
+                    completion(nil)
+                }
+
             }) { (error) in completion(error.localizedDescription) }
         }
     }
