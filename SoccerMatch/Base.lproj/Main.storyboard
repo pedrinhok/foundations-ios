@@ -104,9 +104,23 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
+                            <view hidden="YES" alpha="0.45000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Fm-ej-qOs">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="FA8-rn-Au4">
+                                        <rect key="frame" x="150" y="264" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <constraints>
+                                    <constraint firstItem="FA8-rn-Au4" firstAttribute="centerX" secondItem="3Fm-ej-qOs" secondAttribute="centerX" id="6US-Gv-ouE"/>
+                                    <constraint firstItem="FA8-rn-Au4" firstAttribute="centerY" secondItem="3Fm-ej-qOs" secondAttribute="centerY" id="jgd-N1-fEu"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="3Fm-ej-qOs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8Z1-uA-wqK"/>
                             <constraint firstItem="7yw-Ma-3UM" firstAttribute="top" secondItem="TPE-GM-ATj" secondAttribute="bottom" constant="8" id="CyI-Fc-fyO"/>
                             <constraint firstItem="7yw-Ma-3UM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="DOQ-CC-u02"/>
                             <constraint firstItem="XAZ-WO-xza" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="GBQ-vi-dYF"/>
@@ -115,19 +129,24 @@
                             <constraint firstItem="Gj7-Wb-1YR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="X1K-YP-RO7"/>
                             <constraint firstItem="pnd-Xt-4Sa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="Ylv-CN-dLw"/>
                             <constraint firstItem="Gj7-Wb-1YR" firstAttribute="top" secondItem="pnd-Xt-4Sa" secondAttribute="bottom" constant="8" id="aWG-OD-db6"/>
+                            <constraint firstItem="3Fm-ej-qOs" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="bbK-BE-R2a"/>
                             <constraint firstItem="TPE-GM-ATj" firstAttribute="top" secondItem="Gj7-Wb-1YR" secondAttribute="bottom" constant="20" id="csH-JA-dZe"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TPE-GM-ATj" secondAttribute="trailing" constant="8" id="daH-Gy-EGQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pnd-Xt-4Sa" secondAttribute="trailing" constant="8" id="ktu-AI-bSm"/>
                             <constraint firstItem="TPE-GM-ATj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="lJ7-3b-NZl"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7yw-Ma-3UM" secondAttribute="trailing" constant="8" id="qUD-Zy-YKK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Gj7-Wb-1YR" secondAttribute="trailing" constant="8" id="w3t-3G-YSJ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="3Fm-ej-qOs" secondAttribute="bottom" id="xtd-XG-jAW"/>
+                            <constraint firstItem="3Fm-ej-qOs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="z41-cw-8LK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XAZ-WO-xza" secondAttribute="trailing" constant="8" id="zLZ-H8-gi8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="activityLoading" destination="FA8-rn-Au4" id="Enb-3e-Fwo"/>
                         <outlet property="email" destination="pnd-Xt-4Sa" id="yy6-nE-rD6"/>
                         <outlet property="password" destination="Gj7-Wb-1YR" id="UBV-I0-64B"/>
+                        <outlet property="viewLoading" destination="3Fm-ej-qOs" id="yvc-ju-C4K"/>
                         <segue destination="tvi-Ep-QPL" kind="show" identifier="gotoHome" id="RQ4-PG-0SG"/>
                     </connections>
                 </viewController>

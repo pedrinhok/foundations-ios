@@ -7,52 +7,14 @@ class ViewController: UIViewController {
 
     var locationManager = CLLocationManager()
 
+    @IBOutlet weak var viewLoading: UIView!
+    @IBOutlet weak var activityLoading: UIActivityIndicatorView!
     @IBOutlet weak var email: StandardTextField!
     @IBOutlet weak var password: StandardTextField!
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        locationManager.delegate = self
-        email.delegate = self
-        password.delegate = self
-
-        locationManager.requestWhenInUseAuthorization()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        if UserService.auth() {
-            performSegue(withIdentifier: "gotoHome", sender: nil)
-        }
-    }
-
-    @IBAction func unwindSignin(segue: UIStoryboardSegue) {}
-
-    @IBAction func clickSignin(_ sender: StandardButton) {
-
-        guard let email = email.text, email != "" else {
-            showMessage("E-mail cannnot be empty!")
-            return
-        }
-
-        guard let password = password.text, password != "" else {
-            showMessage("Password cannnot be empty!")
-            return
-        }
-
-        UserService.signin(email: email, password: password) { (error) in
-            if error != nil {
-                self.showMessage("User not found!")
-            } else {
-                self.locationManager.requestWhenInUseAuthorization()
-                self.performSegue(withIdentifier: "gotoHome", sender: nil)
-            }
-        }
-    }
     
     override func viewDidLoad() {
+        
+        locationManager.delegate = self
         email.delegate = self
         password.delegate = self
         
@@ -66,6 +28,48 @@ class ViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showLoading()
+        locationManager.requestWhenInUseAuthorization()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if UserService.auth() {
+            performSegue(withIdentifier: "gotoHome", sender: nil)
+        }
+        hideLoading()
+    }
+
+    @IBAction func unwindSignin(segue: UIStoryboardSegue) {}
+
+    @IBAction func clickSignin(_ sender: StandardButton) {
+        showLoading()
+        guard let email = email.text, email != "" else {
+            showMessage("E-mail cannnot be empty!")
+            hideLoading()
+            return
+        }
+
+        guard let password = password.text, password != "" else {
+            showMessage("Password cannnot be empty!")
+            hideLoading()
+            return
+        }
+
+        UserService.signin(email: email, password: password) { (error) in
+            if error != nil {
+                self.showMessage("User not found!")
+                self.hideLoading()
+            } else {
+                self.locationManager.requestWhenInUseAuthorization()
+                self.performSegue(withIdentifier: "gotoHome", sender: nil)
+            }
+        }
     }
     
     func hideKeyboard(){
@@ -82,7 +86,7 @@ class ViewController: UIViewController {
                 notification.name == Notification.Name.UIKeyboardWillChangeFrame{
         
             view.frame.origin.y  = -keyboardRect.height
-            }else {
+            } else {
                 view.frame.origin.y = 0
         }
         
@@ -96,8 +100,6 @@ class ViewController: UIViewController {
 //
 //    }
 
-    
-    
 
     func showMessage(_ message: String) {
         let alert = UIAlertController(title: "Wops", message: message, preferredStyle: .alert)
@@ -108,6 +110,18 @@ class ViewController: UIViewController {
         alert.addAction(action)
 
         present(alert, animated: true)
+    }
+    
+    func showLoading() {
+        viewLoading.isHidden = false
+        viewLoading.isUserInteractionEnabled = false
+        activityLoading.startAnimating()
+    }
+    
+    func hideLoading() {
+        viewLoading.isHidden = true
+        viewLoading.isUserInteractionEnabled = true
+        activityLoading.stopAnimating()
     }
 
 }
