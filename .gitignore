@@ -2,8 +2,8 @@
 **/.DS_Store
 
 # user settings
-**/SoccerMatch.xcodeproj/
 **/xcuserdata/
+**/SoccerMatch.xcodeproj/xcuserdata/
 
 # pods
 **/Pods/
