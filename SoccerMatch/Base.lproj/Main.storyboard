@@ -2130,11 +2130,18 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GSi-wR-Ryi">
-                                                            <rect key="frame" x="58" y="22" width="213" height="24"/>
+                                                            <rect key="frame" x="58" y="22" width="180" height="24"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-check" translatesAutoresizingMaskIntoConstraints="NO" id="ex9-Gm-VFU" customClass="CircleImage" customModule="SoccerMatch" customModuleProvider="target">
+                                                            <rect key="frame" x="246" y="23" width="25" height="25"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="25" id="fFX-Jn-Fb1"/>
+                                                                <constraint firstAttribute="width" constant="25" id="xjl-hr-dF9"/>
+                                                            </constraints>
+                                                        </imageView>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-right" translatesAutoresizingMaskIntoConstraints="NO" id="ZNi-Sa-n33" customClass="CircleImage" customModule="SoccerMatch" customModuleProvider="target">
                                                             <rect key="frame" x="279" y="22.5" width="25" height="25"/>
                                                             <constraints>
@@ -2145,12 +2152,14 @@
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
+                                                        <constraint firstItem="ZNi-Sa-n33" firstAttribute="leading" secondItem="ex9-Gm-VFU" secondAttribute="trailing" constant="8" id="1YS-3o-pdC"/>
                                                         <constraint firstItem="GSi-wR-Ryi" firstAttribute="centerY" secondItem="N1g-X9-Zet" secondAttribute="centerY" id="1ty-PB-FaF"/>
-                                                        <constraint firstItem="ZNi-Sa-n33" firstAttribute="leading" secondItem="GSi-wR-Ryi" secondAttribute="trailing" constant="8" id="95a-mG-seL"/>
+                                                        <constraint firstItem="ex9-Gm-VFU" firstAttribute="leading" secondItem="GSi-wR-Ryi" secondAttribute="trailing" constant="8" id="95a-mG-seL"/>
                                                         <constraint firstItem="Mxg-2J-Mv3" firstAttribute="centerY" secondItem="N1g-X9-Zet" secondAttribute="centerY" id="GMF-J5-p8T"/>
                                                         <constraint firstItem="Mxg-2J-Mv3" firstAttribute="leading" secondItem="N1g-X9-Zet" secondAttribute="leading" id="IpN-sp-cUb"/>
                                                         <constraint firstAttribute="trailing" secondItem="ZNi-Sa-n33" secondAttribute="trailing" id="VBF-Gq-CQC"/>
                                                         <constraint firstItem="GSi-wR-Ryi" firstAttribute="leading" secondItem="Mxg-2J-Mv3" secondAttribute="trailing" constant="8" id="dBS-qC-Eyz"/>
+                                                        <constraint firstItem="ex9-Gm-VFU" firstAttribute="centerY" secondItem="N1g-X9-Zet" secondAttribute="centerY" id="rpF-58-YBY"/>
                                                         <constraint firstItem="ZNi-Sa-n33" firstAttribute="centerY" secondItem="N1g-X9-Zet" secondAttribute="centerY" id="ySx-DE-XgO"/>
                                                     </constraints>
                                                 </view>
@@ -2163,6 +2172,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="accepted" destination="ex9-Gm-VFU" id="iUW-K2-bkL"/>
                                             <outlet property="name" destination="GSi-wR-Ryi" id="Ft6-IA-kfx"/>
                                             <outlet property="photo" destination="Mxg-2J-Mv3" id="wRc-l5-T2s"/>
                                         </connections>
@@ -2237,13 +2247,13 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="OGF-Hw-WXc"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="collectionSubscriptions" destination="l8m-lu-DEV" id="ymW-4f-5SB"/>
                         <outlet property="day" destination="KkA-bF-ebK" id="Qmk-QV-zTd"/>
                         <outlet property="desc" destination="fza-0y-oQz" id="5e8-sC-BTy"/>
                         <outlet property="heightConstraint" destination="WY6-xV-q4i" id="GeA-T1-B91"/>
                         <outlet property="location" destination="1fQ-zu-ndv" id="hdl-iZ-UdV"/>
                         <outlet property="price" destination="XRm-Cq-xoF" id="vWN-RR-vd5"/>
                         <outlet property="schedule" destination="T05-VD-gZb" id="hsn-8D-ioz"/>
-                        <outlet property="tableSubscriptions" destination="l8m-lu-DEV" id="ymW-4f-5SB"/>
                         <outlet property="vacancies" destination="wVZ-0b-g12" id="d6e-b5-wY7"/>
                         <segue destination="Wq8-Vv-Da4" kind="show" identifier="gotoUserInformation" id="hj6-Mz-cJW"/>
                     </connections>
@@ -2429,6 +2439,9 @@
                                         <real key="value" value="8"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="clickAccept:" destination="Wq8-Vv-Da4" eventType="touchUpInside" id="6PS-jc-Kau"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
@@ -2455,13 +2468,16 @@
                     </view>
                     <navigationItem key="navigationItem" title="User information" id="Je4-XE-ElY"/>
                     <connections>
+                        <outlet property="buttonAccept" destination="hbc-k8-Du8" id="zxZ-mw-0D3"/>
                         <outlet property="name" destination="SyZ-ay-Qo7" id="D4F-MT-A8U"/>
                         <outlet property="numberCreated" destination="fX5-6R-sMA" id="5yV-7v-Qzr"/>
                         <outlet property="numberSubscriptions" destination="JCs-XY-05W" id="ore-4a-gem"/>
                         <outlet property="phone" destination="C0C-EO-ZXu" id="gij-Cu-54s"/>
+                        <segue destination="VBm-aM-FlN" kind="unwind" identifier="unwindMatchCreated" unwindAction="unwindMatchCreatedWithSegue:" id="jr8-8L-y2m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bdg-3d-2Xo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="VBm-aM-FlN" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="5408.8000000000002" y="-289.20539730134936"/>
         </scene>
@@ -2525,6 +2541,7 @@
     </scenes>
     <resources>
         <image name="icon-camera" width="30" height="30"/>
+        <image name="icon-check" width="512" height="512"/>
         <image name="icon-close" width="25" height="25"/>
         <image name="icon-right" width="25" height="25"/>
         <image name="icon-user" width="500" height="500"/>
