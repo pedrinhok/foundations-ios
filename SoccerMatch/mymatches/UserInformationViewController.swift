@@ -4,6 +4,8 @@ class UserInformationViewController: UIViewController {
     
     var subscription: Subscription!
     
+    @IBOutlet weak var viewLoading: UIView!
+    @IBOutlet weak var activityLoading: UIActivityIndicatorView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var phone: UILabel!
     @IBOutlet weak var numberCreated: UILabel!
@@ -58,9 +60,11 @@ class UserInformationViewController: UIViewController {
     }
     
     @IBAction func clickAccept(_ sender: StandardButton) {
+        showLoading()
         SubscriptionService.accept(subscription) { (error) in
             if let error = error {
                 self.showMessage(title: "Wops", message: error)
+                self.hideLoading()
             } else {
                 self.showMessage(title: "User successfully accepted!", message: "") {
                     self.performSegue(withIdentifier: "unwindMatchCreated", sender: nil)
@@ -70,15 +74,29 @@ class UserInformationViewController: UIViewController {
     }
     
     @IBAction func clickRefuse(_ sender: StandardButton) {
+        showLoading()
         SubscriptionService.refuse(subscription) { (error) in
             if let error = error {
                 self.showMessage(title: "Wops", message: error)
+                self.hideLoading()
             } else {
                 self.showMessage(title: "User successfully refused!", message: "") {
                     self.performSegue(withIdentifier: "unwindMatchCreated", sender: nil)
                 }
             }
         }
+    }
+    
+    func showLoading() {
+        viewLoading.isHidden = false
+        viewLoading.isUserInteractionEnabled = true
+        activityLoading.startAnimating()
+    }
+    
+    func hideLoading() {
+        viewLoading.isHidden = true
+        viewLoading.isUserInteractionEnabled = false
+        activityLoading.stopAnimating()
     }
     
 }

@@ -924,7 +924,7 @@
                                     <action selector="password:" destination="xzN-yl-XAg" eventType="touchUpInside" id="yKM-kD-uy9"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" alpha="0.44999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="znO-lb-xGg">
+                            <view hidden="YES" alpha="0.45000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="znO-lb-xGg">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="Wc8-kL-aAo">
@@ -1609,7 +1609,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <view hidden="YES" alpha="0.44999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bPU-6Z-zNM">
+                            <view hidden="YES" alpha="0.45000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bPU-6Z-zNM">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="8mx-1x-N7q">
@@ -2516,11 +2516,26 @@
                                     <action selector="clickRefuse:" destination="Wq8-Vv-Da4" eventType="touchUpInside" id="uQg-xo-vBH"/>
                                 </connections>
                             </button>
+                            <view hidden="YES" alpha="0.45000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ogc-R3-Txn">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="o6y-B9-WKT">
+                                        <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <constraints>
+                                    <constraint firstItem="o6y-B9-WKT" firstAttribute="centerY" secondItem="Ogc-R3-Txn" secondAttribute="centerY" id="a1e-cP-2dh"/>
+                                    <constraint firstItem="o6y-B9-WKT" firstAttribute="centerX" secondItem="Ogc-R3-Txn" secondAttribute="centerX" id="asi-IQ-owf"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="Ogc-R3-Txn" firstAttribute="top" secondItem="VYk-dK-Yov" secondAttribute="top" id="1jS-Rr-QEa"/>
                             <constraint firstItem="BTQ-ir-HCx" firstAttribute="leading" secondItem="VYk-dK-Yov" secondAttribute="leading" constant="8" id="5W3-v7-ccc"/>
                             <constraint firstItem="3yg-dd-bCQ" firstAttribute="trailing" secondItem="hbc-k8-Du8" secondAttribute="trailing" constant="8" id="FH2-Md-eiq"/>
+                            <constraint firstAttribute="bottom" secondItem="Ogc-R3-Txn" secondAttribute="bottom" id="FW7-YV-btO"/>
                             <constraint firstItem="3yg-dd-bCQ" firstAttribute="trailing" secondItem="C0C-EO-ZXu" secondAttribute="trailing" constant="8" id="GY3-4Y-wtX"/>
                             <constraint firstItem="C0C-EO-ZXu" firstAttribute="leading" secondItem="3yg-dd-bCQ" secondAttribute="leading" constant="8" id="Ntk-1E-PJW"/>
                             <constraint firstItem="hpA-P8-GSr" firstAttribute="centerX" secondItem="VYk-dK-Yov" secondAttribute="centerX" id="Oaa-91-mQg"/>
@@ -2534,22 +2549,26 @@
                             <constraint firstItem="hbc-k8-Du8" firstAttribute="top" secondItem="BTQ-ir-HCx" secondAttribute="bottom" constant="20" id="dCN-Iv-Ly5"/>
                             <constraint firstItem="3yg-dd-bCQ" firstAttribute="trailing" secondItem="SyZ-ay-Qo7" secondAttribute="trailing" constant="8" id="gOQ-Hz-FMU"/>
                             <constraint firstItem="SyZ-ay-Qo7" firstAttribute="top" secondItem="hpA-P8-GSr" secondAttribute="bottom" constant="20" id="ghd-lD-2vC"/>
+                            <constraint firstItem="Ogc-R3-Txn" firstAttribute="leading" secondItem="VYk-dK-Yov" secondAttribute="leading" id="mnT-Ip-emA"/>
                             <constraint firstItem="QbJ-nW-HOg" firstAttribute="top" secondItem="hbc-k8-Du8" secondAttribute="bottom" constant="8" id="sN3-vx-xp9"/>
                             <constraint firstItem="yMq-Sr-v30" firstAttribute="top" secondItem="C0C-EO-ZXu" secondAttribute="bottom" constant="20" id="v70-pB-fnu"/>
                             <constraint firstItem="C0C-EO-ZXu" firstAttribute="top" secondItem="SyZ-ay-Qo7" secondAttribute="bottom" constant="8" id="w5B-1H-6Rz"/>
                             <constraint firstItem="3yg-dd-bCQ" firstAttribute="trailing" secondItem="QbJ-nW-HOg" secondAttribute="trailing" constant="8" id="xy2-1b-zoK"/>
                             <constraint firstItem="SlD-b0-t7F" firstAttribute="top" secondItem="C0C-EO-ZXu" secondAttribute="bottom" constant="20" id="yWU-fs-IMH"/>
+                            <constraint firstAttribute="trailing" secondItem="Ogc-R3-Txn" secondAttribute="trailing" id="zl7-ki-GSE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3yg-dd-bCQ"/>
                     </view>
                     <navigationItem key="navigationItem" title="User information" id="Je4-XE-ElY"/>
                     <connections>
+                        <outlet property="activityLoading" destination="o6y-B9-WKT" id="I7g-RT-qoM"/>
                         <outlet property="buttonAccept" destination="hbc-k8-Du8" id="zxZ-mw-0D3"/>
                         <outlet property="buttonRefuse" destination="QbJ-nW-HOg" id="tym-mT-Oyj"/>
                         <outlet property="name" destination="SyZ-ay-Qo7" id="D4F-MT-A8U"/>
                         <outlet property="numberCreated" destination="fX5-6R-sMA" id="5yV-7v-Qzr"/>
                         <outlet property="numberSubscriptions" destination="JCs-XY-05W" id="ore-4a-gem"/>
                         <outlet property="phone" destination="C0C-EO-ZXu" id="gij-Cu-54s"/>
+                        <outlet property="viewLoading" destination="Ogc-R3-Txn" id="9UZ-rK-vBM"/>
                         <segue destination="VBm-aM-FlN" kind="unwind" identifier="unwindMatchCreated" unwindAction="unwindMatchCreatedWithSegue:" id="jr8-8L-y2m"/>
                     </connections>
                 </viewController>
