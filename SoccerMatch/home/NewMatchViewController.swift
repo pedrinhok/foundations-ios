@@ -4,6 +4,8 @@ class NewMatchViewController: UIViewController {
 
     var match: Match!
 
+    @IBOutlet weak var viewLoading: UIView!
+    @IBOutlet weak var activityLoading: UIActivityIndicatorView!
     @IBOutlet weak var location: CustomButton!
     @IBOutlet weak var schedule: CustomButton!
     @IBOutlet weak var type: StandardTextField!
@@ -83,22 +85,29 @@ class NewMatchViewController: UIViewController {
     }
 
     @IBAction func clickCreate(_ sender: StandardButton) {
-
+        
+        showLoading()
+        hideKeyboard()
+        
         guard let location = match.location, location != "" else {
             showMessage(title: "Wops", message: "You must set the location!")
+            hideLoading()
             return
         }
         guard let x = match.x, x != 0.0 else {
             showMessage(title: "Wops", message: "You must set the location!")
+            hideLoading()
             return
         }
         guard let y = match.y, y != 0.0 else {
             showMessage(title: "Wops", message: "You must set the location!")
+            hideLoading()
             return
         }
 
         guard let day = match.day, day != "" else {
             showMessage(title: "Wops", message: "You must set the schedule!")
+            hideLoading()
             return
         }
         guard let start = match.start, start != "" else {
@@ -107,37 +116,44 @@ class NewMatchViewController: UIViewController {
         }
         guard let finish = match.finish, finish != "" else {
             showMessage(title: "Wops", message: "You must set the schedule!")
+            hideLoading()
             return
         }
 
         guard let type = type.text, type != "" else {
             showMessage(title: "Wops", message: "You must set the match type!")
+            hideLoading()
             return
         }
         match.type = type
 
         guard let vacancies = vacancies.text, vacancies != "" else {
             showMessage(title: "Wops", message: "You must set the vacancies!")
+            hideLoading()
             return
         }
         guard let vacanciesInt = Int(vacancies), vacanciesInt > 0 else {
             showMessage(title: "Wops", message: "You must set a valid vacancies (>= 1)!")
+            hideLoading()
             return
         }
         match.vacancies = vacancies
 
         guard let price = price.text, price != "" else {
             showMessage(title: "Wops", message: "You must set the price!")
+            hideLoading()
             return
         }
         guard let priceInt = Int(price), priceInt >= 0 else {
             showMessage(title: "Wops", message: "You must set a valid price (>= 0)!")
+            hideLoading()
             return
         }
         match.price = price
 
         guard let desc = desc.text, desc != "" else {
             showMessage(title: "Wops", message: "You must set the description!")
+            hideLoading()
             return
         }
         match.desc = desc
@@ -145,6 +161,7 @@ class NewMatchViewController: UIViewController {
         MatchService.create(match) { (error) in
             if let error = error {
                 self.showMessage(title: "Wops", message: error)
+                self.hideLoading()
             } else {
                 self.showMessage(title: "Match successfully created!", message: "") {
                     self.performSegue(withIdentifier: "unwindHome", sender: nil)
@@ -152,6 +169,27 @@ class NewMatchViewController: UIViewController {
             }
         }
 
+    }
+    
+    func hideKeyboard() {
+        location.resignFirstResponder()
+        schedule.resignFirstResponder()
+        type.resignFirstResponder()
+        vacancies.resignFirstResponder()
+        price.resignFirstResponder()
+        desc.resignFirstResponder()
+    }
+    
+    func showLoading() {
+        viewLoading.isHidden = false
+        viewLoading.isUserInteractionEnabled = true
+        activityLoading.startAnimating()
+    }
+    
+    func hideLoading() {
+        viewLoading.isHidden = true
+        viewLoading.isUserInteractionEnabled = false
+        activityLoading.stopAnimating()
     }
 
 }

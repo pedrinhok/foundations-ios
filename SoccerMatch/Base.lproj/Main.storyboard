@@ -365,12 +365,29 @@
                                     <action selector="clickSchedule:" destination="ZtP-Rk-P6W" eventType="touchUpInside" id="ikb-kF-y4G"/>
                                 </connections>
                             </button>
+                            <view hidden="YES" alpha="0.44999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IF3-r6-OZv">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="CS1-PU-gsZ">
+                                        <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <constraints>
+                                    <constraint firstItem="CS1-PU-gsZ" firstAttribute="centerX" secondItem="IF3-r6-OZv" secondAttribute="centerX" id="1V0-Fs-Z3z"/>
+                                    <constraint firstItem="CS1-PU-gsZ" firstAttribute="centerY" secondItem="IF3-r6-OZv" secondAttribute="centerY" id="MY5-e6-vBe"/>
+                                </constraints>
+                                <viewLayoutGuide key="safeArea" id="Lnv-hO-xfW"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="CLp-kP-XKP" firstAttribute="leading" secondItem="tVD-UR-xWY" secondAttribute="leading" constant="8" id="7IA-Ev-o7p"/>
+                            <constraint firstItem="IF3-r6-OZv" firstAttribute="leading" secondItem="aLd-DC-GxV" secondAttribute="leading" id="9uj-TT-Ii1"/>
+                            <constraint firstAttribute="trailing" secondItem="IF3-r6-OZv" secondAttribute="trailing" id="9xy-lU-UGj"/>
                             <constraint firstItem="O7M-Qy-lJZ" firstAttribute="top" secondItem="CLp-kP-XKP" secondAttribute="bottom" constant="8" id="DeI-0f-zLQ"/>
                             <constraint firstItem="DkT-ar-nhO" firstAttribute="leading" secondItem="tVD-UR-xWY" secondAttribute="leading" constant="8" id="Ffs-tu-Tb9"/>
+                            <constraint firstAttribute="bottom" secondItem="IF3-r6-OZv" secondAttribute="bottom" id="OZo-ao-vQ9"/>
                             <constraint firstItem="DkT-ar-nhO" firstAttribute="top" secondItem="nZf-ib-BJ2" secondAttribute="bottom" constant="8" id="ZTf-Qk-rQm"/>
                             <constraint firstItem="O7M-Qy-lJZ" firstAttribute="leading" secondItem="tVD-UR-xWY" secondAttribute="leading" constant="8" id="cp2-kD-IPx"/>
                             <constraint firstItem="hrk-Dr-pvQ" firstAttribute="top" secondItem="SqV-mW-uOd" secondAttribute="bottom" constant="8" id="cw8-rO-k1F"/>
@@ -386,6 +403,7 @@
                             <constraint firstItem="SqV-mW-uOd" firstAttribute="leading" secondItem="tVD-UR-xWY" secondAttribute="leading" constant="8" id="o3Y-Eq-2Hq"/>
                             <constraint firstItem="tVD-UR-xWY" firstAttribute="trailing" secondItem="hrk-Dr-pvQ" secondAttribute="trailing" constant="8" id="p8g-SC-lZL"/>
                             <constraint firstItem="nZf-ib-BJ2" firstAttribute="top" secondItem="O7M-Qy-lJZ" secondAttribute="bottom" constant="8" id="pJQ-TH-4cb"/>
+                            <constraint firstItem="IF3-r6-OZv" firstAttribute="top" secondItem="aLd-DC-GxV" secondAttribute="top" id="q12-sZ-9bU"/>
                             <constraint firstItem="CLp-kP-XKP" firstAttribute="top" secondItem="tVD-UR-xWY" secondAttribute="top" constant="20" id="ud8-fY-RNq"/>
                             <constraint firstItem="tVD-UR-xWY" firstAttribute="trailing" secondItem="CLp-kP-XKP" secondAttribute="trailing" constant="8" id="vMr-rg-yh6"/>
                             <constraint firstItem="hrk-Dr-pvQ" firstAttribute="leading" secondItem="tVD-UR-xWY" secondAttribute="leading" constant="8" id="wNz-1o-R4S"/>
@@ -396,12 +414,14 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="deE-1s-Dl5"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityLoading" destination="CS1-PU-gsZ" id="6AC-nG-RiZ"/>
                         <outlet property="desc" destination="hrk-Dr-pvQ" id="Fse-IV-JW6"/>
                         <outlet property="location" destination="CLp-kP-XKP" id="0ha-h5-AkX"/>
                         <outlet property="price" destination="SqV-mW-uOd" id="p0Q-5a-k33"/>
                         <outlet property="schedule" destination="O7M-Qy-lJZ" id="f2Y-dY-vKb"/>
                         <outlet property="type" destination="nZf-ib-BJ2" id="Pau-kh-n7H"/>
                         <outlet property="vacancies" destination="DkT-ar-nhO" id="E70-Ow-0Ry"/>
+                        <outlet property="viewLoading" destination="IF3-r6-OZv" id="FBZ-zw-OD2"/>
                         <segue destination="p81-gR-ZVJ" kind="show" identifier="gotoSchedule" id="IWR-7Y-m71"/>
                         <segue destination="CEF-If-scC" kind="show" identifier="gotoLocation" id="krq-4L-Xuz"/>
                         <segue destination="sFE-NX-MOd" kind="unwind" identifier="unwindHome" unwindAction="unwindHomeWithSegue:" id="Uuh-xb-GDS"/>
