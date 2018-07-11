@@ -105,10 +105,10 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <view hidden="YES" alpha="0.45000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Fm-ej-qOs">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="FA8-rn-Au4">
-                                        <rect key="frame" x="150" y="264" width="20" height="20"/>
+                                        <rect key="frame" x="177.5" y="313.5" width="20" height="20"/>
                                     </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -2128,7 +2128,7 @@
                                 <rect key="frame" x="8" y="390" width="359" height="220"/>
                                 <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="subscriptionCell" id="Csa-yD-Dkh" customClass="SubscriptionCell" customModule="SoccerMatch" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="subscriptionCell" id="Csa-yD-Dkh" customClass="SubscriptionCell" customModule="SoccerMatch" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="359" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Csa-yD-Dkh" id="2aa-4K-6w9">
