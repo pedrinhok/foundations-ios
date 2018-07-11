@@ -1387,10 +1387,24 @@
                                     <action selector="clickSubscribe:" destination="8oZ-Mf-F1x" eventType="touchUpInside" id="c5B-XM-ON3"/>
                                 </connections>
                             </button>
+                            <view hidden="YES" alpha="0.44999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wfC-MO-9W7">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="yR4-mo-kCa">
+                                        <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <constraints>
+                                    <constraint firstItem="yR4-mo-kCa" firstAttribute="centerX" secondItem="wfC-MO-9W7" secondAttribute="centerX" id="bbt-dq-hby"/>
+                                    <constraint firstItem="yR4-mo-kCa" firstAttribute="centerY" secondItem="wfC-MO-9W7" secondAttribute="centerY" id="qCM-ZE-ZUV"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Zev-v0-XeO" firstAttribute="top" secondItem="sK0-Qm-DrP" secondAttribute="bottom" constant="20" id="00X-sq-UHd"/>
+                            <constraint firstItem="wfC-MO-9W7" firstAttribute="top" secondItem="hZI-kg-mvh" secondAttribute="top" id="0p9-bS-hPl"/>
                             <constraint firstItem="eCN-gm-ehg" firstAttribute="leading" secondItem="dws-eK-xKL" secondAttribute="leading" constant="8" id="1rn-7L-R7d"/>
                             <constraint firstItem="Iw7-9c-wLK" firstAttribute="leading" secondItem="dws-eK-xKL" secondAttribute="leading" constant="8" id="2Gd-0K-wxA"/>
                             <constraint firstItem="GgC-cn-f09" firstAttribute="centerY" secondItem="Shm-Ah-1O6" secondAttribute="centerY" id="4J7-66-nxf"/>
@@ -1398,6 +1412,7 @@
                             <constraint firstItem="dws-eK-xKL" firstAttribute="trailing" secondItem="RmG-63-0kO" secondAttribute="trailing" constant="8" id="4jh-BH-PAz"/>
                             <constraint firstItem="dws-eK-xKL" firstAttribute="trailing" secondItem="Iw7-9c-wLK" secondAttribute="trailing" constant="8" id="6Rf-Uw-18s"/>
                             <constraint firstItem="eCN-gm-ehg" firstAttribute="top" secondItem="LYb-0w-cdi" secondAttribute="bottom" constant="20" id="9Bm-80-nFV"/>
+                            <constraint firstAttribute="trailing" secondItem="wfC-MO-9W7" secondAttribute="trailing" id="9uX-y5-1p7"/>
                             <constraint firstItem="dws-eK-xKL" firstAttribute="trailing" secondItem="e33-zn-5gE" secondAttribute="trailing" constant="8" id="B3h-UK-ytF"/>
                             <constraint firstItem="Iw7-9c-wLK" firstAttribute="top" secondItem="eCN-gm-ehg" secondAttribute="bottom" constant="8" id="Ea9-PR-F4D"/>
                             <constraint firstItem="sK0-Qm-DrP" firstAttribute="top" secondItem="KCw-Q6-2A4" secondAttribute="bottom" constant="8" id="GHo-S9-xme"/>
@@ -1420,6 +1435,7 @@
                             <constraint firstItem="dws-eK-xKL" firstAttribute="trailing" secondItem="par-nN-JKG" secondAttribute="trailing" constant="8" id="YmA-kZ-e31"/>
                             <constraint firstItem="5Om-km-dFM" firstAttribute="width" secondItem="Zev-v0-XeO" secondAttribute="width" id="ZSt-Qh-OAB"/>
                             <constraint firstItem="GgC-cn-f09" firstAttribute="leading" secondItem="Shm-Ah-1O6" secondAttribute="trailing" constant="8" id="Zhf-m6-NUg"/>
+                            <constraint firstAttribute="bottom" secondItem="wfC-MO-9W7" secondAttribute="bottom" id="dRN-1O-Opg"/>
                             <constraint firstItem="RmG-63-0kO" firstAttribute="leading" secondItem="GgC-cn-f09" secondAttribute="trailing" constant="8" id="dZ9-N4-lLk"/>
                             <constraint firstItem="LYb-0w-cdi" firstAttribute="leading" secondItem="dws-eK-xKL" secondAttribute="leading" constant="8" id="g6w-vu-eA2"/>
                             <constraint firstItem="Wif-RQ-wpT" firstAttribute="top" secondItem="KCw-Q6-2A4" secondAttribute="bottom" constant="8" id="gNQ-J8-zmp"/>
@@ -1434,6 +1450,7 @@
                             <constraint firstItem="dws-eK-xKL" firstAttribute="trailing" secondItem="LYb-0w-cdi" secondAttribute="trailing" constant="8" id="qxL-F8-1Kd"/>
                             <constraint firstItem="pZI-xd-SeU" firstAttribute="top" secondItem="Zev-v0-XeO" secondAttribute="bottom" constant="8" id="t0u-Hf-Os5"/>
                             <constraint firstItem="e33-zn-5gE" firstAttribute="leading" secondItem="dws-eK-xKL" secondAttribute="leading" constant="8" id="tAP-j0-Yvr"/>
+                            <constraint firstItem="wfC-MO-9W7" firstAttribute="leading" secondItem="hZI-kg-mvh" secondAttribute="leading" id="wQ4-40-BFd"/>
                             <constraint firstItem="e33-zn-5gE" firstAttribute="top" secondItem="Shm-Ah-1O6" secondAttribute="bottom" constant="20" id="wuL-xS-uZt"/>
                             <constraint firstItem="Wif-RQ-wpT" firstAttribute="leading" secondItem="sK0-Qm-DrP" secondAttribute="trailing" constant="8" id="yhl-Bt-cZ2"/>
                         </constraints>
@@ -1441,6 +1458,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Select match" id="vrY-s1-aBj"/>
                     <connections>
+                        <outlet property="activityLoading" destination="yR4-mo-kCa" id="69p-gD-lqe"/>
                         <outlet property="buttonSubscribe" destination="par-nN-JKG" id="dXe-lt-ldy"/>
                         <outlet property="creatorName" destination="GgC-cn-f09" id="DFZ-bt-au3"/>
                         <outlet property="day" destination="sK0-Qm-DrP" id="M87-4d-q98"/>
@@ -1450,6 +1468,7 @@
                         <outlet property="price" destination="pZI-xd-SeU" id="lMB-0m-F8u"/>
                         <outlet property="schedule" destination="Wif-RQ-wpT" id="GQw-9F-AH4"/>
                         <outlet property="vacancies" destination="bRu-rk-JW8" id="PKY-dZ-1cZ"/>
+                        <outlet property="viewLoading" destination="wfC-MO-9W7" id="OPU-tm-UHI"/>
                         <segue destination="YEc-Hz-khk" kind="unwind" identifier="unwindHome" unwindAction="unwindHomeWithSegue:" id="gkL-s2-saN"/>
                     </connections>
                 </viewController>

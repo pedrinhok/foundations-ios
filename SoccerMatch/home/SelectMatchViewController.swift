@@ -6,6 +6,8 @@ class SelectMatchViewController: UIViewController {
     var creator: User!
     var subscriptions: [User] = []
     
+    @IBOutlet weak var viewLoading: UIView!
+    @IBOutlet weak var activityLoading: UIActivityIndicatorView!
     @IBOutlet weak var creatorName: UILabel!
     @IBOutlet weak var desc: UILabel!
     @IBOutlet weak var location: UILabel!
@@ -76,6 +78,7 @@ class SelectMatchViewController: UIViewController {
     }
     
     @IBAction func clickSubscribe(_ sender: UIButton) {
+        showLoading()
         SubscriptionService.create(match) { (error) in
             if let error = error {
                 self.showMessage(title: "Wops", message: error)
@@ -89,6 +92,18 @@ class SelectMatchViewController: UIViewController {
     
     @objc func clickPhone(tap: UITapGestureRecognizer) {
         showMessage(title: creator.phone ?? "", message: "")
+    }
+    
+    func showLoading() {
+        viewLoading.isHidden = false
+        viewLoading.isUserInteractionEnabled = true
+        activityLoading.startAnimating()
+    }
+    
+    func hideLoading() {
+        viewLoading.isHidden = true
+        viewLoading.isUserInteractionEnabled = false
+        activityLoading.stopAnimating()
     }
     
 }
