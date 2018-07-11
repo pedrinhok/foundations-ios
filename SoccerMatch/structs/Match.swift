@@ -1,7 +1,7 @@
 import Foundation
 
 struct Match: Codable {
-
+    
     var ref: String?
     var creator: String?
     var desc: String?
@@ -14,10 +14,11 @@ struct Match: Codable {
     var location: String?
     var x: Double?
     var y: Double?
-
+    var completed: Bool?
+    
     static func decode(_ data: [String: Any]) -> Match {
         var match = Match()
-
+        
         if let ref = data["ref"] as? String {
             match.ref = ref
         }
@@ -54,8 +55,11 @@ struct Match: Codable {
         if let y = data["y"] as? Double {
             match.y = y
         }
-
+        if let completed = data["completed"] as? Bool {
+            match.completed = completed
+        }
+        
         return match
     }
-
+    
 }
