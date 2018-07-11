@@ -12,22 +12,14 @@ class MatchCreatedViewController: UIViewController {
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var vacancies: UILabel!
     @IBOutlet weak var collectionSubscriptions: UITableView!
-    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         collectionSubscriptions.dataSource = self
         collectionSubscriptions.delegate = self
-        heightConstraint.constant = 0
         
-        desc.text = match.desc
-        location.text = match.location
-        day.text = match.day
-        schedule.text = "\(match.start!) - \(match.finish!)"
-        price.text = match.price
-        vacancies.text = match.vacancies
-        
+        getMatch()
         getSubscriptions()
     }
     
@@ -47,11 +39,28 @@ class MatchCreatedViewController: UIViewController {
         }
     }
     
+    func construct() {
+        desc.text = match.desc
+        location.text = match.location
+        day.text = match.day
+        schedule.text = "\(match.start!) - \(match.finish!)"
+        price.text = match.price
+        vacancies.text = match.vacancies
+    }
+    
+    func getMatch() {
+        construct()
+        
+        MatchService.find(match.ref!) { (match) in
+            self.match = match
+            self.construct()
+        }
+    }
+    
     func getSubscriptions() {
         SubscriptionService.getSubscriptionsByMatch(match) { (subscriptions) in
             self.subscriptions = subscriptions
             self.collectionSubscriptions.reloadData()
-            self.heightConstraint.constant = CGFloat(subscriptions.count) * self.collectionSubscriptions.rowHeight
         }
     }
     

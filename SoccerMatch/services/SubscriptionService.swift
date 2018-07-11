@@ -118,11 +118,12 @@ class SubscriptionService {
             completion("An error has occured")
             return
         }
+        match.completed = vacancies == 1
         match.vacancies = String(vacancies - 1)
         
         db.child("subscriptions").child(subscription.ref).updateChildValues(["accepted": "true"]) { (e, res) in
             
-            db.child("matches").child(match.ref!).updateChildValues(["vacancies": match.vacancies!]) { (e, res) in
+            db.child("matches").child(match.ref!).updateChildValues(["completed": match.completed!, "vacancies": match.vacancies!]) { (e, res) in
                 completion(nil)
             }
             

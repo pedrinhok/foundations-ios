@@ -9,6 +9,7 @@ class UserInformationViewController: UIViewController {
     @IBOutlet weak var numberCreated: UILabel!
     @IBOutlet weak var numberSubscriptions: UILabel!
     @IBOutlet weak var buttonAccept: StandardButton!
+    @IBOutlet weak var buttonRefuse: StandardButton!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -16,29 +17,22 @@ class UserInformationViewController: UIViewController {
         name.text = subscription.user!.name
         phone.text = subscription.user!.phone
         
-        if subscription.accepted {
-            buttonAccept.disable()
-            buttonAccept.setTitle("Accepted", for: .normal)
-        }
+        buttons()
+        getMatches()
+    }
+    
+    func buttons() {
+        let match = subscription.match!
         
-        if Int(self.subscription.match!.vacancies!)! < 1 {
+        if let completed = match.completed, completed {
             buttonAccept.disable()
             buttonAccept.setTitle("Vacancies already filled", for: .normal)
         }
         
-        getMatches()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-            
-        case "unwindMatchCreated":
-            guard let vc = segue.destination as? MatchCreatedViewController else { return }
-            vc.match = subscription.match
-            return
-            
-        case .none, .some(_):
-            return
+        if subscription.accepted {
+            buttonAccept.disable()
+            buttonAccept.setTitle("User already accepted", for: .normal)
+            buttonRefuse.isHidden = false
         }
     }
     
@@ -64,19 +58,18 @@ class UserInformationViewController: UIViewController {
     }
     
     @IBAction func clickAccept(_ sender: StandardButton) {
-        let v = Int(self.subscription.match!.vacancies!)!
-        
         SubscriptionService.accept(subscription) { (error) in
             if let error = error {
                 self.showMessage(title: "Wops", message: error)
             } else {
-                self.subscription.match!.vacancies! = String(v - 1)
-                
                 self.showMessage(title: "User successfully accepted!", message: "") {
                     self.performSegue(withIdentifier: "unwindMatchCreated", sender: nil)
                 }
             }
         }
+    }
+    
+    @IBAction func clickRefuse(_ sender: StandardButton) {
     }
     
 }
