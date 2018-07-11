@@ -28,6 +28,12 @@ class ScheduleViewController: UIViewController {
         day.text = match.day
         start.text = match.start
         finish.text = match.finish
+        
+        var daysfromNow: Date {
+            return (Calendar.current as NSCalendar).date(byAdding: .day, value: 0, to: Date(), options: [])!
+        }
+        daySelector.minimumDate = daysfromNow
+        
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -55,6 +61,13 @@ class ScheduleViewController: UIViewController {
     }
 
     @IBAction func clickUpdate(_ sender: StandardButton) {
+        
+        let date = Date()
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = "HH:mm"
+        let currentTime = dateFormater.string(from: date)
+        dateFormater.dateFormat = "dd/MM/yyyy"
+        let currentDay = dateFormater.string(from: date)
 
         guard let day = day.text, day != "" else {
             showMessage("You must set the day!")
@@ -66,10 +79,18 @@ class ScheduleViewController: UIViewController {
             showMessage("You must set the start!")
             return
         }
+        if day == currentDay && start <= currentTime {
+            showMessage("You must set a vallid start!")
+            return
+        }
         match.start = start
 
         guard let finish = finish.text, finish != "" else {
             showMessage("You must set the finish!")
+            return
+        }
+        if finish <= start || (day == currentDay && finish <= currentTime) {
+            showMessage("You must set a vallid finish!")
             return
         }
         match.finish = finish

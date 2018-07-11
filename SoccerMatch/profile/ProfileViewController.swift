@@ -39,10 +39,10 @@ class ProfileViewController: UIViewController {
         email.delegate = self
         email.addTarget(self, action:#selector(ProfileViewController.textFieldDataChanged), for:UIControlEvents.editingChanged)
         
-        var sevenDaysfromNow: Date {
-            return (Calendar.current as NSCalendar).date(byAdding: .day, value: 7, to: Date(), options: [])!
+        var daysfromNow: Date {
+            return (Calendar.current as NSCalendar).date(byAdding: .day, value: 0, to: Date(), options: [])!
         }
-        birthSelector.maximumDate = sevenDaysfromNow
+        birthSelector.maximumDate = daysfromNow
         genderSelector.delegate = self
         
         
