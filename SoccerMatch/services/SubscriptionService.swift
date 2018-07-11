@@ -11,7 +11,7 @@ class SubscriptionService {
         
         request = request.queryOrdered(byChild: "user").queryEqual(toValue: user)
         
-        request.observeSingleEvent(of: .value, with: { (snapshot) in
+        request.observeSingleEvent(of: .value) { (snapshot) in
             
             let requests = DispatchGroup()
             var matches: [Match] = []
@@ -34,8 +34,7 @@ class SubscriptionService {
             requests.notify(queue: .main) {
                 completion(matches)
             }
-            
-        }) { (error) in completion([]) }
+        }
     }
     
     public static func getUsers(match: String, completion: @escaping ([User]) -> ()) {
@@ -43,7 +42,7 @@ class SubscriptionService {
         
         request = request.queryOrdered(byChild: "match").queryEqual(toValue: match)
         
-        request.observeSingleEvent(of: .value, with: { (snapshot) in
+        request.observeSingleEvent(of: .value) { (snapshot) in
             
             let requests = DispatchGroup()
             var users: [User] = []
@@ -66,8 +65,7 @@ class SubscriptionService {
             requests.notify(queue: .main) {
                 completion(users)
             }
-            
-        }) { (error) in completion([]) }
+        }
     }
     
     public static func getSubscriptionsByMatch(_ match: Match, completion: @escaping ([Subscription]) -> ()) {
@@ -75,9 +73,9 @@ class SubscriptionService {
         
         var request = db.child("subscriptions") as DatabaseQuery
         
-        request = request.queryOrdered(byChild: "match").queryEqual(toValue: match.ref)
+        request = request.queryOrdered(byChild: "match").queryEqual(toValue: match.ref!)
         
-        request.observeSingleEvent(of: .value, with: { (snapshot) in
+        request.observeSingleEvent(of: .value) { (snapshot) in
             let requests = DispatchGroup()
             
             for data in snapshot.children {
@@ -100,7 +98,40 @@ class SubscriptionService {
             requests.notify(queue: .main) {
                 completion(subscriptions)
             }
-        }) { (error) in completion([]) }
+        }
+    }
+    
+    public static func getSubscriptionsByUser(_ user: String, completion: @escaping ([Subscription]) -> ()) {
+        var subscriptions: [Subscription] = []
+        
+        var request = db.child("subscriptions") as DatabaseQuery
+        
+        request = request.queryOrdered(byChild: "user").queryEqual(toValue: user)
+        
+        request.observeSingleEvent(of: .value) { (snapshot) in
+            let requests = DispatchGroup()
+            
+            for data in snapshot.children {
+                guard let snapshot = data as? DataSnapshot else { continue }
+                guard let data = snapshot.value as? [String: Any] else { continue }
+                
+                guard let match = data["match"] as? String else { continue }
+                guard let accepted = data["accepted"] as? Bool else { continue }
+                
+                requests.enter()
+                MatchService.find(match) { (match) in
+                    if let match = match {
+                        let subscription = Subscription(ref: snapshot.key, match: match, user: nil, accepted: accepted)
+                        subscriptions.append(subscription)
+                    }
+                    requests.leave()
+                }
+            }
+            
+            requests.notify(queue: .main) {
+                completion(subscriptions)
+            }
+        }
     }
     
     public static func accept(_ subscription: Subscription, completion: @escaping (String?) -> ()) {
