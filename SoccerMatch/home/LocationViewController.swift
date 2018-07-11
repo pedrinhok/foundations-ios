@@ -37,6 +37,7 @@ class LocationViewController: UIViewController {
             return
         }
     }
+    
 
     func construct() {
         var c: CLLocationCoordinate2D

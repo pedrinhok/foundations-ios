@@ -18,6 +18,45 @@ class SignupViewController: UIViewController {
         password.delegate = self
         confirmPassword.delegate = self
     }
+    
+    override func viewDidLoad() {
+        password.delegate = self
+        confirmPassword.delegate = self
+        
+        //Listen for keyboard events
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+    
+    func hideKeyboard(){
+        name.resignFirstResponder()
+        phone.resignFirstResponder()
+        email.resignFirstResponder()
+        password.resignFirstResponder()
+        confirmPassword.resignFirstResponder()
+    }
+    
+    @objc func keyboardWillChange(notification: Notification){
+        print("Keyboard will show:  \(notification.name.rawValue)")
+        guard let keyboardRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey]as? NSValue)?.cgRectValue else{
+            return
+        }
+        if notification.name == Notification.Name.UIKeyboardWillShow ||
+            notification.name == Notification.Name.UIKeyboardWillChangeFrame{
+            
+            view.frame.origin.y  = -keyboardRect.height
+        }else {
+            view.frame.origin.y = 0
+        }
+        
+    }
 
     @IBAction func clickSignup(_ sender: StandardButton) {
 

@@ -19,7 +19,7 @@ class ViewController: UIViewController {
 
         locationManager.requestWhenInUseAuthorization()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -51,6 +51,53 @@ class ViewController: UIViewController {
             }
         }
     }
+    
+    override func viewDidLoad() {
+        email.delegate = self
+        password.delegate = self
+        
+        //Listen for keyboard events
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+    
+    func hideKeyboard(){
+        email.resignFirstResponder()
+        password.resignFirstResponder()
+    }
+    
+    @objc func keyboardWillChange(notification: Notification){
+        print("Keyboard will show:  \(notification.name.rawValue)")
+        guard let keyboardRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey]as? NSValue)?.cgRectValue else{
+            return
+        }
+            if notification.name == Notification.Name.UIKeyboardWillShow ||
+                notification.name == Notification.Name.UIKeyboardWillChangeFrame{
+        
+            view.frame.origin.y  = -keyboardRect.height
+            }else {
+                view.frame.origin.y = 0
+        }
+        
+    }
+    
+    
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//            print("Return pressed")
+//            hideKeyboard()
+//            return true
+//
+//    }
+
+    
+    
 
     func showMessage(_ message: String) {
         let alert = UIAlertController(title: "Wops", message: message, preferredStyle: .alert)
