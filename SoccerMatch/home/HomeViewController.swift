@@ -40,7 +40,7 @@ class HomeViewController: UIViewController {
     }
 
     func getMatches() {
-        MatchService.get { (data) in
+        MatchService.home { (data) in
             for match in data {
                 guard let x = match.x, let y = match.y else { continue }
                 let ann = MatchAnnotation(match, x: CLLocationDegrees(x), y: CLLocationDegrees(y))
