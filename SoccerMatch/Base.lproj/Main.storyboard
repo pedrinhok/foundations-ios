@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoSoccerM" translatesAutoresizingMaskIntoConstraints="NO" id="XAZ-WO-xza">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="XAZ-WO-xza">
                                 <rect key="frame" x="8" y="80" width="359" height="130"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="130" id="EsD-3X-HuC"/>
@@ -2742,7 +2742,7 @@
         <image name="icon-close" width="25" height="25"/>
         <image name="icon-right" width="25" height="25"/>
         <image name="icon-user" width="500" height="500"/>
-        <image name="logoSoccerM" width="603" height="215"/>
+        <image name="logo" width="603" height="215"/>
         <image name="whatsapp" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
