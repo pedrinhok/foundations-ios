@@ -14,7 +14,6 @@ struct Match: Codable {
     var location: String?
     var x: Double?
     var y: Double?
-    var completed: Bool?
     
     static func decode(_ data: [String: Any]) -> Match {
         var match = Match()
@@ -55,11 +54,26 @@ struct Match: Codable {
         if let y = data["y"] as? Double {
             match.y = y
         }
-        if let completed = data["completed"] as? Bool {
-            match.completed = completed
-        }
-        
+
         return match
+    }
+    
+    func completed() -> Bool {
+        return Int(vacancies!)! < 1
+    }
+
+    func finished() -> Bool {
+        
+        let formatter = DateFormatter()
+        let today = Date()
+        
+        formatter.dateFormat = "dd/MM/yyyy"
+        let day = formatter.string(from: today)
+        
+        formatter.dateFormat = "HH:mm"
+        let finish = formatter.string(from: today)
+        
+        return self.day! <= day && self.finish! <= finish
     }
     
 }

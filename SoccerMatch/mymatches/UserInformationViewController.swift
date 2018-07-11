@@ -26,13 +26,13 @@ class UserInformationViewController: UIViewController {
     func buttons() {
         let match = subscription.match!
         
-        if let completed = match.completed, completed {
-            buttonAccept.disable()
+        if match.completed() {
+            buttonAccept.inactive()
             buttonAccept.setTitle("Vacancies already filled", for: .normal)
         }
         
         if let accepted = subscription.accepted, accepted {
-            buttonAccept.disable()
+            buttonAccept.inactive()
             buttonAccept.setTitle("User already accepted", for: .normal)
             buttonRefuse.isHidden = false
         }

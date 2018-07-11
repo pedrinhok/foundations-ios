@@ -22,11 +22,20 @@ class SelectMatchViewController: UIViewController {
         super.viewWillAppear(animated)
         
         desc.text = match.desc
+        
         location.text = match.location
+        
         day.text = match.day
+        
         schedule.text = "\(match.start!) - \(match.finish!)"
+        
         price.text = match.price
-        vacancies.text = match.vacancies
+        
+        if match.completed() {
+            vacancies.text = "Filled"
+        } else {
+            vacancies.text = match.vacancies
+        }
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(clickPhone))
         phone.isUserInteractionEnabled = true
@@ -40,7 +49,7 @@ class SelectMatchViewController: UIViewController {
         let current = UserService.current()!
         
         if match.creator == current.ref {
-            buttonSubscribe.disable()
+            buttonSubscribe.inactive()
             buttonSubscribe.setTitle("You created the match", for: .normal)
         }
         
@@ -59,7 +68,7 @@ class SelectMatchViewController: UIViewController {
             self.subscriptions = users
             
             if users.contains(where: { $0.ref == current.ref }) {
-                self.buttonSubscribe.disable()
+                self.buttonSubscribe.inactive()
                 self.buttonSubscribe.setTitle("You're already subscribed", for: .normal)
             }
         }

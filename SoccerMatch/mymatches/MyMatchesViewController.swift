@@ -2,8 +2,8 @@ import UIKit
 
 class MyMatchesViewController: UIViewController {
     
-    var matchesCreated: [Match] = []
-    var matchesSubscribed: [Match] = []
+    var created: [Match] = []
+    var subscribed: [Subscription] = []
     
     @IBOutlet weak var numberCreated: UILabel!
     @IBOutlet weak var numberSubscribed: UILabel!
@@ -22,18 +22,19 @@ class MyMatchesViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let match = sender as? Match else { return }
         
         switch segue.identifier {
             
         case "gotoMatchCreated":
+            guard let match = sender as? Match else { return }
             guard let vc = segue.destination as? MatchCreatedViewController else { return }
             vc.match = match
             return
             
         case "gotoMatchSubscribed":
+            guard let subscription = sender as? Subscription else { return }
             guard let vc = segue.destination as? MatchSubscribedViewController else { return }
-            vc.match = match
+            vc.subscription = subscription
             return
             
         case .none, .some(_):
@@ -44,13 +45,13 @@ class MyMatchesViewController: UIViewController {
     func getMatches() {
         let user = UserService.current()!
         MatchService.get(creator: user.ref) { (matches) in
-            self.matchesCreated = matches
+            self.created = matches.sorted(by: { $0.day! > $1.day! })
             self.numberCreated.text = String(matches.count)
             self.collectionCreated.reloadSections(IndexSet(integer: 0))
         }
-        SubscriptionService.getMatches(user: user.ref!) { (matches) in
-            self.matchesSubscribed = matches
-            self.numberSubscribed.text = String(matches.count)
+        SubscriptionService.getSubscriptionsByUser(user.ref!) { (subscriptions) in
+            self.subscribed = subscriptions.sorted(by: { $0.match!.day! > $1.match!.day! })
+            self.numberSubscribed.text = String(subscriptions.count)
             self.collectionSubscribed.reloadSections(IndexSet(integer: 0))
         }
     }
@@ -62,9 +63,9 @@ extension MyMatchesViewController: UICollectionViewDataSource, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch (collectionView.tag) {
         case 0:
-            return matchesCreated.count
+            return created.count
         case 1:
-            return matchesSubscribed.count
+            return subscribed.count
         default:
             return 0
         }
@@ -75,7 +76,7 @@ extension MyMatchesViewController: UICollectionViewDataSource, UICollectionViewD
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "matchCreatedCell", for: indexPath) as! MatchCollectionCell
             
-            let match = matchesCreated[indexPath.row]
+            let match = created[indexPath.row]
             
             constructCell(cell, match: match)
             
@@ -83,7 +84,8 @@ extension MyMatchesViewController: UICollectionViewDataSource, UICollectionViewD
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "matchSubscribedCell", for: indexPath) as! MatchCollectionCell
             
-            let match = matchesSubscribed[indexPath.row]
+            let subscription = subscribed[indexPath.row]
+            let match = subscription.match!
             
             constructCell(cell, match: match)
             
@@ -97,20 +99,26 @@ extension MyMatchesViewController: UICollectionViewDataSource, UICollectionViewD
         cell.desc.text = match.desc
         cell.location.text = match.location
         cell.schedule.text = "\(match.day!) (\(match.start!) - \(match.finish!))"
+        
+        if match.finished() {
+            cell.finished.backgroundColor = UIColor(red: 205/255, green: 205/255, blue: 205/255, alpha: 1)
+        } else {
+            cell.finished.backgroundColor = UIColor(red: 125/255, green: 210/255, blue: 115/255, alpha: 1)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         switch (collectionView.tag) {
             
         case 0:
-            let match = matchesCreated[indexPath.row]
+            let match = created[indexPath.row]
             
             performSegue(withIdentifier: "gotoMatchCreated", sender: match)
             
         case 1:
-            let match = matchesSubscribed[indexPath.row]
+            let subscription = subscribed[indexPath.row]
             
-            performSegue(withIdentifier: "gotoMatchSubscribed", sender: match)
+            performSegue(withIdentifier: "gotoMatchSubscribed", sender: subscription)
             
         default:
             print("?")

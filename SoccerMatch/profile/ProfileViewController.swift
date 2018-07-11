@@ -106,7 +106,7 @@ class ProfileViewController: UIViewController {
             userObj.photo = UIImagePNGRepresentation(photo.image!)
         }
         
-        submitBtn.disable()
+        submitBtn.inactive()
         UserService.updateUserData(data: userObj) { (error) in
             if let error = error {
                 self.showMessage(error)
@@ -174,9 +174,9 @@ class ProfileViewController: UIViewController {
                 && user.phone == phone.text
                 && user.name == name.text
                 && user.photo == UIImagePNGRepresentation(photo.image!) {
-            submitBtn.disable()
+            submitBtn.inactive()
         } else {
-            submitBtn.enable()
+            submitBtn.active()
         }
     }
     
