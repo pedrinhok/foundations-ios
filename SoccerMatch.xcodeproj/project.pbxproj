@@ -41,6 +41,7 @@
 		95DB013120EE390B009AF416 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB013020EE390B009AF416 /* CustomButton.swift */; };
 		95DB013320EE5E09009AF416 /* MatchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB013220EE5E09009AF416 /* MatchService.swift */; };
 		C68497E120EBC0C500A8E3A1 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68497E020EBC0C500A8E3A1 /* CircleImage.swift */; };
+		C695ECC520F6384500BC9D7E /* DesignableTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C695ECC420F6384400BC9D7E /* DesignableTabBarController.swift */; };
 		E0B5AA8120EBB60700501574 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0B5AA8020EBB60700501574 /* CoreLocation.framework */; };
 		E0B5AA8320EBB61F00501574 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0B5AA8220EBB61E00501574 /* MapKit.framework */; };
 /* End PBXBuildFile section */
@@ -83,6 +84,7 @@
 		95DB013020EE390B009AF416 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		95DB013220EE5E09009AF416 /* MatchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchService.swift; sourceTree = "<group>"; };
 		C68497E020EBC0C500A8E3A1 /* CircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
+		C695ECC420F6384400BC9D7E /* DesignableTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DesignableTabBarController.swift; path = "/Users/camile.ancines/Desktop/CHALLENGE FINAL/SoccerMatch/commons/DesignableTabBarController.swift"; sourceTree = "<absolute>"; };
 		C9E7C108D81BFD2E28E324C3 /* Pods_SoccerMatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoccerMatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0B5AA8020EBB60700501574 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		E0B5AA8220EBB61E00501574 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -157,6 +159,7 @@
 		9518C57220E652C700B55134 /* commons */ = {
 			isa = PBXGroup;
 			children = (
+				C695ECC420F6384400BC9D7E /* DesignableTabBarController.swift */,
 				C68497E020EBC0C500A8E3A1 /* CircleImage.swift */,
 				9518C57320E652F800B55134 /* RoundedView.swift */,
 				9518C57D20E6681C00B55134 /* StandardButton.swift */,
@@ -375,6 +378,7 @@
 				9518C57020E64CB700B55134 /* UserService.swift in Sources */,
 				874FC53B20EBAD3C000D0443 /* NewMatchViewController.swift in Sources */,
 				874FC52820EBAD1E000D0443 /* MyMatchesViewController.swift in Sources */,
+				C695ECC520F6384500BC9D7E /* DesignableTabBarController.swift in Sources */,
 				9518C57E20E6681C00B55134 /* StandardButton.swift in Sources */,
 				95DB013120EE390B009AF416 /* CustomButton.swift in Sources */,
 				874FC52920EBAD1E000D0443 /* MatchSubscribedViewController.swift in Sources */,
