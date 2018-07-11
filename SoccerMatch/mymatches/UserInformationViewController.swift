@@ -24,7 +24,7 @@ class UserInformationViewController: UIViewController {
     func buttons() {
         let match = subscription.match!
         
-        if let completed = match.completed, completed {
+        if match.completed() {
             buttonAccept.inactive()
             buttonAccept.setTitle("Vacancies already filled", for: .normal)
         }
