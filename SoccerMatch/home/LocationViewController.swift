@@ -14,15 +14,36 @@ class LocationViewController: UIViewController {
     @IBOutlet weak var address: StandardTextField!
     @IBOutlet weak var name: StandardTextField!
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //map.delegate = self
+        //address.delegate = self
+        name.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChange(notification:)), name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillChangeFrame, object: nil)
+    }
+    
+ 
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        name.delegate = self
 
         let tap = UITapGestureRecognizer(target: self, action: #selector(selectPosition))
         map.addGestureRecognizer(tap)
 
         construct()
+        
+        
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -81,6 +102,8 @@ class LocationViewController: UIViewController {
     }
 
     @IBAction func clickUpdate(_ sender: StandardButton) {
+        
+        
 
         guard let name = name.text, name != "" else {
             showMessage("You must set the name!")
@@ -104,6 +127,16 @@ class LocationViewController: UIViewController {
         map.addAnnotation(ann)
     }
 
+    @objc func keyboardWillChange(notification: Notification){
+        guard let keyboardRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {
+            return
+        }
+        if notification.name == Notification.Name.UIKeyboardWillShow || notification.name == Notification.Name.UIKeyboardWillChangeFrame {
+            view.frame.origin.y = -keyboardRect.height
+        } else {
+            view.frame.origin.y = 0
+        }
+    }
 }
 
 extension LocationViewController: UITextFieldDelegate {
